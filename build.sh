@@ -1,5 +1,5 @@
 #!/bin/sh
 cd ../
 mkdir output
-cp -R ./backoffice/* ./output
-cp -R ./output ./backoffice/
+cp -R ./test/* ./output
+cp -R ./output ./test/
