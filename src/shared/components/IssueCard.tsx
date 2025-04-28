@@ -1,0 +1,94 @@
+import React from 'react';
+import { COMMITTEES } from '../const/committee';
+import Image from 'next/image';
+
+export type IssueCardProps = {
+	/** 카드 제목 */
+	title: string;
+	/** 소속 위원회 */
+	committee: string;
+	/** 발의자 이름 */
+	name: string;
+	/** 발의 날짜 (YYYY.MM.DD 형태) */
+	date: string;
+	/** 현재 상태 */
+	state: string;
+	/** 관련 키워드 목록 */
+	keyword_list: string[];
+	/** 조회수 */
+	view_num: number;
+	/** 북마크 수 */
+	bookmark_num: number;
+	/** 댓글 수 */
+	comment_num: number;
+};
+
+const IssueCard = ({ title, committee, name, date, state, view_num, bookmark_num, comment_num }: IssueCardProps) => {
+	const IconList = [
+		{
+			src: '/svgs/eye.svg',
+			alt: '조회수',
+			nums: view_num,
+		},
+		{
+			src: '/svgs/fire.svg',
+			alt: '북마크수',
+			nums: bookmark_num,
+		},
+		{
+			src: '/svgs/comment.svg',
+			alt: '댓글수',
+			nums: comment_num,
+		},
+	];
+
+	return (
+		<article className="flex flex-col top-6 left-7 rounded-[12px] pt-5 pr-5 pb-4 pl-6 gap-2.5 desktop:gap-3 bg-bg-white">
+			<header className="flex justify-between gap-2 h-21">
+				<div className="flex flex-1 flex-col gap-1.5">
+					<h3 className="typo-heading1 font-bold text-ellipsis line-clamp-2" title={title}>
+						{title}
+					</h3>
+					<div className="flex gap-2.5 typo-label2 desktop:typo-label1-normal text-label-alternative font-regular">
+						<div>{name}</div>
+						<div>{date}</div>
+					</div>
+				</div>
+				<div className="flex items-center justify-center w-[52px] h-[52px] rounded-full bg-bg-gray">{COMMITTEES[committee].emoji}</div>
+			</header>
+			<section className="flex gap-2">
+				<SectionInfo text={state}></SectionInfo>
+				<SectionInfo text={committee}></SectionInfo>
+			</section>
+			<footer className="flex justify-between">
+				<div className="flex gap-2">
+					{IconList.map((icon) => (
+						<IconWithCount key={icon.src} src={icon.src} alt={icon.alt} nums={icon.nums} />
+					))}
+				</div>
+				<Image src="/svgs/bookmark.svg" alt="북마크" width={20} height={20} />
+			</footer>
+		</article>
+	);
+};
+
+export default IssueCard;
+
+const SectionInfo = ({ text }: { text: string }) => {
+	return (
+		<section className="flex items-center justify-center text-center h-6 rounded-[6px] px-1.5 gap-1 typo-caption1 font-bold bg-[rgba(79,41,229,0.08)] text-accent-fg-violet">
+			{text}
+		</section>
+	);
+};
+
+export const IconWithCount = ({ src, alt, nums }: { src: string; alt: string; nums: number }) => {
+	return (
+		<div className="flex items-center gap-1">
+			<Image src={src} alt={alt} width={14} height={14} />
+			<span className="typo-label2 font-regular text-label-alternative opacity-[61%]" aria-label={alt}>
+				{nums}
+			</span>
+		</div>
+	);
+};
