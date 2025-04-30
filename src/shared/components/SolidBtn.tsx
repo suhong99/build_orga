@@ -14,13 +14,13 @@ export interface SolidBtnProps {
 }
 
 const sizeMap: Record<NonNullable<SolidBtnProps['size']>, string> = {
-	small: 'w-[63px] h-[32px] px-[14px] py-[7px] rounded-[8px]',
-	medium: 'w-[80px] h-[40px] px-[20px] py-[9px] rounded-[10px]',
-	large: 'w-[98px] h-[48px] px-[28px] py-[12px] rounded-[12px]',
+	small: 'h-[32px] px-[14px] py-[7px] rounded-[8px]',
+	medium: 'h-[40px] px-[20px] py-[9px] rounded-[10px]',
+	large: 'h-[48px] px-[28px] py-[12px] rounded-[12px]',
 };
 
 export const SolidBtn = ({ primary = true, size = 'medium', label, onClick }: SolidBtnProps) => {
-	const base = 'flex items-center justify-center typo-body2-normal font-bold';
+	const base = 'flex items-center justify-center whitespace-nowrap typo-body2-normal font-bold';
 	const variant = primary ? 'text-white bg-primary-main-normal ' : 'text-label-neutral bg-[#EDEDEF]';
 	const sizeClass = sizeMap[size];
 

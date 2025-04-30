@@ -5,19 +5,19 @@ import { NonEmptyArray } from '@/shared/types/util';
 type ContentHeaderProps = {
 	title: string;
 	link: string;
-	keyword_list?: NonEmptyArray<string>;
+	keywordList?: NonEmptyArray<string>;
 	isLoginRequired?: boolean;
 };
 
-const ContentHeader = ({ title, link, keyword_list, isLoginRequired }: ContentHeaderProps) => {
+const ContentHeader = ({ title, link, keywordList, isLoginRequired }: ContentHeaderProps) => {
 	console.log(link);
 	return (
 		<div className="flex justify-center  desktop:justify-between items-center w-full h-[56px] desktop:h-[38px] desktop:gap-[10px] p-0">
 			<h2 className="flex flex-col items-center desktop:flex-row typo-heading1 desktop:typo-title2 font-bold gap-2 flex-wrap text-center">
 				{title}
-				{keyword_list && (
+				{keywordList && (
 					<span className="flex gap-2 text-primary-main-normal">
-						{keyword_list.map((keyword) => (
+						{keywordList.map((keyword) => (
 							<span key={keyword}>#{keyword}</span>
 						))}
 					</span>

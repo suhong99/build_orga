@@ -14,31 +14,31 @@ export type IssueCardProps = {
 	/** 현재 상태 */
 	state: string;
 	/** 관련 키워드 목록 */
-	keyword_list: string[];
+	keywordList: string[];
 	/** 조회수 */
-	view_num: number;
+	viewNum: number;
 	/** 북마크 수 */
-	bookmark_num: number;
+	bookmarkNum: number;
 	/** 댓글 수 */
-	comment_num: number;
+	commentNum: number;
 };
 
-const IssueCard = ({ title, committee, name, date, state, view_num, bookmark_num, comment_num }: IssueCardProps) => {
+const IssueCard = ({ title, committee, name, date, state, viewNum, bookmarkNum, commentNum }: IssueCardProps) => {
 	const IconList = [
 		{
 			src: '/svgs/eye.svg',
 			alt: '조회수',
-			nums: view_num,
+			nums: viewNum,
 		},
 		{
 			src: '/svgs/fire.svg',
 			alt: '북마크수',
-			nums: bookmark_num,
+			nums: bookmarkNum,
 		},
 		{
 			src: '/svgs/comment.svg',
 			alt: '댓글수',
-			nums: comment_num,
+			nums: commentNum,
 		},
 	];
 

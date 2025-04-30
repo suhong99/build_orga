@@ -28,9 +28,9 @@ export const Default: Story = {
 		name: '홍길동',
 		date: '2025.04.27',
 		state: '심사중',
-		keyword_list: ['AI', '개인정보', '보안'],
-		view_num: 1234,
-		bookmark_num: 56,
-		comment_num: 12,
+		keywordList: ['AI', '개인정보', '보안'],
+		viewNum: 1234,
+		bookmarkNum: 56,
+		commentNum: 12,
 	},
 };

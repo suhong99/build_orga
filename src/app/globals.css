@@ -59,8 +59,8 @@
 	--color-fill-alternative: #f8f8f8;
 
 	--color-status-positive: #00bf40;
-	--color-status-negative: #ff9200;
-	--color-status-warning: #ff0a0a;
+	--color-status-cautionary: #ff9200;
+	--color-status-destructive: #ff0a0a;
 
 	--color-accent-bg-violet: #6541f2;
 	--color-accent-bg-green: #43e5b2;
