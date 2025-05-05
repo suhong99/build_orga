@@ -2,12 +2,12 @@ import React from 'react';
 import Image from 'next/image';
 import { NonEmptyArray } from '@/shared/types/util';
 
-type ContentHeaderProps = {
+interface ContentHeaderProps {
 	title: string;
 	link: string;
 	keywordList?: NonEmptyArray<string>;
 	isLoginRequired?: boolean;
-};
+}
 
 const ContentHeader = ({ title, link, keywordList, isLoginRequired }: ContentHeaderProps) => {
 	console.log(link);

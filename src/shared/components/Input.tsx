@@ -1,7 +1,7 @@
 import React from 'react';
 import InfoCircle from '../svg/InfoCircle';
 
-export type InputProps = {
+export interface InputProps {
 	/** input의 고유 ID (웹접근성) */
 	id: string;
 	/** input name */
@@ -20,7 +20,7 @@ export type InputProps = {
 	className?: string;
 	/** 비활성화 여부 */
 	isDisabled?: boolean;
-};
+}
 
 export default function Input({ id, name, value, onChange, placeholder = '', errMsg, maxLength, className = '', isDisabled = false }: InputProps) {
 	const errorId = id ? `${id}-error` : undefined;

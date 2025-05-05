@@ -5,7 +5,7 @@ import { SolidBtn } from '@/shared/components/SolidBtn';
 import { useNickname } from './hooks/useNickname';
 
 const Nickname = () => {
-	const { nickname, setNickname, error, setError } = useNickname();
+	const { nickname, setNickname, error, validateDuplicate } = useNickname();
 
 	return (
 		<section className="min-w-[343px]">
@@ -18,7 +18,7 @@ const Nickname = () => {
 					value={nickname}
 					onChange={(val) => {
 						setNickname(val);
-						setError({ type: null, msg: null });
+						validateDuplicate(false);
 					}}
 					placeholder="3~8글자 이내로 입력"
 					errMsg={error.msg}
@@ -26,7 +26,7 @@ const Nickname = () => {
 				<SolidBtn
 					label="중복 확인"
 					onClick={() => {
-						setError({ type: 'duplicate', msg: '중복된 문자입니다' });
+						validateDuplicate(true);
 					}}
 				/>
 			</div>

@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react';
 import ContentHeader from './ContentHeader';
 import { SolidBtn } from '@/shared/components/SolidBtn';
 
-type ContentProps = {
+interface ContentProps {
 	children: ReactElement<typeof ContentHeader>;
-};
+}
 
 const data: IssueCardProps[] = [
 	{

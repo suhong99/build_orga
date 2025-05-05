@@ -4,13 +4,13 @@ import React from 'react';
 
 const Navibar = () => {
 	return (
-		<div className="flex justify-between items-center gap-[70px]">
+		<nav className="flex justify-between items-center gap-[70px]">
 			{Object.entries(CLIENT_NAVI_PATH)
 				.filter(([key]) => key !== 'home') // '홈' 제외
 				.map(([key, { name, path }]) => (
 					<NaviBtn key={key} title={name} link={path} />
 				))}
-		</div>
+		</nav>
 	);
 };
 

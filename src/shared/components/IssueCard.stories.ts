@@ -27,7 +27,7 @@ export const Default: Story = {
 		committee: '과학기술정보방송통신위원회',
 		name: '홍길동',
 		date: '2025.04.27',
-		state: '심사중',
+		state: '발의',
 		keywordList: ['AI', '개인정보', '보안'],
 		viewNum: 1234,
 		bookmarkNum: 56,

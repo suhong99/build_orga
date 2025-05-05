@@ -1,12 +1,14 @@
 import React from 'react';
 
-type IconProps = {
+interface IconProps {
 	width?: number;
 	height?: number;
 	className?: string;
-};
+}
 
-const InfoCircle: React.FC<IconProps> = ({ width = 16, height = 16, className = '' }) => (
+//children을 무분별히 받는 React.FC 비선호
+// https://www.howdy-mj.me/react/react-node-and-jsx-element
+const InfoCircle = ({ width = 16, height = 16, className = '' }: IconProps) => (
 	<svg width={width} height={height} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className={className}>
 		<path d="M12.9998 8C12.9998 8.55228 12.5521 9 11.9998 9C11.4475 9 10.9998 8.55228 10.9998 8C10.9998 7.44772 11.4475 7 11.9998 7C12.5521 7 12.9998 7.44772 12.9998 8Z" />
 		<path d="M12.8999 11.5C12.8999 11.0029 12.497 10.6 11.9999 10.6C11.5028 10.6 11.0999 11.0029 11.0999 11.5V16C11.0999 16.4971 11.5028 16.9 11.9999 16.9C12.497 16.9 12.8999 16.4971 12.8999 16V11.5Z" />
