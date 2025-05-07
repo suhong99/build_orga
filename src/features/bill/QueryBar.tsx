@@ -1,5 +1,6 @@
 import SearchBar from '@/shared/components/SearchBar';
 import OrderFilter from './OrderFilter';
+import { Suspense } from 'react';
 
 const QueryBar = () => {
 	return (
@@ -7,7 +8,9 @@ const QueryBar = () => {
 			<div className="flex">
 				<OrderFilter />
 			</div>
-			<SearchBar />
+			<Suspense>
+				<SearchBar />
+			</Suspense>
 		</section>
 	);
 };
