@@ -1,5 +1,4 @@
 import BillContents from '@/features/bill/BillContents';
-import PageNation from '@/features/bill/PageNation';
 import QueryBar from '@/features/bill/QueryBar';
 
 export default function BillPage() {
@@ -9,7 +8,6 @@ export default function BillPage() {
 			<div className="w-full flex flex-col flex-1 gap-16 desktop:gap-12 items-center px-9 py-12 bg-bg-gray ">
 				<QueryBar />
 				<BillContents />
-				<PageNation />
 			</div>
 		</>
 	);
