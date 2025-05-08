@@ -1,3 +1,4 @@
+import { SolidBtn } from '@/shared/components/SolidBtn';
 import Navibar from './Navibar';
 import Link from 'next/link';
 
@@ -9,7 +10,7 @@ const Header = () => {
 					로고
 				</Link>
 				<Navibar />
-				<div className="">유저프로필</div>
+				<SolidBtn label="로그인" size="small" />
 			</div>
 		</header>
 	);

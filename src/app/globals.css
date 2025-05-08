@@ -97,3 +97,23 @@ body {
 	color: var(--foreground);
 	font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer utilities {
+	.custom-scrollbar {
+		scrollbar-width: 3px;
+		scrollbar-color: #dddddf transparent;
+	}
+
+	.custom-scrollbar::-webkit-scrollbar {
+		width: 3px;
+	}
+
+	.custom-scrollbar::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.custom-scrollbar::-webkit-scrollbar-thumb {
+		background-color: #dddddf;
+		border-radius: 1000px;
+	}
+}

@@ -34,7 +34,8 @@ type Story = StoryObj<typeof meta>;
 // 기본 스토리
 export const Default: Story = {
 	args: {
-		title: '최신순', // 기본값
+		label: '최신순', // 기본값
+		about: '정렬',
 		children: (close: () => void) => (
 			<div className="flex flex-col w-[300px] justify-center items-center">
 				<div

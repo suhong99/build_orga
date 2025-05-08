@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Dropdown from '@/shared/components/DropDown';
 import useUpdateQueryParam from '@/shared/hooks/useUpdateQueryParam';
+import Image from 'next/image';
 
 const OrderFilter = () => {
 	const [selected, setSelected] = useState('최신순');
@@ -21,9 +22,9 @@ const OrderFilter = () => {
 	};
 
 	return (
-		<Dropdown title={selected}>
+		<Dropdown label={selected} about="정렬">
 			{(close) => (
-				<div className="flex flex-col w-[300px] justify-center items-center">
+				<div className="flex flex-col w-full desktop:w-[300px] justify-center desktop:items-center">
 					<DropdownItem
 						value="최신순"
 						selected={selected}
@@ -40,9 +41,6 @@ const OrderFilter = () => {
 							close();
 						}}
 					/>
-					<button className="cursor-pointer desktop:hidden" onClick={close}>
-						닫기
-					</button>
 				</div>
 			)}
 		</Dropdown>
@@ -53,9 +51,14 @@ export default OrderFilter;
 
 const DropdownItem = ({ value, selected, onSelect }: { value: string; selected: string; onSelect: (value: string) => void }) => (
 	<div
-		className={`py-3 typo-body1-normal  font-regular cursor-pointer desktop:w-[305px] desktop:px-[12px] desktop:rounded-[12px] ${selected === value ? 'desktop:bg-[#f6f6f6]' : ''}`}
+		className={`flex py-3 typo-body1-normal  font-regular cursor-pointer desktop:w-[305px] gap-2 px-5 desktop:px-3 desktop:rounded-[12px] desktop:text-black ${selected === value ? 'text-primary-main-normal desktop:bg-[#f6f6f6] ' : ''}`}
 		onClick={() => onSelect(value)}
 	>
+		{selected === value ? (
+			<Image src="/svgs/check.svg" alt="check" className="desktop:hidden" width={24} height={24} />
+		) : (
+			<div className="desktop:hidden w-6"></div>
+		)}
 		{value}
 	</div>
 );
