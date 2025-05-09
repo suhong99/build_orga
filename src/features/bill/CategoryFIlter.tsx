@@ -55,12 +55,12 @@ const CategoryFilter = () => {
 							<KeywordBtn key={keyword} keyword={keyword} onClick={() => toggleKeyword(keyword)} isSelected={selected.includes(keyword)} />
 						))}
 					</div>
-					<div className="absolute bottom-0 w-full  flex flex-1 justify-center desktop:justify-between gap-4 desktop:gap-0 bg-primary-sub-normal p-2 ">
+					<div className="absolute bottom-0 w-full  flex flex-1 justify-center desktop:justify-between gap-4 desktop:gap-0 p-2 desktop:pr-3">
 						<button className="flex gap-1 typo-label2 font-bold cursor-pointer text-label-alternative items-center " onClick={handleReset}>
 							초기화
 							<Image src="/svgs/reset.svg" alt="리셋" width={14} height={14} />
 						</button>
-						<SolidBtn label="적용하기" onClick={() => handleApply(close)} isFull />
+						<SolidBtn label="적용하기" onClick={() => handleApply(close)} className="flex-1 desktop:flex-0" />
 					</div>
 				</div>
 			)}

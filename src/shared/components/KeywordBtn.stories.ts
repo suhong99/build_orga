@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import KeywordBtn from './KeywordBtn';
 
 const meta = {
-	title: 'shared/KeywordBtn',
+	title: 'shared/button/KeywordBtn',
 	component: KeywordBtn,
 	parameters: {
 		layout: 'centered',

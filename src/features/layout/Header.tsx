@@ -10,7 +10,9 @@ const Header = () => {
 					로고
 				</Link>
 				<Navibar />
-				<SolidBtn label="로그인" size="small" />
+				<Link href="/modal-login">
+					<SolidBtn label="로그인" size="small" />
+				</Link>
 			</div>
 		</header>
 	);

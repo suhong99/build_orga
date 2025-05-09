@@ -56,7 +56,9 @@ const IssueCard = ({ title, committee, name, date, state, viewNum, bookmarkNum, 
 						<div>{date}</div>
 					</div>
 				</div>
-				<div className="flex items-center justify-center w-[52px] h-[52px] rounded-full bg-bg-gray">{COMMITTEES[committee]?.emoji}</div>
+				<div className="flex items-center justify-center w-[52px] h-[52px] rounded-full bg-bg-gray text-2xl desktop:text-[32px]">
+					{COMMITTEES[committee]?.emoji}
+				</div>
 			</header>
 			<section className="flex gap-2">
 				<TagLabel type="status" text={state}></TagLabel>
@@ -68,7 +70,7 @@ const IssueCard = ({ title, committee, name, date, state, viewNum, bookmarkNum, 
 						<IconWithCount key={icon.src} src={icon.src} alt={icon.alt} nums={icon.nums} />
 					))}
 				</div>
-				<Image src="/svgs/bookmark.svg" alt="북마크" width={20} height={20} />
+				<Image src="/svgs/bookmark.svg" alt="북마크" width={24} height={24} />
 			</footer>
 		</article>
 	);

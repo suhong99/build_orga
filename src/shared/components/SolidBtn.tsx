@@ -9,8 +9,8 @@ export interface SolidBtnProps {
 	size?: 'small' | 'medium' | 'large';
 	/** Button contents */
 	label: string;
-	/** full */
-	isFull?: boolean;
+	/** 추가 css */
+	className?: string;
 	/** Optional click handler */
 	onClick?: () => void;
 }
@@ -21,13 +21,13 @@ const sizeMap: Record<NonNullable<SolidBtnProps['size']>, string> = {
 	large: 'h-[48px] px-[28px] py-[12px] rounded-[12px]',
 };
 
-export const SolidBtn = ({ primary = true, size = 'medium', label, isFull = false, onClick }: SolidBtnProps) => {
+export const SolidBtn = ({ primary = true, size = 'medium', label, className, onClick }: SolidBtnProps) => {
 	const base = 'flex items-center justify-center whitespace-nowrap typo-body2-normal font-bold cursor-pointer';
 	const variant = primary ? 'text-white bg-primary-main-normal ' : 'text-label-neutral bg-[#EDEDEF]';
 	const sizeClass = sizeMap[size];
 
 	return (
-		<button type="button" className={`${base} ${variant} ${sizeClass} ${isFull && 'flex-1'}`} onClick={onClick}>
+		<button type="button" className={`${base} ${variant} ${sizeClass} ${className}`} onClick={onClick}>
 			{label}
 		</button>
 	);
