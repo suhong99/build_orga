@@ -1,9 +1,9 @@
 import React from 'react';
-import { KEYWORD } from '../const/committee';
+import { Keyword } from '../const/committee';
 
 interface KeywordBtnProps {
 	/** 키워드*/
-	keyword: KEYWORD;
+	keyword: Keyword;
 	/** 선택된 버튼인지 */
 	isSelected: boolean;
 	/** 호출되는 함수 */
@@ -14,6 +14,7 @@ const KeywordBtn = ({ keyword, isSelected, onClick }: KeywordBtnProps) => {
 	return (
 		<button
 			onClick={onClick}
+			type="button"
 			className={`px-4 py-2 border h-8 rounded-[8px] cursor-pointer typo-label2 font-bold ${isSelected ? 'border-primary-main-normal bg-primary-main-normal text-white' : ' border-line-neutral text-black'}`}
 		>
 			{keyword}

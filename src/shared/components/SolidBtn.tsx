@@ -11,8 +11,12 @@ export interface SolidBtnProps {
 	label: string;
 	/** 추가 css */
 	className?: string;
+	/**disabled */
+	isDisabled?: boolean;
 	/** Optional click handler */
 	onClick?: () => void;
+	/** 타입 */
+	type?: 'submit' | 'reset' | 'button';
 }
 
 const sizeMap: Record<NonNullable<SolidBtnProps['size']>, string> = {
@@ -21,13 +25,14 @@ const sizeMap: Record<NonNullable<SolidBtnProps['size']>, string> = {
 	large: 'h-[48px] px-[28px] py-[12px] rounded-[12px]',
 };
 
-export const SolidBtn = ({ primary = true, size = 'medium', label, className, onClick }: SolidBtnProps) => {
-	const base = 'flex items-center justify-center whitespace-nowrap typo-body2-normal font-bold cursor-pointer';
+export const SolidBtn = ({ primary = true, size = 'medium', label, className, isDisabled, type = 'button', onClick }: SolidBtnProps) => {
+	const base =
+		'flex items-center justify-center whitespace-nowrap typo-body2-normal font-bold cursor-pointer disabled:text-label-assistive disabled:bg-interaction-disable disabled:cursor-not-allowed';
 	const variant = primary ? 'text-white bg-primary-main-normal ' : 'text-label-neutral bg-[#EDEDEF]';
 	const sizeClass = sizeMap[size];
 
 	return (
-		<button type="button" className={`${base} ${variant} ${sizeClass} ${className}`} onClick={onClick}>
+		<button disabled={isDisabled} type={type} className={`${base} ${variant} ${sizeClass} ${className}`} onClick={onClick}>
 			{label}
 		</button>
 	);

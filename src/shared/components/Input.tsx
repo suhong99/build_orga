@@ -1,5 +1,6 @@
 import React from 'react';
 import InfoCircle from '../svg/InfoCircle';
+import CheckCircle from '../svg/CheckCircle';
 
 export interface InputProps {
 	/** input의 고유 ID (웹접근성) */
@@ -20,11 +21,22 @@ export interface InputProps {
 	className?: string;
 	/** 비활성화 여부 */
 	isDisabled?: boolean;
+	posiviteMsg?: string;
 }
 
-export default function Input({ id, name, value, onChange, placeholder = '', errMsg, maxLength, className = '', isDisabled = false }: InputProps) {
+export default function Input({
+	id,
+	name,
+	value,
+	onChange,
+	placeholder = '',
+	errMsg,
+	maxLength,
+	className = '',
+	isDisabled = false,
+	posiviteMsg = '',
+}: InputProps) {
 	const errorId = id ? `${id}-error` : undefined;
-
 	return (
 		<div className="w-full">
 			<input
@@ -41,11 +53,20 @@ export default function Input({ id, name, value, onChange, placeholder = '', err
 				className={`w-full h-12 px-4 py-3 rounded-[12px]  typo-body1-normal font-regular text-label-normal placeholder:text-label-assistive border  ${errMsg ? 'border-status-destructive focus:border-status-destructive' : 'border-line-normal focus:border-black'} 
 						 focus:outline-none disabled:bg-interaction-disable ${className}`}
 			/>
-			{errMsg && (
+			{errMsg ? (
 				<span id={errorId} className="flex p-1 gap-1 items-center text-status-destructive">
 					<InfoCircle className="text-status-destructive" />
 					{errMsg}
 				</span>
+			) : (
+				<>
+					{posiviteMsg && (
+						<span id={errorId} className="flex p-1 gap-1 items-center text-status-positive">
+							<CheckCircle className="text-status-positive" />
+							{posiviteMsg}
+						</span>
+					)}
+				</>
 			)}
 		</div>
 	);

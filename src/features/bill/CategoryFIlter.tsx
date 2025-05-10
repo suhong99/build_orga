@@ -2,7 +2,7 @@
 
 import Dropdown from '@/shared/components/DropDown';
 import { SolidBtn } from '@/shared/components/SolidBtn';
-import { KEYWORD, KEYWORD_LIST } from '@/shared/const/committee';
+import { Keyword, KEYWORD_LIST } from '@/shared/const/committee';
 import useUpdateQueryParam from '@/shared/hooks/useUpdateQueryParam';
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -14,18 +14,18 @@ const CategoryFilter = () => {
 	const searchParams = useSearchParams();
 	const keywordParam = searchParams.get('keywords');
 
-	const [selected, setSelected] = useState<KEYWORD[]>([]);
+	const [selected, setSelected] = useState<Keyword[]>([]);
 	const [label, setLabel] = useState<string>('전체');
 
 	// URL의 keywords 파라미터 반영
 	useEffect(() => {
 		if (keywordParam) {
-			const initialKeywords = keywordParam.split(',').filter((kw) => KEYWORD_LIST.includes(kw as KEYWORD));
-			setSelected(initialKeywords as KEYWORD[]);
+			const initialKeywords = keywordParam.split(',').filter((kw) => KEYWORD_LIST.includes(kw as Keyword));
+			setSelected(initialKeywords as Keyword[]);
 		}
 	}, [keywordParam]);
 
-	const toggleKeyword = (keyword: KEYWORD) => {
+	const toggleKeyword = (keyword: Keyword) => {
 		setSelected((prev) => (prev.includes(keyword) ? prev.filter((k) => k !== keyword) : [...prev, keyword]));
 	};
 
