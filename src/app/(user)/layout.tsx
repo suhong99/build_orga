@@ -1,17 +1,19 @@
+import Footer from '@/features/layout/Footer';
 import Header from '@/features/layout/Header';
 
 export default function Layout({
 	children,
-	modal,
+	overlay,
 }: Readonly<{
 	children: React.ReactNode;
-	modal: React.ReactNode;
+	overlay: React.ReactNode;
 }>) {
 	return (
 		<>
 			<Header />
 			<main className="flex flex-col flex-1 items-center w-full">{children}</main>
-			{modal}
+			<Footer />
+			{overlay}
 		</>
 	);
 }

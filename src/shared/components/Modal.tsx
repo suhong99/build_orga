@@ -12,7 +12,7 @@ const Modal = ({ children }: ModalProps) => {
 	const router = useRouter();
 	const onCloseModal = () => router.back();
 	return (
-		<div onClick={onCloseModal} className="fixed inset-0 z-50 flex items-center justify-center bg-black/75">
+		<div onClick={onCloseModal} className="fixed inset-0 z-50 flex items-center justify-center bg-black/52">
 			<aside
 				onClick={(e) => e.stopPropagation()}
 				role="dialog"
