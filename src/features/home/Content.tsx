@@ -9,6 +9,7 @@ interface ContentProps {
 
 const data: IssueCardProps[] = [
 	{
+		id: '0',
 		title: '정부의 디지털 혁신 정책 발표 정부의 디지털 혁신 정책 발표정부의 디지털 혁신 정책 발표정부의 디지털 혁신 정책 발표',
 		committee: '여성가족위원회',
 		name: '김지민',
@@ -20,6 +21,7 @@ const data: IssueCardProps[] = [
 		commentNum: 45,
 	},
 	{
+		id: '1',
 		title: '정부의 디지털 혁신 정책 발표',
 		committee: '과학기술정보방송통신위원회',
 		name: '김지민',
@@ -31,6 +33,7 @@ const data: IssueCardProps[] = [
 		commentNum: 45,
 	},
 	{
+		id: '2',
 		title: '정부의 디지털 혁신 정책 발표',
 		committee: '과학기술정보방송통신위원회',
 		name: '김지민',
@@ -42,6 +45,7 @@ const data: IssueCardProps[] = [
 		commentNum: 45,
 	},
 	{
+		id: '3',
 		title: '정부의 디지털 혁신 정책 발표',
 		committee: '과학기술정보방송통신위원회',
 		name: '김지민',
@@ -53,6 +57,7 @@ const data: IssueCardProps[] = [
 		commentNum: 45,
 	},
 	{
+		id: '4',
 		title: '정부의 디지털 혁신 정책 발표',
 		committee: '과학기술정보방송통신위원회',
 		name: '김지민',
@@ -64,6 +69,7 @@ const data: IssueCardProps[] = [
 		commentNum: 45,
 	},
 	{
+		id: '5',
 		title: '정부의 디지털 혁신 정책 발표',
 		committee: '과학기술정보방송통신위원회',
 		name: '김지민',
@@ -81,8 +87,8 @@ const Content = ({ children }: ContentProps) => {
 		<section className="w-full flex flex-col gap-5 max-w-maxw">
 			{children}
 			<div className="grid  grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 gap-5">
-				{data.map((issue, i) => {
-					return <IssueCard key={issue.title + i} {...issue} />;
+				{data.map((issue) => {
+					return <IssueCard key={issue.id} {...issue} />;
 				})}
 			</div>
 			<div className="flex justify-center desktop:hidden">

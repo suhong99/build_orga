@@ -23,6 +23,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	args: {
+		id: '0',
 		title: 'AI 시대의 개인정보 보호 방안',
 		committee: '과학기술정보방송통신위원회',
 		name: '홍길동',
