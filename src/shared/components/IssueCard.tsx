@@ -49,7 +49,7 @@ const IssueCard = ({ id, title, committee, name, date, state, viewNum, bookmarkN
 
 	return (
 		<Link
-			href={CLIENT_NAVI_PATH.billDetail.path(id)}
+			href={CLIENT_NAVI_PATH.billDetail.getPath(id)}
 			className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-[12px]"
 		>
 			<article className="flex flex-col top-6 left-7 rounded-[12px] pt-5 pr-5 pb-4 pl-6 gap-2.5 desktop:gap-3 bg-bg-white">

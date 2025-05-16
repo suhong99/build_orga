@@ -1,7 +1,10 @@
+// Global Navigation Bar
 import { SolidBtn } from '@/shared/components/SolidBtn';
 import Navibar from './Navibar';
 import Link from 'next/link';
 import Image from 'next/image';
+import { CLIENT_NAVI_PATH } from '@/shared/const/url';
+
 const Header = () => {
 	return (
 		<header className="w-full px-5 mx-auto flex justify-center">
@@ -11,6 +14,9 @@ const Header = () => {
 				</Link>
 				<Navibar />
 				<div className="flex gap-5 items-center">
+					<Link href={CLIENT_NAVI_PATH.search.path}>
+						<Image src="/svgs/search.svg" alt="search-icon" width={24} height={24} />
+					</Link>
 					<Link href="/modal-login">
 						<SolidBtn label="로그인" size="small" />
 					</Link>
