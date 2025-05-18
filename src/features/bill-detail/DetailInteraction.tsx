@@ -1,9 +1,11 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { BillDetalProps } from './api';
 import { BillReaction } from './const';
+import Image from 'next/image';
+import ShareButton from '@/shared/components/ShareBtn';
 
 const IconMap: { label: BillReaction; emoji: string }[] = [
 	{ label: '좋아요', emoji: '👍' },
@@ -12,7 +14,7 @@ const IconMap: { label: BillReaction; emoji: string }[] = [
 	{ label: '아쉬워요', emoji: '☹️' },
 ] as const;
 
-const FloatingBtn = ({ reactions, myReaction: initialMyReaction }: Pick<BillDetalProps, 'reactions' | 'myReaction'>) => {
+const DetailInteraction = ({ reactions, myReaction: initialMyReaction }: Pick<BillDetalProps, 'reactions' | 'myReaction'>) => {
 	const targetRef = useRef<HTMLDivElement>(null);
 	const [visible, setVisible] = useState(true);
 	const { scrollY } = useScroll();
@@ -59,7 +61,30 @@ const FloatingBtn = ({ reactions, myReaction: initialMyReaction }: Pick<BillDeta
 
 	return (
 		<>
-			<div ref={targetRef} className="border border-line-neutral w-full" />
+			<div className="flex flex-col w-full gap-5">
+				<div ref={targetRef} className="border border-line-neutral w-full" />
+				<div className="flex flex-col items-center w-full desktop:flex-row desktop:justify-between	">
+					<div className="flex gap-3">
+						{reactionCounts.map((count, i) => {
+							const { label, emoji } = IconMap[i];
+							const isSelected = myReaction === label;
+							return (
+								<Fragment key={label}>
+									<EmojiBtn label={label} emoji={emoji} isSelected={isSelected} clickFn={() => handleClick(i)} count={count} />
+									{i < reactionCounts.length - 1 && <div className="h-5 border border-line-neutral " />}
+								</Fragment>
+							);
+						})}
+					</div>
+					<div className="flex gap-5 typo-body2-normal font-bold justify-center">
+						<div className="flex gap-1 items-center align-middle">
+							<Image src="/svgs/bookmark.svg" alt="북마크" width={18} height={18} className="py-0.5" />
+							<span className="text-label-alternative/61">북마크</span>
+						</div>
+						<ShareButton />
+					</div>
+				</div>
+			</div>
 
 			<AnimatePresence>
 				{visible && (
@@ -73,7 +98,6 @@ const FloatingBtn = ({ reactions, myReaction: initialMyReaction }: Pick<BillDeta
 						{reactionCounts.map((count, i) => {
 							const { label, emoji } = IconMap[i];
 							const isSelected = myReaction === label;
-
 							return <EmojiBtn key={label} label={label} emoji={emoji} isSelected={isSelected} clickFn={() => handleClick(i)} count={count} />;
 						})}
 					</motion.aside>
@@ -83,7 +107,7 @@ const FloatingBtn = ({ reactions, myReaction: initialMyReaction }: Pick<BillDeta
 	);
 };
 
-export default FloatingBtn;
+export default DetailInteraction;
 
 interface EmojiBtnProps {
 	label: BillReaction;
@@ -95,10 +119,15 @@ interface EmojiBtnProps {
 
 const EmojiBtn = ({ label, count, emoji, isSelected, clickFn }: EmojiBtnProps) => {
 	return (
-		<motion.button key={label} whileTap={{ scale: 0.95 }} onClick={clickFn} className="flex items-center gap-2 typo-headline1 font-bold">
-			<span>{emoji}</span>
-			<span className="text-label-strong hidden desktop:block">{label}</span>
-			<span className={isSelected ? 'text-primary-main-normal' : 'text-[#AEB0B6]'}>{count}</span>
+		<motion.button
+			key={label}
+			whileTap={{ scale: 0.95 }}
+			onClick={clickFn}
+			className={`flex items-center gap-2 typo-headline1 font-bold cursor-pointer ${isSelected ? 'text-primary-main-normal' : 'text-label-alternative/61'}`}
+		>
+			<span className="text-black">{emoji}</span>
+			<span className="hidden desktop:block">{label}</span>
+			<span>{count}</span>
 		</motion.button>
 	);
 };

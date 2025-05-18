@@ -15,7 +15,7 @@ export interface BillDetalProps {
 	/** 발의 날짜 (YYYY.MM.DD 형태) */
 	date: string;
 	/** 현재 상태 */
-	state: BillStatus;
+	status: BillStatus;
 	/** 조회수 */
 	viewNum: number;
 	/** 북마크 수 */
@@ -39,7 +39,7 @@ export const getBillDetail = (id: string): BillDetalProps => {
 		committee: '과학기술정보방송통신위원회',
 		name: '홍길동',
 		date: '2025.05.01',
-		state: '발의',
+		status: '법제사법위원회심사',
 		viewNum: 1234,
 		bookmarkNum: 56,
 		commentNum: 12,

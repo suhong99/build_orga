@@ -1,6 +1,6 @@
 import React from 'react';
-import InfoCircle from '../svg/InfoCircle';
-import CheckCircle from '../svg/CheckCircle';
+import InfoCircle from '../icon/InfoCircle';
+import CheckCircle from '../icon/CheckCircle';
 
 export interface InputProps {
 	/** input의 고유 ID (웹접근성) */

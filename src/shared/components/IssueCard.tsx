@@ -45,7 +45,7 @@ const IssueCard = ({ id, title, committee, name, date, state, viewNum, bookmarkN
 			alt: '댓글수',
 			nums: commentNum,
 		},
-	] as const; // 좀 더 명확하게 쓸 수 있음
+	] as const;
 
 	return (
 		<Link
@@ -64,7 +64,7 @@ const IssueCard = ({ id, title, committee, name, date, state, viewNum, bookmarkN
 						</div>
 					</div>
 					<div className="flex items-center justify-center w-[52px] h-[52px] rounded-full bg-bg-gray text-2xl desktop:text-[32px]">
-						{COMMITTEES[committee]?.emoji}
+						{COMMITTEES[committee].emoji}
 					</div>
 				</header>
 				<section className="flex gap-2">
@@ -77,7 +77,7 @@ const IssueCard = ({ id, title, committee, name, date, state, viewNum, bookmarkN
 							<IconWithCount key={icon.src} src={icon.src} alt={icon.alt} nums={icon.nums} />
 						))}
 					</div>
-					<Image src="/svgs/bookmark.svg" alt="북마크" width={24} height={24} />
+					<Image src="/svgs/bookmark.svg" alt="북마크" width={18} height={22} />
 				</footer>
 			</article>
 		</Link>
