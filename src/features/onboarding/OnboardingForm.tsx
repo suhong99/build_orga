@@ -30,7 +30,7 @@ const OnboardingForm = () => {
 			</div>
 			<Nickname isValidate={isValidateNick} setIsValidate={setIsValidateNick} />
 			<Keywords keywords={keywords} setKeywords={setKeywords} />
-			<SolidBtn type="submit" isDisabled={!canSumbit} size="large" label="시작하기" className="mx-auto w-full desktop:w-auto" />
+			<SolidBtn type="submit" disabled={!canSumbit} size="large" label="시작하기" className="mx-auto w-full desktop:w-auto" />
 		</form>
 	);
 };

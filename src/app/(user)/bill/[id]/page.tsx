@@ -12,8 +12,9 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 	const data = getBillDetail(id);
 	return (
 		<div className="flex flex-col items-center p-5 pb-[100px]  desktop:pt-12 desktop:pb-[160px] w-full">
-			<article className="flex flex-col items-center w-full max-w-desktop gap-9">
+			<article className="flex flex-col items-center w-full max-w-desktop gap-6 desktop:gap-9">
 				<DetailTitle {...data} />
+
 				<div className="border border-line-neutral	w-full" />
 				<DetailInfo {...data} />
 				<DetailContent detail={data.detail} />

@@ -1,6 +1,7 @@
 import React from 'react';
 
-export interface SolidBtnProps {
+// 기본 SolidBtnProps 타입 정의
+export interface BaseSolidBtnProps {
 	/** Is this the principal call to action on the page? */
 	primary?: boolean;
 	/** What background color to use */
@@ -9,30 +10,48 @@ export interface SolidBtnProps {
 	size?: 'small' | 'medium' | 'large';
 	/** Button contents */
 	label: string;
-	/** 추가 css */
-	className?: string;
-	/**disabled */
-	isDisabled?: boolean;
 	/** Optional click handler */
 	onClick?: () => void;
-	/** 타입 */
-	type?: 'submit' | 'reset' | 'button';
+	/** Disabled state */
+	disabled?: boolean;
+	/** Additional class names */
+	className?: string;
 }
 
-const sizeMap: Record<NonNullable<SolidBtnProps['size']>, string> = {
+// 버튼의 HTML 속성을 포함한 타입
+export type SolidBtnProps<T extends Record<string, unknown> = Record<string, never>> = BaseSolidBtnProps &
+	Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseSolidBtnProps> &
+	T;
+
+const sizeMap: Record<NonNullable<BaseSolidBtnProps['size']>, string> = {
 	small: 'h-[32px] px-[14px] py-[7px] rounded-[8px]',
 	medium: 'h-[40px] px-[20px] py-[9px] rounded-[10px]',
 	large: 'h-[48px] px-[28px] py-[12px] rounded-[12px]',
 };
 
-export const SolidBtn = ({ primary = true, size = 'medium', label, className, isDisabled, type = 'button', onClick }: SolidBtnProps) => {
-	const base =
-		'flex items-center justify-center whitespace-nowrap typo-body2-normal font-bold cursor-pointer disabled:text-label-assistive disabled:bg-interaction-disable disabled:cursor-not-allowed';
-	const variant = primary ? 'text-white bg-primary-main-normal ' : 'text-label-neutral bg-[#EDEDEF]';
+export const SolidBtn = <T extends Record<string, unknown> = Record<string, never>>({
+	primary = true,
+	size = 'medium',
+	label,
+	onClick,
+	disabled = false,
+	className = '',
+	// 명시적으로 속성을 분리하여 커스텀 속성 필터링
+	...rest
+}: SolidBtnProps<T>) => {
+	const base = 'flex items-center justify-center whitespace-nowrap typo-body2-normal font-bold';
+	const variant = primary ? 'text-white bg-primary-main-normal' : 'text-label-neutral bg-[#EDEDEF]';
 	const sizeClass = sizeMap[size];
+	const disabledClass = disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer';
 
 	return (
-		<button disabled={isDisabled} type={type} className={`${base} ${variant} ${sizeClass} ${className}`} onClick={onClick}>
+		<button
+			type="button"
+			className={`${base} ${variant} ${sizeClass} ${disabledClass} ${className}`}
+			onClick={onClick}
+			disabled={disabled}
+			{...rest} // 이미 필터링된 표준 HTML 속성만 전달
+		>
 			{label}
 		</button>
 	);

@@ -52,7 +52,7 @@ const IssueCard = ({ id, title, committee, name, date, state, viewNum, bookmarkN
 			href={CLIENT_NAVI_PATH.billDetail.getPath(id)}
 			className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-[12px]"
 		>
-			<article className="flex flex-col top-6 left-7 rounded-[12px] pt-5 pr-5 pb-4 pl-6 gap-2.5 desktop:gap-3 bg-bg-white">
+			<article className="flex flex-col rounded-[12px] px-5 pt-5 pb-3 gap-2.5 bg-bg-white desktop:gap-3 desktop:pl-6">
 				<header className="flex justify-between gap-2 h-21">
 					<div className="flex flex-1 flex-col gap-1.5">
 						<h3 className="typo-heading1 font-bold text-ellipsis line-clamp-2" title={title}>
@@ -77,7 +77,7 @@ const IssueCard = ({ id, title, committee, name, date, state, viewNum, bookmarkN
 							<IconWithCount key={icon.src} src={icon.src} alt={icon.alt} nums={icon.nums} />
 						))}
 					</div>
-					<Image src="/svgs/bookmark.svg" alt="북마크" width={18} height={22} />
+					<Image src="/svgs/bookmark.svg" alt="북마크" width={18} height={22} className="mt-1" />
 				</footer>
 			</article>
 		</Link>
