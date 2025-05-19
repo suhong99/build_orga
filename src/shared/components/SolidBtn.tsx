@@ -24,9 +24,9 @@ export type SolidBtnProps<T extends Record<string, unknown> = Record<string, nev
 	T;
 
 const sizeMap: Record<NonNullable<BaseSolidBtnProps['size']>, string> = {
-	small: 'h-[32px] px-[14px] py-[7px] rounded-[8px]',
-	medium: 'h-[40px] px-[20px] py-[9px] rounded-[10px]',
-	large: 'h-[48px] px-[28px] py-[12px] rounded-[12px]',
+	small: 'h-[32px] px-[14px] py-[7px] rounded-[8px] typo-label2 font-bold',
+	medium: 'h-[40px] px-[20px] py-[9px] rounded-[10px] typo-body2-normal font-medium',
+	large: 'h-[48px] px-[28px] py-[12px] rounded-[12px] typo-body2-normal font-medium',
 };
 
 export const SolidBtn = <T extends Record<string, unknown> = Record<string, never>>({
@@ -39,7 +39,7 @@ export const SolidBtn = <T extends Record<string, unknown> = Record<string, neve
 	// 명시적으로 속성을 분리하여 커스텀 속성 필터링
 	...rest
 }: SolidBtnProps<T>) => {
-	const base = 'flex items-center justify-center whitespace-nowrap typo-body2-normal font-bold';
+	const base = 'flex items-center justify-center whitespace-nowrap';
 	const variant = primary ? 'text-white bg-primary-main-normal' : 'text-label-neutral bg-[#EDEDEF]';
 	const sizeClass = sizeMap[size];
 	const disabledClass = disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer';
@@ -47,7 +47,7 @@ export const SolidBtn = <T extends Record<string, unknown> = Record<string, neve
 	return (
 		<button
 			type="button"
-			className={`${base} ${variant} ${sizeClass} ${disabledClass} ${className}`}
+			className={`${base} ${variant} ${sizeClass} ${disabledClass}  ${className}`}
 			onClick={onClick}
 			disabled={disabled}
 			{...rest} // 이미 필터링된 표준 HTML 속성만 전달
