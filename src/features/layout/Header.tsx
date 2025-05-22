@@ -4,6 +4,7 @@ import Navibar from './Navibar';
 import Link from 'next/link';
 import Image from 'next/image';
 import { CLIENT_NAVI_PATH } from '@/shared/const/url';
+import SearchIcon from '@/shared/icon/Search';
 
 const Header = () => {
 	return (
@@ -22,7 +23,7 @@ const Header = () => {
 				<Navibar />
 				<div className="flex gap-5 items-center">
 					<Link href={CLIENT_NAVI_PATH.search.path}>
-						<Image src="/svgs/search.svg" alt="search-icon" width={24} height={24} />
+						<SearchIcon width={24} height={24} />
 					</Link>
 					<Link href="/modal-login">
 						<SolidBtn label="로그인" size="small" />

@@ -74,6 +74,7 @@ export default function Input<T extends Record<string, unknown> = Record<string,
                 focus:outline-none disabled:bg-interaction-disable ${className}`}
 				{...rest} // 커스텀 속성이 제거된 표준 HTML 속성만 전달
 			/>
+
 			{errMsg && (
 				<span id={errorId} className="flex p-1 gap-1 items-center text-status-destructive">
 					<InfoCircle className="text-status-destructive" />
