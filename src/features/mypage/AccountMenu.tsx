@@ -1,35 +1,20 @@
 'use client';
 
-interface MenuBtnProps {
-	label: string;
-	onClick: () => void;
-}
+import { SolidBtn } from '@/shared/components/SolidBtn';
 
+// TODO: 관련 기능 추가
 const AccountMenu = () => {
-	const menuList = [
-		{ label: '프로필 수정', fn: () => {} },
-		{ label: '로그아웃', fn: () => {} },
-	] as const;
-
 	return (
-		<div className="w-full flex flex-col gap-4">
-			{menuList.map((item) => (
-				<MenuBtn key={item.label} label={item.label} onClick={item.fn} />
-			))}
+		<div className="w-[110px] flex flex-col items-center gap-4 desktop:w-full">
+			<SolidBtn primary={false} label="프로필 수정" className="w-full" />
+			<button
+				type="button"
+				className="hidden desktop:block w-full h-10 text-center py-1 typo-body2-normal font-bold text-label-neutral/88  cursor-pointer hover:bg-bg-gray/60 rounded-[12px]"
+			>
+				로그아웃
+			</button>
 		</div>
 	);
 };
 
 export default AccountMenu;
-
-const MenuBtn = ({ label, onClick }: MenuBtnProps) => {
-	return (
-		<button
-			type="button"
-			onClick={onClick}
-			className="w-full text-left py-1 typo-body1-normal text-label-neutral/88 font-bold cursor-pointer hover:bg-bg-gray/60"
-		>
-			{label}
-		</button>
-	);
-};

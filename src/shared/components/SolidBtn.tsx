@@ -39,15 +39,15 @@ export const SolidBtn = <T extends Record<string, unknown> = Record<string, neve
 	// 명시적으로 속성을 분리하여 커스텀 속성 필터링
 	...rest
 }: SolidBtnProps<T>) => {
-	const base = 'flex items-center justify-center whitespace-nowrap';
-	const variant = primary ? 'text-white bg-primary-main-normal' : 'text-label-neutral bg-[#EDEDEF]';
+	const base = 'flex items-center justify-center whitespace-nowrap hover:opacity-90';
+	const variant = primary ? 'text-white bg-primary-main-normal' : 'text-label-neutral/88 bg-label-normal/8';
 	const sizeClass = sizeMap[size];
 	const disabledClass = disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer';
 
 	return (
 		<button
 			type="button"
-			className={`${base} ${variant} ${sizeClass} ${disabledClass}  ${className}`}
+			className={`${base} ${variant} ${sizeClass} ${disabledClass} ${className}`}
 			onClick={onClick}
 			disabled={disabled}
 			{...rest} // 이미 필터링된 표준 HTML 속성만 전달

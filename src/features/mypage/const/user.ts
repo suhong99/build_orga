@@ -7,3 +7,5 @@ export interface MyInfo {
 	opinionNum: number;
 	profileImg: string;
 }
+
+export type UserCategory = '북마크' | '의견' | '댓글';
