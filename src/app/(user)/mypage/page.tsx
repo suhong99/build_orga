@@ -1,6 +1,11 @@
 import { MyInfo } from '@/features/mypage/const/user';
 import MyContents from '@/features/mypage/MyContents';
 import UserInfo from '@/features/mypage/UserInfo';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: '마이페이지',
+};
 
 export default function MyPage() {
 	const myInfo: MyInfo = {

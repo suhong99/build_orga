@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { getBillDetail } from '@/features/bill-detail/api';
 import DetailCommentList from '@/features/bill-detail/DetailCommentList';
 import DetailContent from '@/features/bill-detail/DetailContent';
@@ -6,6 +7,10 @@ import DetailInteraction from '@/features/bill-detail/DetailInteraction';
 import DetailProcess from '@/features/bill-detail/DetailProcess';
 import DetailTitle from '@/features/bill-detail/DetailTitle';
 import ScrollUpBtn from '@/shared/components/ScrollUpBtn';
+
+export const metadata: Metadata = {
+	title: '법안 상세페이지',
+};
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
 	const { id } = await params;

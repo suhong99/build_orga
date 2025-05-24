@@ -1,6 +1,11 @@
-import SearchBar from '@/shared/components/SearchBar';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { Suspense } from 'react';
+import SearchBar from '@/shared/components/SearchBar';
+
+export const metadata: Metadata = {
+	title: '검색 페이지',
+};
 
 export default function SearchPage() {
 	const data = ['이재명', '김문수', '이준석', '권영국', '정치'];

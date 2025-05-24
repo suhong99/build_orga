@@ -1,5 +1,10 @@
 import BillContents from '@/features/bill/BillContents';
 import QueryBar from '@/features/bill/QueryBar';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: '법안 피드',
+};
 
 export default function BillPage() {
 	return (
