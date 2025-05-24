@@ -33,5 +33,6 @@ export const Default: Story = {
 		viewNum: 1234,
 		bookmarkNum: 56,
 		commentNum: 12,
+		isBookMarked: true,
 	},
 };

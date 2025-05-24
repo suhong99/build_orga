@@ -4,6 +4,8 @@
 :root {
 	--background: #fff;
 	--foreground: #000;
+	/* pretandard 숫자 넓이 고정 */
+	font-variant-numeric: tabular-nums;
 }
 
 @theme inline {

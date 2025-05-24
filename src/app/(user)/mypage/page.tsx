@@ -22,8 +22,7 @@ export default function MyPage() {
 				<section className="flex flex-col items-center px-5 w-full  desktop:px-10 pt-[50px] desktop:py-14 desktop:w-[387px] gap-6 desktop:gap-9 desktop:border-2 bg-white desktop:border-line-alternative desktop:rounded-[20px]">
 					<UserInfo {...myInfo} />
 				</section>
-				{/* TODO: */}
-				<section className="flex w-full h-[1000px]">
+				<section className="flex w-full">
 					<MyContents />
 				</section>
 			</div>

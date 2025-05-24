@@ -1,9 +1,13 @@
+'use client';
+
 import Image from 'next/image';
 import { CommitteeName, COMMITTEES } from '../const/committee';
 import TagLabel from './TagLabel';
 import { BillStatus } from '../const/bill';
 import Link from 'next/link';
 import { CLIENT_NAVI_PATH } from '../const/url';
+import { useState } from 'react';
+import BookmarkIcon from '../icon/Bookmark';
 
 export interface IssueCardProps {
 	/**이슈 아이디 */
@@ -26,9 +30,12 @@ export interface IssueCardProps {
 	bookmarkNum: number;
 	/** 댓글 수 */
 	commentNum: number;
+	/** 북마크 여부 */
+	isBookMarked: boolean;
 }
 
-const IssueCard = ({ id, title, committee, name, date, state, viewNum, bookmarkNum, commentNum }: IssueCardProps) => {
+const IssueCard = ({ id, title, committee, name, date, state, viewNum, bookmarkNum, commentNum, isBookMarked }: IssueCardProps) => {
+	const [isChecked, setIsChecked] = useState(isBookMarked);
 	const IconList = [
 		{
 			src: '/svgs/eye.svg',
@@ -48,11 +55,8 @@ const IssueCard = ({ id, title, committee, name, date, state, viewNum, bookmarkN
 	] as const;
 
 	return (
-		<Link
-			href={CLIENT_NAVI_PATH.billDetail.getPath(id)}
-			className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-[12px]"
-		>
-			<article className="flex flex-col rounded-[12px] px-5 pt-5 pb-3 gap-2.5 bg-bg-white desktop:gap-3 desktop:pl-6">
+		<article className="flex flex-col rounded-[12px] px-5 pt-5 pb-3 gap-2.5 bg-bg-white desktop:gap-3 desktop:pl-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ">
+			<Link href={CLIENT_NAVI_PATH.billDetail.getPath(id)}>
 				<header className="flex justify-between gap-2 h-21">
 					<div className="flex flex-1 flex-col gap-1.5">
 						<h3 className="typo-heading1 font-bold text-ellipsis line-clamp-2" title={title}>
@@ -67,20 +71,28 @@ const IssueCard = ({ id, title, committee, name, date, state, viewNum, bookmarkN
 						{COMMITTEES[committee].emoji}
 					</div>
 				</header>
-				<section className="flex gap-2">
-					<TagLabel type="status" text={state}></TagLabel>
-					<TagLabel type="committee" text={committee}></TagLabel>
-				</section>
-				<footer className="flex justify-between">
-					<div className="flex gap-2">
-						{IconList.map((icon) => (
-							<IconWithCount key={icon.src} src={icon.src} alt={icon.alt} nums={icon.nums} />
-						))}
-					</div>
-					<Image src="/svgs/bookmark.svg" alt="북마크" width={18} height={22} className="mt-1" />
-				</footer>
-			</article>
-		</Link>
+			</Link>
+			<section className="flex gap-2">
+				<TagLabel type="status" text={state}></TagLabel>
+				<TagLabel type="committee" text={committee}></TagLabel>
+			</section>
+			<footer className="flex justify-between">
+				<div className="flex gap-2">
+					{IconList.map((icon) => (
+						<IconWithCount key={icon.src} src={icon.src} alt={icon.alt} nums={icon.nums} />
+					))}
+				</div>
+				<button
+					className="py-0.5"
+					onClick={(e) => {
+						e.stopPropagation(); // Link로의 클릭 전파 방지
+						setIsChecked((prev) => !prev);
+					}}
+				>
+					<BookmarkIcon isChecked={isChecked} />
+				</button>
+			</footer>
+		</article>
 	);
 };
 

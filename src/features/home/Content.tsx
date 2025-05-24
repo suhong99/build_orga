@@ -19,6 +19,7 @@ const data: IssueCardProps[] = [
 		viewNum: 10200,
 		bookmarkNum: 150,
 		commentNum: 45,
+		isBookMarked: true,
 	},
 	{
 		id: '1',
@@ -31,6 +32,7 @@ const data: IssueCardProps[] = [
 		viewNum: 10200,
 		bookmarkNum: 150,
 		commentNum: 45,
+		isBookMarked: true,
 	},
 	{
 		id: '2',
@@ -43,6 +45,7 @@ const data: IssueCardProps[] = [
 		viewNum: 10200,
 		bookmarkNum: 150,
 		commentNum: 45,
+		isBookMarked: false,
 	},
 	{
 		id: '3',
@@ -55,6 +58,7 @@ const data: IssueCardProps[] = [
 		viewNum: 10200,
 		bookmarkNum: 150,
 		commentNum: 45,
+		isBookMarked: false,
 	},
 	{
 		id: '4',
@@ -67,6 +71,7 @@ const data: IssueCardProps[] = [
 		viewNum: 10200,
 		bookmarkNum: 150,
 		commentNum: 45,
+		isBookMarked: false,
 	},
 	{
 		id: '5',
@@ -79,6 +84,7 @@ const data: IssueCardProps[] = [
 		viewNum: 10200,
 		bookmarkNum: 150,
 		commentNum: 45,
+		isBookMarked: false,
 	},
 ];
 

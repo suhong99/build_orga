@@ -2,11 +2,11 @@ import IssueCard from '@/shared/components/IssueCard';
 import React from 'react';
 
 const MyBookmark = () => {
-	const arr = Array(10).fill(0);
 	// TODO:
+	const arr = Array(10).fill(0);
 	return (
-		<div className="grid grid-cols-1 @max-[768px]:grid-cols-2">
-			{arr.map((e, i) => (
+		<div className="grid grid-cols-1 gap-6 @min-[768px]:grid-cols-2 ">
+			{arr.map((_, i) => (
 				<IssueCard
 					key={i}
 					id={'1'}
@@ -19,6 +19,7 @@ const MyBookmark = () => {
 					viewNum={0}
 					bookmarkNum={0}
 					commentNum={0}
+					isBookMarked={true}
 				/>
 			))}
 		</div>
