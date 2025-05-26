@@ -5,6 +5,9 @@ import { notFound } from 'next/navigation';
 import EventBasePolicy from '@/features/event/EventBasePolicy';
 import EventBill from '@/features/event/EventBill';
 import StretchLine from '@/features/event/StretchLine';
+import EventMainPolicy from '@/features/event/EventMainPolicy';
+import EventBanner from '@/features/event/EventBanner';
+import EventFieldPolicy from '@/features/event/EventFieldPolicy';
 
 export const metadata: Metadata = {
 	title: '대선 후보',
@@ -26,10 +29,14 @@ export default async function Page({ params }: { params: Promise<{ name: string 
 	return (
 		<div className="flex flex-col w-full items-center px-5 pt-9 pb-12 max-w-desktop gap-4 desktop:pt-[80px] desktop:gap-10">
 			<EventHeader name={korean} />
-			<StretchLine />
+			<StretchLine className="desktop:mt-7" />
 			<EventBasePolicy name={korean} />
 			<StretchLine />
 			<EventBill name={korean} />
+			<StretchLine />
+			<EventMainPolicy name={korean} />
+			<EventBanner />
+			<EventFieldPolicy name={korean} />
 		</div>
 	);
 }

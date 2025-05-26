@@ -1,6 +1,6 @@
 import React from 'react';
-import Image from 'next/image';
 import { NonEmptyArray } from '@/shared/types/util';
+import RightIcon from '@/shared/icon/Right';
 
 interface ContentHeaderProps {
 	title: string;
@@ -28,8 +28,8 @@ const ContentHeader = ({ title, link, keywordList, isLoginRequired }: ContentHea
 					</span>
 				)}
 			</h2>
-			<button className="hidden  desktop:flex cursor-pointer typo-body1-normal text-label-alternative opacity-[61%] hover:opacity-100 font-bold">
-				더보기 &nbsp; <Image src="/svgs/right.svg" alt="오른화살표" width="8" height="8" />
+			<button className="hidden  desktop:flex cursor-pointer typo-body1-normal text-label-alternative opacity-[61%] hover:opacity-100 font-bold items-center">
+				더보기 &nbsp; <RightIcon width={8} height={14} />
 			</button>
 		</div>
 	);
