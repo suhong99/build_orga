@@ -16,6 +16,7 @@ const EventBill = ({ name }: { name: EventPerson }) => {
 					<Link
 						href={`/modal-event-bill/${name}/${id}`}
 						key={id}
+						scroll={false}
 						className="flex  w-full items-center px-5 py-4 gap-4 rounded-[12px] desktop:h-[56px] bg-[#FBFAFF]"
 					>
 						<span className="typo-label1-normal text-label-normal w-[64px] text-center desktop:typo-headline1 desktop:w-[80px] ">{category}</span>

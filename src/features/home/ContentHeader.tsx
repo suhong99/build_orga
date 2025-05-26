@@ -10,6 +10,7 @@ interface ContentHeaderProps {
 }
 
 const ContentHeader = ({ title, link, keywordList, isLoginRequired }: ContentHeaderProps) => {
+	// TODO: 링크작업예정
 	console.log(link);
 	return (
 		<div className="flex justify-center  desktop:justify-between items-center w-full h-[56px] desktop:h-[38px] desktop:gap-[10px] p-0">
