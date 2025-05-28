@@ -1,18 +1,27 @@
+import { aggroFont } from '@/shared/const/font';
 import { EVENT_DETAIL_DATA, EventPerson } from './const/data';
-import Image from 'next/image';
+import { Fragment } from 'react';
 
 const EventBasePolicy = ({ name }: { name: EventPerson }) => {
+	const KEYWORD: Record<EventPerson, { first: string; second: string }> = {
+		김문수: { first: '“자유와 책임,', second: '중산층이 두터워지는 나라”' },
+		이재명: { first: '“모두가 잘 사는 나라,', second: 'AI 강국 대한민국”' },
+		이준석: { first: '“기준 있는 국가,', second: '정당한 보상”' },
+	};
 	return (
-		<section className="flex flex-col w-full gap-8 desktop:px-9">
-			<h2 className="typo-heading1 font-bold text-label-normal">정책 기조</h2>
-			<span className="typo-heading1 font-bold text-accent-fg-violet">{EVENT_DETAIL_DATA[name].polyStance.abstract}</span>
+		<section className="flex flex-col items-center w-full gap-8">
+			<h2 className={`${aggroFont.className} typo-aggro-display flex flex-col items-center desktop:flex-row`}>
+				<span className="text-primary-main-heavy">{KEYWORD[name].first}</span>
+				<span className="max-desktop:hidden">&nbsp;</span>
+				<span className="text-primary-sub-heavy">{KEYWORD[name].second} </span>
+			</h2>
 			<div className="flex w-full items-start gap-4.5">
-				<Image src={`/images/event/뱃지_${name}.png`} alt="후보 뱃지" width={48} height={48} />
-				<ul className="flex flex-col">
-					{EVENT_DETAIL_DATA[name].polyStance.sub.map((text) => (
-						<li key={text} className="typo-body1-normal font-regular text-label-normal">
-							{text}
-						</li>
+				<ul className="w-full flex flex-col items-center justify-center gap-1 typo-heading1 text-label-alternative desktop:flex-row desktop:gap-3 desktop:typo-heading2">
+					{EVENT_DETAIL_DATA[name].polyStance.sub.map((text, i) => (
+						<Fragment key={text}>
+							{i !== 0 && <span className="max-desktop:hidden">•</span>}
+							<li>{text}</li>
+						</Fragment>
 					))}
 				</ul>
 			</div>

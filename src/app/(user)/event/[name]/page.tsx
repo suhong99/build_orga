@@ -27,16 +27,17 @@ export default async function Page({ params }: { params: Promise<{ name: string 
 	}
 
 	return (
-		<div className="flex flex-col w-full items-center px-5 pt-9 pb-12 max-w-desktop gap-4 desktop:pt-[80px] desktop:gap-10">
+		<div className="flex flex-col w-full items-center px-5 pt-9 pb-25 max-w-desktop gap-4 desktop:pt-[80px] desktop:gap-10">
 			<EventHeader name={korean} />
-			<StretchLine className="desktop:mt-7" />
-			<EventBasePolicy name={korean} />
-			<StretchLine />
-			<EventBill name={korean} />
-			<StretchLine />
-			<EventMainPolicy name={korean} />
-			<EventBanner />
-			<EventFieldPolicy name={korean} />
+			<div className="w-full flex flex-col py-8 gap-8 max-desktop:pt-6 desktop:px-9 desktop:gap-9">
+				<EventBasePolicy name={korean} />
+				<StretchLine />
+				<EventBill name={korean} />
+				<StretchLine />
+				<EventMainPolicy name={korean} />
+				<EventBanner />
+				<EventFieldPolicy name={korean} />
+			</div>
 		</div>
 	);
 }

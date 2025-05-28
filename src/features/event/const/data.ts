@@ -38,7 +38,7 @@ export const EVENT_DETAIL_DATA = {
 				id: '2200037',
 				title: '2024년 민생위기 극복을 위한 특별조치법안',
 				date: '2024-05-30',
-				result: '대안 반영 후 폐기',
+				result: '폐기',
 				category: '행정',
 				aiSummary: '고물가·고금리로 어려움을 겪는 국민과 내수 경제를 살리기 위해 전국민에게 25만 원 내외의 지역사랑상품권을 지급하려는 법안',
 				target: '전국민, 소상공인, 자영업자',
@@ -56,7 +56,7 @@ export const EVENT_DETAIL_DATA = {
 				id: '2123704',
 				title: '하천법 일부개정법률안',
 				date: '2023-08-08',
-				result: '공포 (법률 확정)',
+				result: '공포',
 				category: '환경',
 				aiSummary: '불법 점유로부터 하천을 보호하고, 모든 국민이 평등하게 이용할 수 있도록 이용권 명시와 관리·단속 계획을 강화하려는 법안',
 				target: '환경단체, 지자체, 하천 인근 주민',
@@ -125,7 +125,7 @@ export const EVENT_DETAIL_DATA = {
 		policyByField: [
 			{
 				category: '경제',
-				keyword: '“세계를 선도하는 경제강국”',
+				keyword: '세계를 선도하는 경제강국',
 				details: [
 					'AI·반도체 중심 100조 민관펀드 조성, 5만개 GPU 인프라 확보',
 					'K-콘텐츠 수출 50조 목표, OTT·웹툰 등 지원',
@@ -136,12 +136,12 @@ export const EVENT_DETAIL_DATA = {
 			},
 			{
 				category: '교육',
-				keyword: '“무상교육 확대 + 기초학력 보장 강화”',
+				keyword: '무상교육 확대 + 기초학력 보장 강화',
 				details: ['고교까지 시행 중인 무상교육 지속 확대', '대학 서열 완화, 지방대 지원 확대', '교원 권익·입시 개선은 현행 유지 보완 중심'],
 			},
 			{
 				category: '외교·안보',
-				keyword: '“실용 균형 외교 + 첨단 국방”',
+				keyword: '실용 균형 외교 + 첨단 국방',
 				details: [
 					'한미 기술동맹 강화, 중국과 경제협력 유지',
 					'남북 협력 재개, 개성공단 재가동 조건부 추진',
@@ -151,7 +151,7 @@ export const EVENT_DETAIL_DATA = {
 			},
 			{
 				category: '복지·사회',
-				keyword: '“보편복지 + 맞춤복지 병행”',
+				keyword: '보편복지 + 맞춤복지 병행',
 				details: [
 					'상병수당 전국 확대, 중금리 청년 금융지원, 1인가구 지원 강화',
 					'주 4.5일제(격주 주 4일제 수준) 도입 검토',
@@ -162,7 +162,7 @@ export const EVENT_DETAIL_DATA = {
 			},
 			{
 				category: '정치·행정',
-				keyword: '“권력기관 개혁 + 행정수도 완성”',
+				keyword: '권력기관 개혁 + 행정수도 완성',
 				details: [
 					'검찰 수사권·기소권 분리, 검사 탄핵 가능 제도화',
 					'공수처 존치, 중립성 강화 / 경찰 민주통제 보완',
@@ -223,7 +223,7 @@ export const EVENT_DETAIL_DATA = {
 				id: '172109',
 				title: '납북피해자 지원 등에 관한 법률안',
 				date: '2005-06-24',
-				result: '대안 반영 후 폐기',
+				result: '폐기',
 				category: '통일',
 				aiSummary:
 					'납북자 송환을 국가의 책무로 명확히 하고, 납북피해자와 가족에게 취업·의료·주거 등 지원과 명예회복 조치를 통해 생활안정과 국민화합을 도모하려는 법안',
@@ -233,7 +233,7 @@ export const EVENT_DETAIL_DATA = {
 				id: '172101',
 				title: '국군포로대우등에관한법률 일부개정법률안',
 				date: '2005-06-23',
-				result: '대안 반영 후 폐기',
+				result: '폐기',
 				category: '국방',
 				aiSummary:
 					'국군포로의 실태파악·송환을 국가 책무로 명확히 하고, 포로 가족에 대한 차별 방지와 지원 근거를 마련해 생활안정과 예우를 강화하려는 법안',
@@ -262,7 +262,7 @@ export const EVENT_DETAIL_DATA = {
 				id: '170583',
 				title: '북한산농림수산물반입실태에대한감사청구안',
 				date: '2004-10-16',
-				result: '본회의 부결',
+				result: '부결',
 				category: '통일',
 				aiSummary:
 					'북한산으로 위장된 중국산 농수산물 반입 실태와 통일부 등 관계 부처의 관리 부실, 유착 의혹을 감사하여 농어민 보호와 투명한 남북교역 질서를 바로잡으려는 감사청구안',
@@ -272,7 +272,7 @@ export const EVENT_DETAIL_DATA = {
 				id: '170531',
 				title: '북한이탈주민의보호및정착지원에관한법률중개정법률안',
 				date: '2004-09-24',
-				result: '대안 반영 후 폐기',
+				result: '폐기',
 				category: '통일',
 				aiSummary:
 					'해외 체류 북한이탈주민이 대리인·전화 등으로도 보호신청을 할 수 있도록 절차를 확대하고, 정부가 매년 실태조사 및 보호대책을 마련하도록 하려는 법안',
@@ -282,7 +282,7 @@ export const EVENT_DETAIL_DATA = {
 				id: '162916',
 				title: '복권의발행및관리에관한기본법안',
 				date: '2003-11-08',
-				result: '대안 반영 후 폐기',
+				result: '폐기',
 				category: '재정',
 				aiSummary:
 					'복권의 종류·총액·당첨금 등을 법으로 제한하고, 조정위원회를 통해 복권시장을 통합 관리해 사행성은 줄이고 공익 기금 조성의 투명성을 높이려는 법안',
@@ -320,7 +320,7 @@ export const EVENT_DETAIL_DATA = {
 				id: '160532',
 				title: '강제부당퇴출은행의피해자보상에관한특별법안',
 				date: '2000-12-15',
-				result: '대안 반영 후 폐기',
+				result: '폐기',
 				category: '경제',
 				aiSummary: '1998년 강제 퇴출된 5개 은행의 주주·직원에게 명예회복과 피해보상을 제공해, 구조조정 과정의 행정책임을 바로잡으려는 법안',
 				target: '해당 퇴출은행의 전 직원·소액주주, 금융정책 피해자 지원단체, 금융위기 시기 구조조정에 관심 있는 시민',
@@ -329,7 +329,7 @@ export const EVENT_DETAIL_DATA = {
 				id: '160399',
 				title: '중소기업의구조개선및경영안정지원을위한특별조치법중개정법률안',
 				date: '2000-11-24',
-				result: '대안 반영 후 폐기',
+				result: '폐기',
 				category: '산업',
 				aiSummary: '경쟁력 약화로 침체된 재래시장의 현대화를 위해 정부와 지자체가 공공시설(소방, 주차장 등) 설치·운영을 지원할 수 있도록 하려는 법안',
 				target: '재래시장 상인, 소상공인 단체, 지역경제 활성화 담당자, 전통시장 현대화 정책 관계자',
@@ -338,7 +338,7 @@ export const EVENT_DETAIL_DATA = {
 				id: '152317',
 				title: '폐기물관리법중개정법률안',
 				date: '1999-11-18',
-				result: '대안 반영 후 폐기',
+				result: '폐기',
 				category: '환경',
 				aiSummary: '감염 위험이 있는 폐기물을 발생부터 최종 처리까지 분리 관리하도록 해 감염 예방을 강화하려는 법안',
 				target: '의료기관 종사자, 폐기물 처리업체, 보건안전 담당자, 감염병 예방 정책 관계자',
@@ -392,7 +392,7 @@ export const EVENT_DETAIL_DATA = {
 		policyByField: [
 			{
 				category: '경제',
-				keyword: '“자유와 성장”',
+				keyword: '자유와 성장',
 				details: [
 					'법인세 인하, 상속세 폐지/감면, 종부세·양도세 완화',
 					'규제 프리존, 인허가 간소화로 신산업 투자 유도',
@@ -404,7 +404,7 @@ export const EVENT_DETAIL_DATA = {
 			},
 			{
 				category: '교육',
-				keyword: '“취업 중심 교육 + 이공계 강화”',
+				keyword: '취업 중심 교육 + 이공계 강화',
 				details: [
 					'대기업 공개채용 부활 유도',
 					'AI특성화 대학원 확대, 연구자 정년 65세 상향',
@@ -415,7 +415,7 @@ export const EVENT_DETAIL_DATA = {
 			},
 			{
 				category: '외교·안보',
-				keyword: '“핵공유·자체 핵무장 잠재력 + 강경 대북정책”',
+				keyword: '핵공유·자체 핵무장 잠재력 + 강경 대북정책',
 				details: [
 					'미 전술핵 재배치 협의, 우라늄 농축·설계 연구 추진',
 					'사이버 안보법 제정: 여론 조작·정보 유출 차단',
@@ -425,7 +425,7 @@ export const EVENT_DETAIL_DATA = {
 			},
 			{
 				category: '복지·사회',
-				keyword: '“생애주기별 선별복지 + 저출산 집중”',
+				keyword: '생애주기별 선별복지 + 저출산 집중',
 				details: [
 					'3자녀 가구에 9년간 주거비 지원 (‘3·3·3 청년주택’)',
 					'난임치료·출산비 국가지원, 영유아 보육 확충',
@@ -436,7 +436,7 @@ export const EVENT_DETAIL_DATA = {
 			},
 			{
 				category: '정치·행정',
-				keyword: '“특권 없는 정부 + 보수개혁”',
+				keyword: '특권 없는 정부 + 보수개혁',
 				details: [
 					'국회의원 불체포 특권 폐지(1호 공약)',
 					'공수처 폐지, 수사권을 검경으로 환원',
@@ -551,7 +551,7 @@ export const EVENT_DETAIL_DATA = {
 		policyByField: [
 			{
 				category: '경제',
-				keyword: '“규칙이 명확한 경제, 지방이 주도하는 투자”',
+				keyword: '규칙이 명확한 경제, 지방이 주도하는 투자',
 				details: [
 					'규제 기준국가 선언: 불명확한 규제 해소, 정부 책임 명문화',
 					'지방법인세 자율화: 법인세의 일부를 지방에 이양',
@@ -563,7 +563,7 @@ export const EVENT_DETAIL_DATA = {
 			},
 			{
 				category: '교육',
-				keyword: '“학벌 아닌 실력, 정답보다 기준”',
+				keyword: '학벌 아닌 실력, 정답보다 기준',
 				details: [
 					'학벌 대체형 교육: 기업과 협업해 실무 중심 자격제 도입',
 					'기술직 우대 및 실용교육 강화',
@@ -583,7 +583,7 @@ export const EVENT_DETAIL_DATA = {
 			},
 			{
 				category: '복지·사회',
-				keyword: '“청년 세대를 위한 구조개혁”',
+				keyword: '청년 세대를 위한 구조개혁',
 				details: [
 					'양육비 국가채권화: 미지급 양육비 국고 먼저 지급 → 추후 채권 추심',
 					'무연고자 장례 국가 책임: 1인 사회에 맞춘 제도적 보완',
@@ -594,7 +594,7 @@ export const EVENT_DETAIL_DATA = {
 			},
 			{
 				category: '정치·행정',
-				keyword: '“탈진영, 기준 정치의 시작”',
+				keyword: '탈진영, 기준 정치의 시작',
 				details: [
 					'기준행정법 제정: 모든 행정·규제 명시적 기준 마련 의무화',
 					'청년비례제 확대: 선거제도 개편으로 청년 의석 확대',
