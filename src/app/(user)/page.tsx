@@ -1,5 +1,6 @@
 import HuboCard from '@/features/event-home/HuboCard';
 import MobileHubo from '@/features/event-home/MobileHubo';
+import HuBoPolicy from '@/features/event-home/HuBoPolicy';
 import { EventPerson } from '@/features/event/const/data';
 import React from 'react';
 
@@ -32,12 +33,12 @@ export default function Home() {
 				))}
 			</section>
 
-			<section className="bg-accent-bg-green h-[600px] w-full">임시 영역</section>
+			<HuBoPolicy />
 		</div>
 	);
 }
 
-/* TODO: 대선 끝나고 복구
+/* TODO: 대선 끝나고 복구	
 import Content from '@/features/home/Content';
 import ContentHeader from '@/features/home/ContentHeader';
 

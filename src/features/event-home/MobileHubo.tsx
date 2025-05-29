@@ -45,7 +45,7 @@ const MobileHubo = ({ name }: { name: EventPerson }) => {
 								</p>
 								<p className="typo-label1-normal font-regular text-label-alternative ">{data.party}</p>
 							</div>
-							<div className="relative text-center text-[32px] leading-[136%] font-bold ">
+							<div className="relative text-center text-[30px] leading-[136%] h-[36px] font-bold ">
 								<span>{data.light.comment}</span>
 								<WavePathIcon fill={HUBO_COLOR[name].icon} className="-translate-y-5/7 group-hover:hidden" />
 							</div>
@@ -82,7 +82,7 @@ const MobileHubo = ({ name }: { name: EventPerson }) => {
 								</p>
 								<p className="typo-label1-normal font-regular text-white ">{data.party}</p>
 							</div>
-							<div className="relative text-center text-[32px] leading-[136%] font-bold">
+							<div className="relative text-center text-[32px] h-[36px] leading-[136%] font-bold">
 								<span className="text-white">{data.dark.comment}</span>
 								<WavePathIcon className="absolute -translate-y-5/7" />
 							</div>
