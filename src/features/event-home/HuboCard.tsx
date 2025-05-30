@@ -31,10 +31,10 @@ const HuboCard = ({ name }: { name: EventPerson }) => {
 						<p className="typo-label1-normal font-regular text-label-alternative group-hover:text-white">{data.party}</p>
 					</div>
 					<div className="relative text-center text-[32px] leading-[136%] font-bold ">
-						<span className="group-hover:hidden">{data.light.comment}</span>
-						<span className="text-white hidden group-hover:block">{data.dark.comment}</span>
+						<span className="relative group-hover:hidden z-2">{data.light.comment}</span>
+						<span className="relative text-white hidden group-hover:block z-2">{data.dark.comment}</span>
 						<WavePathIcon fill={HUBO_COLOR[name].icon} className="-translate-y-5/7 group-hover:hidden" />
-						<WavePathIcon className="hidden -translate-y-5/7 group-hover:block" />
+						<WavePathIcon className="hidden -translate-y-5/7 group-hover:block " />
 					</div>
 					<div className="flex w-full flex-wrap gap-x-4 px-6 py-5 justify-center h-[134px]">
 						{data.light.info.map((text) => (

@@ -1,10 +1,7 @@
 // Global Navigation Bar
-import { SolidBtn } from '@/shared/components/SolidBtn';
 import Navibar from './Navibar';
 import Link from 'next/link';
 import Image from 'next/image';
-import { CLIENT_NAVI_PATH } from '@/shared/const/url';
-import SearchIcon from '@/shared/icon/Search';
 
 const Header = () => {
 	return (
@@ -21,13 +18,14 @@ const Header = () => {
 					/>
 				</Link>
 				<Navibar />
-				<div className="flex gap-5 items-center">
-					<Link href={CLIENT_NAVI_PATH.search.path}>
+				{/*TODO: 대선용 UI 수정 마지막 2개*/}
+				<div className="flex gap-5 items-center min-w-30 justify-end">
+					{/* <Link href={CLIENT_NAVI_PATH.search.path}>
 						<SearchIcon width={24} height={24} />
 					</Link>
 					<Link href="/modal-login">
 						<SolidBtn label="로그인" size="small" />
-					</Link>
+					</Link> */}
 					<Link href="/mobile-link" className="desktop:hidden cursor-pointer">
 						<Image src="/svgs/menu.svg" alt="네비바 열기" width={24} height={24} />
 					</Link>

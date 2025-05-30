@@ -27,13 +27,16 @@ const PolicyContent = () => {
 	};
 	return (
 		<>
-			<div className="w-full flex justify-center desktop:gap-5 max-desktop:justify-between">
-				<CategoryBtn text="전체" isSelected={categoryList.length === 0} clickFn={() => setCategoryList([])} />
-				{CATEGORY.map((category) => {
-					const isSelected = categoryList.includes(category);
-					return <CategoryBtn key={category} text={category} isSelected={isSelected} clickFn={() => toggleCategory(category)} />;
-				})}
+			<div className="w-full overflow-x-auto">
+				<div className="flex flex-nowrap min-[550px]:justify-center gap-5 ">
+					<CategoryBtn text="전체" isSelected={categoryList.length === 0} clickFn={() => setCategoryList([])} />
+					{CATEGORY.map((category) => {
+						const isSelected = categoryList.includes(category);
+						return <CategoryBtn key={category} text={category} isSelected={isSelected} clickFn={() => toggleCategory(category)} />;
+					})}
+				</div>
 			</div>
+
 			<div className="desktop:hidden flex justify-center gap-3.5">
 				{HUBO.map((hubo) => (
 					<HuboBtn key={hubo} text={hubo} isSelected={mobileHubo === hubo} clickFn={() => selectHubo(hubo)} />
@@ -41,25 +44,26 @@ const PolicyContent = () => {
 			</div>
 			<div className="w-full grid grid-cols-3 gap-15 max-desktop:hidden">
 				{HUBO.map((name) => (
-					<div key={name} className="flex flex-col w-full">
-						<div className="flex w-full h-[116px] justify-center items-center px-5 py-4 gap-8 border border-line-alternative rounded-[12px] ">
-							<div className="w-[76px] h-[76px] overflow-hidden border border-line-normal rounded-full">
-								<Image src={`/images/event/${name}.png`} alt="후보사진" width={90} height={90} />
-							</div>
-							<div className="flex gap-x-1.5 items-center">
-								<span className="typo-heading2 font-bold">{name}</span>
-								<span className={`flex items-center justify-center px-1.5 h-5 typo-caption2 rounded-[6px] ${PARTY_LABEL_COLOR[name]}`}>
-									{EVENT_HOME_CARD_DATA[name].party}
-								</span>
-							</div>
+					<div
+						key={name + '이름들'}
+						className="flex w-full h-[116px] justify-center items-center px-5 py-4 gap-8 border border-line-alternative rounded-[12px] "
+					>
+						<div className="w-[76px] h-[76px] overflow-hidden border border-line-normal rounded-full">
+							<Image src={`/images/event/${name}.png`} alt="후보사진" width={90} height={90} />
 						</div>
-						{(categoryList.length > 0 ? categoryList : CATEGORY).map((category) => (
-							<PolicyItem key={name + category} name={name} category={category} />
-						))}
+						<div className="flex gap-x-1.5 items-center">
+							<span className="typo-heading2 font-bold">{name}</span>
+							<span className={`flex items-center justify-center px-1.5 h-5 typo-caption2 rounded-[6px] ${PARTY_LABEL_COLOR[name]}`}>
+								{EVENT_HOME_CARD_DATA[name].party}
+							</span>
+						</div>
 					</div>
 				))}
+				{(categoryList.length > 0 ? categoryList : CATEGORY).map((category) =>
+					HUBO.map((name) => <PolicyItem key={name + category + '카테고리별 내용'} name={name} category={category} />),
+				)}
 			</div>
-			<div className="flex flex-col items-center w-full">
+			<div className="flex flex-col items-center w-full desktop:hidden">
 				{(categoryList.length > 0 ? categoryList : CATEGORY).map((category) => (
 					<PolicyItem key={mobileHubo + category} name={mobileHubo} category={category} />
 				))}
@@ -79,7 +83,7 @@ interface btnProps {
 const CategoryBtn = ({ text, isSelected, clickFn }: btnProps) => {
 	const btnClass = isSelected ? 'text-white bg-[#6541F2] border-#6541F2' : 'text-label-alternative border-label-alternative';
 	return (
-		<button onClick={clickFn} className={`text-center rounded-[10px] pl-3 pr-2.5 py-[9px] border-1 typo-body2-normal ${btnClass}`}>
+		<button onClick={clickFn} className={`text-center rounded-[10px] pl-3 pr-2.5 py-[9px] border-1 typo-body2-normal whitespace-nowrap ${btnClass}`}>
 			{text}
 		</button>
 	);
