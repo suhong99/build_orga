@@ -14,3 +14,8 @@ export const CLIENT_NAVI_PATH = {
 const NAVIBAR_VALUES = ['guide', 'bill', 'person'] as const;
 
 export const NAVIBAR_PATH = NAVIBAR_VALUES.map((key) => CLIENT_NAVI_PATH[key]);
+
+export const SERVER_URL = {
+	oauth: 'api/auth/oauth/',
+	logout: 'api/auth/logout',
+};

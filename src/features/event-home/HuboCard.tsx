@@ -30,7 +30,7 @@ const HuboCard = ({ name }: { name: EventPerson }) => {
 						</p>
 						<p className="typo-label1-normal font-regular text-label-alternative group-hover:text-white">{data.party}</p>
 					</div>
-					<div className="relative text-center text-[32px] leading-[136%] font-bold ">
+					<div className="relative text-center text-[30px] h-[36px] leading-[136%] font-bold ">
 						<span className="relative group-hover:hidden z-2">{data.light.comment}</span>
 						<span className="relative text-white hidden group-hover:block z-2">{data.dark.comment}</span>
 						<WavePathIcon fill={HUBO_COLOR[name].icon} className="-translate-y-5/7 group-hover:hidden" />

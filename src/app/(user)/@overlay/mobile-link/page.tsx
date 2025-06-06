@@ -9,7 +9,7 @@ export default function Page() {
 				<Image src="/svgs/logo.svg" alt="로고" width={150} height={32} priority className="ml-4.5" />
 				<nav className="flex flex-col">
 					<NaviBtn title="제 21대 대선 후보" link="/" />
-					<NaviBtn title="그래이픽이란?" target="_blank" link="/" />
+					<NaviBtn title="그래이픽이란?" target="_blank" link="https://tally.so/r/wQWzY7" />
 					{/* {NAVIBAR_PATH.map(({ name, path }) => (
 						<NaviBtn key={name} title={name} link={path} />
 					))} */}

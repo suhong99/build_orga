@@ -1,18 +1,13 @@
+import { NAVIBAR_PATH } from '@/shared/const/url';
 import Link from 'next/link';
 import React from 'react';
 
-// TODO: 대선끝나고 수정
 const Navibar = () => {
 	return (
 		<nav className="hidden desktop:flex justify-between items-center gap-[70px] ">
-			{/* 
 			{NAVIBAR_PATH.map(({ name, path }) => (
 				<NaviBtn key={name} title={name} link={path} />
 			))}
-			 */}
-
-			<NaviBtn title="제 21대 대선" link="/" />
-			<NaviBtn title="그래이픽이란?" target="_blank" link="/" />
 		</nav>
 	);
 };

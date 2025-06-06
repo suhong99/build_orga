@@ -1,5 +1,4 @@
 type BookmarkIconProps = {
-	// TODO: 옵셔널 빼기
 	isChecked?: boolean;
 	color?: string;
 	size?: number;

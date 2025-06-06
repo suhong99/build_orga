@@ -13,7 +13,7 @@ const PolicyItem = ({ name, category }: ItemProps) => {
 		<article className="flex flex-col w-full gap-3 py-4 items-center max-w-[500px]">
 			<header className="flex flex-col w-full gap-1.5">
 				<span className="typo-heading2 font-bold text-label-normal">{category}</span>
-				<div className="flex gap-2.5">
+				<div className="flex gap-x-2.5 flex-wrap h-10">
 					{data.keywordList.map((keyword) => (
 						<span key={keyword} className="typo-label1-normal font-regular text-label-alternative">
 							#{keyword}
@@ -22,7 +22,7 @@ const PolicyItem = ({ name, category }: ItemProps) => {
 				</div>
 			</header>
 			{data.info.map(({ title, detailList }) => (
-				<div key={title} className="flex gap-5 py-3 w-full">
+				<div key={title} className="flex gap-5 pb-3 w-full">
 					<span className="flex items-center justify-center px-1.5 w-21 h-6 typo-caption1	 text-[#4F29E5] bg-[#4F29E5]/9  rounded-[6px]">{title}</span>
 					<div className="flex flex-col gap-2.5 flex-1 flex-wrap break-words">
 						{detailList.map((text) => (
