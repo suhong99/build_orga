@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 export default function Page() {
+	// TODO:
 	const [isFail] = useState(false);
 
 	return (

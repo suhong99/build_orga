@@ -97,3 +97,10 @@ FSD를 간소화 시킨 폴더 구조 사용
 <img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" />
 <img src="https://img.shields.io/badge/framer--motion-0055FF?style=for-the-badge&logo=framer&logoColor=white" />
 <img src="https://img.shields.io/badge/storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white" />
+
+## branch 전략
+
+- main : 실 서비스 중인 브랜치. 베타서비스 이전까지는 develop 브랜치 역할을 대신함
+- develop : 신규 개발 내용을 병합중이 branch.
+- tt-\* : 지라 이슈 번호에 따른 기능 단위의 브랜치. 작업이 완료시 develop에 병합
+- hotfix : 급하게 수정해야할 내용을 작업 -> main에 병합
