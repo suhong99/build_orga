@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 export default function Page() {
-	// TODO:
+	// TODO: 실패로직 혹은 페이지 수정
 	const [isFail] = useState(false);
 
 	return (

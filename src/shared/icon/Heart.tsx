@@ -7,7 +7,7 @@ interface HeartIconProps {
 	className?: string;
 }
 
-const HeartIcon: React.FC<HeartIconProps> = ({ isLiked = false, className = 'w-5 h-5' }) => {
+const HeartIcon = ({ isLiked = false, className = 'w-5 h-5' }: HeartIconProps) => {
 	return isLiked ? (
 		<svg className={className} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path

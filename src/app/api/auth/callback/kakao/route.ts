@@ -6,14 +6,14 @@ import { NextRequest } from 'next/server';
 export async function GET(req: NextRequest) {
 	const code = req.nextUrl.searchParams.get('code') || '';
 
-	const response = await fetch(`${process.env.SERVER_URL}${SERVER_URL.oauth}kakao`, {
+	const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/${SERVER_URL.oauth}kakao`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json;charset=UTF-8',
 		},
 		body: JSON.stringify({
 			code,
-			redirectUri: `${process.env.KAKAO_REDIRECT_URI}`,
+			redirectUri: `${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}`,
 		}),
 	});
 

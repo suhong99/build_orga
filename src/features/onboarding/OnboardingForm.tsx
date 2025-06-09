@@ -8,7 +8,6 @@ import { Keyword } from '@/shared/const/committee';
 
 const OnboardingForm = () => {
 	const [keywords, setKeywords] = useState<Keyword[]>([]);
-	// TODO:  api에서 중복확인 에러 발생시 처리해주기
 	const [isValidateNick, setIsValidateNick] = useState<boolean>(false);
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -16,7 +15,6 @@ const OnboardingForm = () => {
 		const formData = new FormData(e.currentTarget);
 		const nickname = formData.get('nickname');
 
-		console.log(nickname, keywords);
 		alert(`${nickname} ${keywords}`);
 	};
 

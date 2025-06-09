@@ -36,6 +36,7 @@ const Nickname = ({ setIsValidate }: NicknameProps) => {
 		}
 	}, [isValid, setIsValidate]);
 
+	console.log(isDuplicateButtonDisabled, 'isDuplicateButtonDisabled');
 	return (
 		<section className="min-w-[343px]">
 			<label htmlFor="nickname" className="text-left typo-caption1 font-bold text-interaction-inactive">
@@ -54,7 +55,6 @@ const Nickname = ({ setIsValidate }: NicknameProps) => {
 					label={isChecking ? '확인 중...' : '중복 확인'}
 					onClick={checkDuplicate}
 					disabled={isDuplicateButtonDisabled}
-					className={isDuplicateButtonDisabled ? 'opacity-50 cursor-not-allowed' : ''}
 				/>
 			</div>
 		</section>

@@ -1,10 +1,10 @@
 import React from 'react';
 
-type RightIconProps = {
+interface RightIconProps {
 	width?: number;
 	height?: number;
 	className?: string;
-};
+}
 
 const RightIcon = ({ width = 7, height = 12, className = 'text-label-alternative' }: RightIconProps) => {
 	return (
