@@ -1,6 +1,7 @@
 'use server';
 
-import { COOKIE_NAME } from '@/shared/const/cookie';
+import { logout } from '@/shared/api/auth';
+import { COOKIE_MAX_AGE, COOKIE_NAME } from '@/shared/const/cookie';
 import { cookies } from 'next/headers';
 
 type AuthResult = {
@@ -20,34 +21,33 @@ export const storeAuth = async (result: AuthResult) => {
 		secure: true,
 		sameSite: 'lax',
 		path: '/',
-		maxAge: 60 * 60, // 1시간
+		maxAge: COOKIE_MAX_AGE.auth.access,
 	});
 
 	cookieStore.set(refresh, result.refreshToken, {
 		httpOnly: true,
 		secure: true,
 		sameSite: 'lax',
-
 		path: '/',
-		maxAge: 60 * 60 * 24 * 7,
+		maxAge: COOKIE_MAX_AGE.auth.refresh,
 	});
 
 	cookieStore.set(userId, result.userid.toString(), {
 		httpOnly: false,
 		path: '/',
-		maxAge: 60 * 60 * 24 * 7,
 	});
 
 	cookieStore.set(nickname, result.nickname ?? '', {
 		httpOnly: false,
 		path: '/',
-		maxAge: 60 * 60 * 24 * 7,
 	});
 };
 
-// 로그아웃 로직 (쿠키 삭제)
+// 로그아웃 로직 (쿠키 삭제 및 호출)
 export const clearAuth = async () => {
 	const cookieStore = await cookies();
+	const accessToken = cookieStore.get(COOKIE_NAME.auth.access)?.value;
+	if (accessToken) await logout(accessToken);
 
 	cookieStore.delete('accesstoken');
 	cookieStore.delete('refreshtoken');

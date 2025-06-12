@@ -2,13 +2,14 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { COOKIE_NAME } from './shared/const/cookie';
+import { clearAuth } from './features/auth/utils/cookie';
 
 export async function middleware(req: NextRequest) {
 	const { pathname } = req.nextUrl;
 	const cookieStore = await cookies();
 
 	// 오타 방지용 상수값 관리
-	const { access, refresh, userId, nickname } = COOKIE_NAME.auth;
+	const { access, nickname } = COOKIE_NAME.auth;
 	const protectedPaths = ['/onboarding', '/mypage'];
 
 	const hasToken = cookieStore.has(access);
@@ -16,10 +17,7 @@ export async function middleware(req: NextRequest) {
 
 	// 닉네임 없이 onboarding페이지 이탈시 토큰 제거 (로그아웃)
 	if (hasToken && nickValue === '' && !(pathname === '/onboarding')) {
-		cookieStore.delete(access);
-		cookieStore.delete(refresh);
-		cookieStore.delete(userId);
-		cookieStore.delete(nickname);
+		await clearAuth();
 
 		if (pathname !== '/onboarding') {
 			return NextResponse.redirect(new URL('/', req.url));
