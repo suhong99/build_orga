@@ -57,15 +57,14 @@ export const refreshToken = async (): Promise<boolean> => {
 };
 
 export const logout = async (accessToken: string) => {
-	// TODO: 서버에러 상태
 	fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/logout`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json;charset=UTF-8',
+			Authorization: `Bearer ${accessToken}`,
 		},
-		body: JSON.stringify({ accessToken }),
 	}).catch(() => {
 		// 실패해도 무시
-		console.warn('Logout request failed, but proceeding anyway.');
+		console.warn('서버측 로그아웃 실패, 쿠키 삭제만 진행합니다.');
 	});
 };
