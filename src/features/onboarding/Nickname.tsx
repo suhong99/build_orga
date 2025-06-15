@@ -36,7 +36,6 @@ const Nickname = ({ setIsValidate }: NicknameProps) => {
 		}
 	}, [isValid, setIsValidate]);
 
-	console.log(isDuplicateButtonDisabled, 'isDuplicateButtonDisabled');
 	return (
 		<section className="min-w-[343px]">
 			<label htmlFor="nickname" className="text-left typo-caption1 font-bold text-interaction-inactive">
@@ -45,6 +44,7 @@ const Nickname = ({ setIsValidate }: NicknameProps) => {
 			<div className="flex gap-[15px] h-10">
 				<Input<NicknameInputExtension>
 					id="nickname"
+					name="nickname"
 					value={nickname}
 					onChange={(val) => setNickname(val)}
 					placeholder="3~8글자 이내로 입력"

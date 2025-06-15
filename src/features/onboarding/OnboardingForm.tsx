@@ -5,20 +5,34 @@ import Keywords from './Keywords';
 import Nickname from './Nickname';
 import { useState } from 'react';
 import { Keyword } from '@/shared/const/committee';
+import { onboardUser } from './api/server';
+import { useRouter } from 'next/navigation';
 
 const OnboardingForm = () => {
 	const [keywords, setKeywords] = useState<Keyword[]>([]);
 	const [isValidateNick, setIsValidateNick] = useState<boolean>(false);
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		//TODO: api를 통해 온보딩 정보 전송하기
-		const formData = new FormData(e.currentTarget);
-		const nickname = formData.get('nickname');
-
-		alert(`${nickname} ${keywords}`);
-	};
-
 	const canSumbit = keywords.length > 0 && isValidateNick;
+	const router = useRouter();
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		const formData = new FormData(e.currentTarget);
+		const nickname = formData.get('nickname') as string;
+
+		const result = await onboardUser(nickname, keywords);
+		switch (result.status) {
+			case 'relogin':
+				alert('재로그인 후 시도해주세요!');
+				router.push('/');
+				break;
+			case 'retry':
+				alert('다시 시도해 주세요!');
+				break;
+			case 'success':
+				router.push('/');
+				break;
+		}
+	};
 
 	return (
 		<form onSubmit={handleSubmit} className="flex flex-col gap-[32px] desktop:gap-12 py-12 w-[375px] desktop:w-[480px] mx-auto">

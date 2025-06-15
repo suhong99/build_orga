@@ -3,6 +3,7 @@
 import { cookies } from 'next/headers';
 import { COOKIE_NAME } from '../const/cookie';
 import { refreshToken } from './auth';
+import { RefreshTokenError } from '../const/error';
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
@@ -22,12 +23,8 @@ export async function fetcher(path: string, options: FetcherOptions = {}): Promi
 		method,
 		headers: finalHeaders,
 		body: body && typeof body !== 'string' ? JSON.stringify(body) : body,
-		...rest, // signal 등 기타 옵션 유지
+		...rest,
 	});
-
-	if (!response.ok) {
-		throw new Error(`Request failed with status ${response.status}`);
-	}
 
 	return response;
 }
@@ -55,13 +52,12 @@ export async function authorizedFetcher<T>(path: string, options: FetcherOptions
 	if (response.status === 401) {
 		if (isRetry) {
 			// 이미 한번 재시도 했는데도 실패 → 더이상 재시도 안함
-			throw new Error('Token refresh failed after retry');
+			throw new RefreshTokenError();
 		}
 
 		const refreshed = await refreshToken();
-
 		if (!refreshed) {
-			throw new Error('Token refresh failed');
+			throw new RefreshTokenError();
 		}
 
 		// 재귀 호출로 재시도
