@@ -1,8 +1,8 @@
 import HamberMenu from '@/features/layout/HamberMenu';
 import Link from 'next/link';
-import Image from 'next/image';
 import { clearAuth, isLoggedIn } from '@/features/auth/utils/cookie';
 import { NAVIBAR_PATH } from '@/shared/const/url';
+import Logo from '@/shared/icon/Logo';
 
 export default async function Page() {
 	const logout = async () => {
@@ -14,7 +14,7 @@ export default async function Page() {
 	return (
 		<HamberMenu>
 			<div className="flex flex-col mt-[68px] px-2.5 py-2 gap-3">
-				<Image src="/svgs/logo.svg" alt="로고" width={150} height={32} priority className="ml-4.5" />
+				<Logo className="w-[150px] h-[32px]  ml-4.5" />
 				<nav className="flex flex-col">
 					{NAVIBAR_PATH.map(({ name, path }) => (
 						<NaviBtn key={name} title={name} link={path} />

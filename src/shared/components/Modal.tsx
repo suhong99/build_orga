@@ -21,7 +21,7 @@ const Modal = ({ children, className = '' }: ModalProps) => {
 				className={`flex justify-center relative w-[335px] h-[344px] desktop:w-[558px] desktop:h-[524px] rounded-[20px] bg-white ${className}`}
 			>
 				<button className="absolute top-5 right-6 cursor-pointer" onClick={onCloseModal}>
-					<Image src="/svgs/close.svg" alt="닫기" width={24} height={24} />
+					<Image src="/svgs/close.svg" alt="닫기" width={24} height={24} draggable={false} />
 				</button>
 				{children}
 			</aside>

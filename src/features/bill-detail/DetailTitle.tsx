@@ -44,7 +44,7 @@ const DetailTitle = ({
 					))}
 				</div>
 				<div className="flex pt-1 gap-1 items-center">
-					<Image src="/svgs/bookmark.svg" alt="북마크" width={18} height={18} className="py-0.5" />
+					<Image src="/svgs/bookmark.svg" alt="북마크" draggable={false} width={18} height={18} className="py-0.5" />
 					<span className="hidden desktop:block typo-body2-normal font-bold text-label-alternative/61">북마크</span>
 				</div>
 			</div>

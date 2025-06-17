@@ -85,7 +85,7 @@ const DetailInteraction = ({ reactions, myReaction: initialMyReaction }: Pick<Bi
 
 					<div className="flex justify-end gap-5 typo-body2-normal font-bold mt-6 mb-5 desktop:mt-9 desktop:mb-3">
 						<div className="flex gap-1 items-center align-middle">
-							<Image src="/svgs/bookmark.svg" alt="북마크" width={18} height={18} className="py-0.5" />
+							<Image src="/svgs/bookmark.svg" alt="북마크" width={18} height={18} draggable={false} className="py-0.5" />
 							<span className="text-label-alternative/61">북마크</span>
 						</div>
 						<ShareButton />

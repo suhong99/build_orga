@@ -32,7 +32,7 @@ export const Dropdown = ({ label, about, children, className }: DropdownProps) =
 				}}
 			>
 				{label}
-				<Image src="/svgs/down.svg" alt="드롭다운열기" width={16} height={16} />
+				<Image src="/svgs/down.svg" alt="드롭다운열기" width={16} height={16} draggable={false} />
 			</button>
 
 			{open && (

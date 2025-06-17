@@ -14,6 +14,7 @@ const UserInfo = ({ nickname, profileImg, keywordList }: MyInfo) => {
 						width={100}
 						height={100}
 						className="w-[56px] h-[56px] desktop:w-[100px] desktop:h-[100px] rounded-full"
+						draggable={false}
 						priority
 					/>
 					<figcaption className="sr-only">{nickname}님의 프로필 사진</figcaption>

@@ -36,6 +36,7 @@ const Comment = ({ img, nickname, date, isEdited, text, likeNum, isLiked, isWrit
 				width={48}
 				height={48}
 				className="w-[32px] h-[32px] desktop:w-[48px] desktop:h-[48px] rounded-full"
+				draggable={false}
 				priority
 			/>
 			<div className="flex flex-col flex-1 gap-2">
