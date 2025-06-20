@@ -15,15 +15,16 @@ export async function middleware(req: NextRequest) {
 	const hasToken = cookieStore.has(access);
 	const nickValue = cookieStore.get(nickname)?.value;
 
-	// 닉네임 없이 onboarding페이지 이탈시 토큰 제거 (로그아웃)
 	if (hasToken && nickValue === '' && !(pathname === '/onboarding')) {
-		await clearAuth();
+		const referer = req.headers.get('referer') || '';
+		const isFromModalLogin = referer.includes('/modal-login');
 
-		if (pathname !== '/onboarding') {
+		// modal-login에서 온 경우라면 생략 (slot 삭제에 의한 경유인 경우 무시)
+		if (!isFromModalLogin) {
+			await clearAuth();
 			return NextResponse.redirect(new URL('/', req.url));
 		}
 	}
-
 	// 토큰없을 경우 특정 페이지 진입 불가
 	if (!hasToken && protectedPaths.includes(pathname)) {
 		return NextResponse.redirect(new URL('/', req.url));

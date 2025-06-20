@@ -4,7 +4,7 @@ import { logout } from '@/shared/api/auth';
 import { COOKIE_MAX_AGE, COOKIE_NAME } from '@/shared/const/cookie';
 import { cookies } from 'next/headers';
 
-type AuthResult = {
+export type AuthResult = {
 	accessToken: string;
 	refreshToken: string;
 	userid: number;

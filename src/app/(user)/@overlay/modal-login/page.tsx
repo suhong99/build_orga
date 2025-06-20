@@ -1,15 +1,35 @@
 'use client';
 
-import { authorize } from '@/features/auth/api/oauth';
+import { loginUser } from '@/features/auth/api/oauth';
+import useOAuthPopUp from '@/features/auth/hooks/useOauthPopup';
 import LoginFailText from '@/features/auth/LoginFailText';
 import Modal from '@/shared/components/Modal';
-import SocialBtn from '@/shared/components/SocialBtn';
+import SocialBtn, { SocialType } from '@/shared/components/SocialBtn';
 import Logo from '@/shared/icon/Logo';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function Page() {
-	// TODO: 실패로직 혹은 페이지 수정
-	const [isFail] = useState(false);
+	const [isFail, setIsFail] = useState(false);
+	const { open, code, isOpen } = useOAuthPopUp();
+	const [socialType, setSocialType] = useState<SocialType | null>(null);
+	const router = useRouter();
+	useEffect(() => {
+		if (!code || !socialType) return;
+
+		loginUser(code, socialType)
+			.then((user) => {
+				if (!user.nickname) {
+					router.push('/onboarding');
+				} else {
+					router.back();
+				}
+			})
+			.catch((e) => {
+				console.error(e);
+				setIsFail(true);
+			});
+	}, [code, socialType, router]);
 
 	return (
 		<Modal>
@@ -26,14 +46,18 @@ export default function Page() {
 					<SocialBtn
 						type="kakao"
 						onClick={() => {
-							authorize('kakao');
+							open('kakao');
+							setSocialType('kakao');
 						}}
+						isLoading={isOpen}
 					/>
 					<SocialBtn
 						type="google"
 						onClick={() => {
-							authorize('google');
+							open('google');
+							setSocialType('google');
 						}}
+						isLoading={isOpen}
 					/>
 					{isFail && <LoginFailText />}
 				</div>

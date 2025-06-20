@@ -1,6 +1,9 @@
 'use server';
 
+import { SERVER_URL } from '@/shared/const/url';
 import { redirect } from 'next/navigation';
+import { AuthResult, storeAuth } from '../utils/cookie';
+import { SocialType } from '@/shared/components/SocialBtn';
 
 type OAuthType = 'kakao' | 'google';
 
@@ -11,4 +14,33 @@ export const authorize = async (type: OAuthType) => {
 	};
 
 	redirect(oauthURL[type]);
+};
+
+export const loginUser = async (code: string, type: SocialType): Promise<AuthResult> => {
+	const URL_MAP: Record<SocialType, string> = {
+		kakao: `${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}`,
+		google: `${process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI}`,
+	};
+
+	const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/${SERVER_URL.oauth}/${type}`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json;charset=UTF-8',
+		},
+		body: JSON.stringify({
+			code,
+			redirectUri: URL_MAP[type],
+		}),
+	});
+
+	if (!response.ok) {
+		console.error('소셜 로그인 실패', await response.text());
+		throw new Error('소셜 에러');
+	}
+	const data = await response.json();
+	const result = data.result;
+
+	await storeAuth(result);
+
+	return result;
 };
