@@ -3,12 +3,19 @@
 import { cookies } from 'next/headers';
 import { COOKIE_NAME } from '../const/cookie';
 import { refreshToken } from './auth';
-import { RefreshTokenError } from '../const/error';
+import { NeedLoginError, RefreshTokenError } from '../const/error';
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
 interface FetcherOptions extends Omit<RequestInit, 'method'> {
 	method?: HttpMethod;
+}
+
+interface ApiResponse<T> {
+	isSuccess: boolean;
+	responseCode: number;
+	responseMessage: string;
+	result: T;
 }
 
 export async function fetcher(path: string, options: FetcherOptions = {}): Promise<Response> {
@@ -29,19 +36,15 @@ export async function fetcher(path: string, options: FetcherOptions = {}): Promi
 	return response;
 }
 
-export async function authorizedFetcher<T>(path: string, options: FetcherOptions = {}, isRetry: boolean = false): Promise<T> {
+export async function tokenFetcher<T>(path: string, options: FetcherOptions = {}, isRetry: boolean = false): Promise<ApiResponse<T>> {
 	const cookieStore = await cookies();
 	const { access } = COOKIE_NAME.auth;
 	const accessToken = cookieStore.get(access)?.value;
 
-	if (!accessToken) {
-		throw new Error('Access token not found');
-	}
-
 	// 헤더 삽입 함수
-	const buildHeaders = (token: string) => ({
+	const buildHeaders = (token?: string) => ({
 		...options.headers,
-		Authorization: `Bearer ${token}`,
+		...(token ? { Authorization: `Bearer ${token}` } : {}),
 	});
 
 	const response = await fetcher(path, {
@@ -50,23 +53,28 @@ export async function authorizedFetcher<T>(path: string, options: FetcherOptions
 	});
 
 	if (response.status === 401) {
+		if (!accessToken) {
+			throw new NeedLoginError();
+		}
+
+		// 토큰이 있는데도 재발급 실패 → 이미 재시도 했으면 중단
 		if (isRetry) {
-			// 이미 한번 재시도 했는데도 실패 → 더이상 재시도 안함
 			throw new RefreshTokenError();
 		}
 
+		// 첫 시도면 refresh 시도
 		const refreshed = await refreshToken();
 		if (!refreshed) {
 			throw new RefreshTokenError();
 		}
 
-		// 재귀 호출로 재시도
-		return authorizedFetcher<T>(path, options, true);
+		// refresh 성공 → 재요청
+		return tokenFetcher<T>(path, options, true);
 	}
 
 	if (!response.ok) {
 		throw new Error(`Request failed with status ${response.status}`);
 	}
 
-	return (await response.json()) as T;
+	return (await response.json()) as ApiResponse<T>;
 }

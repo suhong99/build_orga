@@ -1,7 +1,7 @@
 'use server';
 
 import { logout } from '@/shared/api/auth';
-import { authorizedFetcher } from '@/shared/api/fetcher';
+import { tokenFetcher } from '@/shared/api/fetcher';
 import { Keyword } from '@/shared/const/committee';
 import { COOKIE_NAME } from '@/shared/const/cookie';
 import { RefreshTokenError } from '@/shared/const/error';
@@ -43,7 +43,7 @@ export async function onboardUser(nickname: string, keywords: Keyword[]) {
 	}
 
 	try {
-		await authorizedFetcher('/api/users/me/onboarding', {
+		await tokenFetcher('/api/users/me/onboarding', {
 			method: 'POST',
 			body: JSON.stringify({ nickname, interestKeywords: keywords }),
 			cache: 'no-store',

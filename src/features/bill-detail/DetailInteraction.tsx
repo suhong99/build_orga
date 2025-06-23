@@ -2,7 +2,6 @@
 
 import { Fragment, useRef, useState } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
-import { BillDetalProps } from './api';
 import { BillReaction } from './const';
 import Image from 'next/image';
 import ShareButton from '@/shared/components/ShareBtn';
@@ -14,10 +13,16 @@ const IconMap: { label: BillReaction; emoji: string }[] = [
 	{ label: '아쉬워요', emoji: '☹️' },
 ] as const;
 
-const DetailInteraction = ({ reactions, myReaction: initialMyReaction }: Pick<BillDetalProps, 'reactions' | 'myReaction'>) => {
+// TODO: { reactions, myReaction: initialMyReaction }: Pick<BillDetalProps, 'reactions' | 'myReaction'>
+// reactions: [number, number, number, number];
+// myReaction: BillReaction | null;
+const DetailInteraction = () => {
 	const targetRef = useRef<HTMLDivElement>(null);
 	const [visible, setVisible] = useState(true);
 	const { scrollY } = useScroll();
+
+	const reactions = [100, 200, 100, 50];
+	const initialMyReaction = null;
 
 	const [myReaction, setMyReaction] = useState<BillReaction | null>(initialMyReaction);
 	const [reactionCounts, setReactionCounts] = useState([...reactions]);

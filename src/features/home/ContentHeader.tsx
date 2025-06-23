@@ -1,6 +1,7 @@
 import React from 'react';
 import { NonEmptyArray } from '@/shared/types/util';
 import RightIcon from '@/shared/icon/Right';
+import Link from 'next/link';
 
 interface ContentHeaderProps {
 	title: string;
@@ -10,8 +11,6 @@ interface ContentHeaderProps {
 }
 
 const ContentHeader = ({ title, link, keywordList, isLoginRequired }: ContentHeaderProps) => {
-	// TODO: 링크작업예정
-	console.log(link);
 	return (
 		<div className="flex justify-center  desktop:justify-between items-center w-full h-[56px] desktop:h-[38px] desktop:gap-[10px] p-0">
 			<h2 className="flex flex-col items-center desktop:flex-row typo-heading1 desktop:typo-title2 font-bold gap-2 flex-wrap text-center">
@@ -29,9 +28,12 @@ const ContentHeader = ({ title, link, keywordList, isLoginRequired }: ContentHea
 					</span>
 				)}
 			</h2>
-			<button className="hidden  desktop:flex cursor-pointer typo-body1-normal text-label-alternative opacity-[61%] hover:opacity-100 font-bold items-center">
+			<Link
+				href={link}
+				className="hidden  desktop:flex cursor-pointer typo-body1-normal text-label-alternative opacity-[61%] hover:opacity-100 font-bold items-center"
+			>
 				더보기 &nbsp; <RightIcon width={8} height={14} />
-			</button>
+			</Link>
 		</div>
 	);
 };

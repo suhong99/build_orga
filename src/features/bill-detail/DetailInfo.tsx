@@ -2,12 +2,17 @@ import { BillDetalProps } from './api';
 
 type InfoSubject = '진행 단계' | '대표 발의자' | '소관 위원회' | 'AI 한줄 요약';
 
-const DetailInfo = ({ status, name, committee, aiSummary }: Pick<BillDetalProps, 'status' | 'name' | 'committee' | 'aiSummary'>) => {
+const DetailInfo = ({
+	billStatus,
+	representativeName,
+	committeeName,
+	billAiSummary,
+}: Pick<BillDetalProps, 'billStatus' | 'representativeName' | 'committeeName' | 'billAiSummary'>) => {
 	const InfoList: { subject: InfoSubject; detail: string; isLong?: boolean }[] = [
-		{ subject: '진행 단계', detail: status },
-		{ subject: '대표 발의자', detail: name },
-		{ subject: '소관 위원회', detail: committee },
-		{ subject: 'AI 한줄 요약', detail: aiSummary, isLong: true },
+		{ subject: '진행 단계', detail: billStatus },
+		{ subject: '대표 발의자', detail: representativeName },
+		{ subject: '소관 위원회', detail: committeeName },
+		{ subject: 'AI 한줄 요약', detail: billAiSummary, isLong: true },
 	];
 	return (
 		<section className="flex flex-col w-full px-5 py-4 gap-4 rounded-[20px] bg-bg-gray desktop:px-12 desktop:py-8 desktop:gap-5">

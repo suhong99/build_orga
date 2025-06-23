@@ -2,7 +2,9 @@ import { BILL_STATUS_STEP, BillStatus } from '@/shared/const/bill';
 import CheckIcon from '@/shared/icon/Check';
 import React from 'react';
 
+// TODO: 수정
 const DetailProcess = ({ status }: { status: BillStatus }) => {
+	console.log(status);
 	const processBar = Object.keys(BILL_STATUS_STEP)
 		.filter((key): key is Exclude<BillStatus, '기각'> => key !== '기각')
 		.map((billStatus) => {

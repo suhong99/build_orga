@@ -13,6 +13,12 @@ const meta: Meta<typeof SocialBtn> = {
 				options: ['kakao', 'google'],
 			},
 		},
+		isLoading: {
+			description: '로딩 여부',
+			control: {
+				type: 'boolean',
+			},
+		},
 	},
 };
 
