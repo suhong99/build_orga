@@ -1,4 +1,6 @@
 // Global Navigation Bar
+'use server';
+
 import Navibar from './Navibar';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -6,8 +8,14 @@ import { SolidBtn } from '@/shared/components/SolidBtn';
 import SearchIcon from '@/shared/icon/Search';
 import { CLIENT_NAVI_PATH } from '@/shared/const/url';
 import Logo from '@/shared/icon/Logo';
+import { cookies } from 'next/headers';
+import { COOKIE_NAME } from '@/shared/const/cookie';
 
-const Header = () => {
+const Header = async () => {
+	const cookieStore = await cookies();
+	const nickname = cookieStore.get(COOKIE_NAME.auth.nickname);
+	const isLogin = !!nickname?.value;
+
 	return (
 		<header className="sticky top-0 w-full px-5 mx-auto flex justify-center bg-white z-20 shadow-xs">
 			<div className="flex justify-between items-center top-0 w-full max-w-maxw h-16">
@@ -19,9 +27,17 @@ const Header = () => {
 					<Link href={CLIENT_NAVI_PATH.search.path}>
 						<SearchIcon width={24} height={24} />
 					</Link>
-					<Link href="/modal-login">
-						<SolidBtn label="로그인" size="small" />
-					</Link>
+					{isLogin ? (
+						<Link href="/mypage">
+							{/* 이미지로 대체 */}
+							<div className="w-8 h-8 rounded-full text-center flex justify-center items-center  bg-accent-bg-red">유저</div>
+						</Link>
+					) : (
+						<Link href="/modal-login">
+							<SolidBtn label="로그인" size="small" />
+						</Link>
+					)}
+
 					<Link href="/mobile-link" className="desktop:hidden cursor-pointer">
 						<Image src="/svgs/menu.svg" alt="네비바 열기" width={24} height={24} draggable={false} />
 					</Link>

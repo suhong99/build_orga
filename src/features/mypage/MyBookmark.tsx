@@ -9,17 +9,16 @@ const MyBookmark = () => {
 			{arr.map((_, i) => (
 				<IssueCard
 					key={i}
-					id={'1'}
-					title={'AI 시대의 개인정보 보호 방안'}
-					committee={'외교통일위원회'}
-					name={'홍길동'}
-					date={'2025.04.27'}
-					state={'발의/소관위원회 심사'}
-					keywordList={['AI', '개인정보', '보안']}
-					viewNum={0}
-					bookmarkNum={0}
-					commentNum={0}
-					isBookMarked={true}
+					billId={'1'}
+					aiTitle={'AI 시대의 개인정보 보호 방안'}
+					committeeName={'외교통일위원회'}
+					representativeName={'홍길동'}
+					proposeDate={'2025.04.27'}
+					billHistoryStatus={'발의/소관위원회 심사'}
+					viewCount={0}
+					reactionCount={0}
+					commentCount={0}
+					scraped={true}
 				/>
 			))}
 		</div>

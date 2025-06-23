@@ -23,16 +23,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	args: {
-		id: '0',
-		title: 'AI 시대의 개인정보 보호 방안',
-		committee: '과학기술정보방송통신위원회',
-		name: '홍길동',
-		date: '2025.04.27',
-		state: '발의/소관위원회 심사',
-		keywordList: ['AI', '개인정보', '보안'],
-		viewNum: 1234,
-		bookmarkNum: 56,
-		commentNum: 12,
-		isBookMarked: true,
+		billId: '0',
+		aiTitle: 'AI 시대의 개인정보 보호 방안',
+		committeeName: '과학기술정보방송통신위원회',
+		representativeName: '홍길동',
+		proposeDate: '2025.04.27',
+		billHistoryStatus: '발의/소관위원회 심사',
+		viewCount: 1234,
+		reactionCount: 56,
+		commentCount: 12,
+		scraped: true,
 	},
 };
