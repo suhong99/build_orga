@@ -13,8 +13,7 @@ import { COOKIE_NAME } from '@/shared/const/cookie';
 
 const Header = async () => {
 	const cookieStore = await cookies();
-	const nickname = cookieStore.get(COOKIE_NAME.auth.nickname);
-	const isLogin = !!nickname?.value;
+	const profileImg = cookieStore.get(COOKIE_NAME.auth.img)?.value;
 
 	return (
 		<header className="sticky top-0 w-full px-5 mx-auto flex justify-center bg-white z-20 shadow-xs">
@@ -27,10 +26,9 @@ const Header = async () => {
 					<Link href={CLIENT_NAVI_PATH.search.path}>
 						<SearchIcon width={24} height={24} />
 					</Link>
-					{isLogin ? (
+					{!!profileImg ? (
 						<Link href="/mypage">
-							{/* 이미지로 대체 */}
-							<div className="w-8 h-8 rounded-full text-center flex justify-center items-center  bg-accent-bg-red">유저</div>
+							<Image src={profileImg} alt="프로필 이미지" width={32} height={32} className="rounded-full" />
 						</Link>
 					) : (
 						<Link href="/modal-login">

@@ -4,7 +4,6 @@ import DetailCommentList from '@/features/bill-detail/DetailCommentList';
 import DetailContent from '@/features/bill-detail/DetailContent';
 import DetailInfo from '@/features/bill-detail/DetailInfo';
 import DetailInteraction from '@/features/bill-detail/DetailInteraction';
-import DetailProcess from '@/features/bill-detail/DetailProcess';
 import DetailTitle from '@/features/bill-detail/DetailTitle';
 import ScrollUpBtn from '@/shared/components/ScrollUpBtn';
 
@@ -24,7 +23,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 				<DetailInfo {...data} />
 				<DetailContent detail={data.billSummary || ''} />
 				{/* TODO: */}
-				<DetailProcess status={data.billStatus} />
+				{/* <DetailProcess status={data.billStatus} /> */}
 				<DetailInteraction />
 				<DetailCommentList />
 			</article>

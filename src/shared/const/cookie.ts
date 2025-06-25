@@ -4,6 +4,7 @@ export const COOKIE_NAME = {
 		refresh: 'refreshtoken',
 		userId: 'userid',
 		nickname: 'nickname',
+		img: 'profileimg',
 	},
 };
 

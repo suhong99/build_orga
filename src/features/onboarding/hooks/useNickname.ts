@@ -38,7 +38,6 @@ export function useNickname(): UseNicknameReturn {
 			const data = await checkNickname(nickname);
 
 			const isDuplicate = data?.result;
-			console.log(isDuplicate, 'isDuplicate');
 			if (isDuplicate) {
 				setError({ type: 'duplicate', msg: '이미 사용 중인 닉네임입니다.' });
 			} else {
