@@ -3,8 +3,8 @@
 import { Fragment, useRef, useState } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { BillReaction } from './const';
-import Image from 'next/image';
 import ShareButton from '@/shared/components/ShareBtn';
+import BookmarkBtn from './BookmarkBtn';
 
 const IconMap: { label: BillReaction; emoji: string }[] = [
 	{ label: '좋아요', emoji: '👍' },
@@ -16,7 +16,7 @@ const IconMap: { label: BillReaction; emoji: string }[] = [
 // TODO: { reactions, myReaction: initialMyReaction }: Pick<BillDetalProps, 'reactions' | 'myReaction'>
 // reactions: [number, number, number, number];
 // myReaction: BillReaction | null;
-const DetailInteraction = () => {
+const DetailInteraction = ({ id, isScrapped }: { id: string; isScrapped: boolean }) => {
 	const targetRef = useRef<HTMLDivElement>(null);
 	const [visible, setVisible] = useState(true);
 	const { scrollY } = useScroll();
@@ -89,10 +89,7 @@ const DetailInteraction = () => {
 					</div>
 
 					<div className="flex justify-end gap-5 typo-body2-normal font-bold mt-6 mb-5 desktop:mt-9 desktop:mb-3">
-						<div className="flex gap-1 items-center align-middle">
-							<Image src="/svgs/bookmark.svg" alt="북마크" width={18} height={18} draggable={false} className="py-0.5" />
-							<span className="text-label-alternative/61">북마크</span>
-						</div>
+						<BookmarkBtn id={id} isScrapped={isScrapped} />
 						<ShareButton />
 					</div>
 					<div className="border border-line-neutral w-full" />

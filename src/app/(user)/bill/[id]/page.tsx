@@ -24,7 +24,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 				<DetailContent detail={data.billSummary || ''} />
 				{/* TODO: */}
 				{/* <DetailProcess status={data.billStatus} /> */}
-				<DetailInteraction />
+				<DetailInteraction id={id} isScrapped={data.scrapped} />
 				<DetailCommentList />
 			</article>
 			<ScrollUpBtn />

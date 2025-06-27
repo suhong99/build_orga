@@ -6,8 +6,10 @@ import TagLabel from './TagLabel';
 import { BillStatus } from '../const/bill';
 import Link from 'next/link';
 import { CLIENT_NAVI_PATH } from '../const/url';
-import { useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import BookmarkIcon from '../icon/Bookmark';
+import { toggleScrapped } from '../api/bill';
+import { useRouter } from 'next/navigation';
 
 export interface IssueCardProps {
 	/**이슈 아이디 */
@@ -44,7 +46,8 @@ const IssueCard = ({
 	commentCount,
 	scraped,
 }: IssueCardProps) => {
-	const [isChecked, setIsChecked] = useState(scraped);
+	const [isBookmarked, setIsBookmarked] = useState(scraped);
+	const router = useRouter();
 	const IconList = [
 		{
 			src: '/svgs/eye.svg',
@@ -62,6 +65,22 @@ const IssueCard = ({
 			nums: commentCount,
 		},
 	] as const;
+
+	const toggleBookmark = async (e: MouseEvent) => {
+		e.stopPropagation();
+		const res = await toggleScrapped(billId);
+		console.log(res, '뭐지');
+		switch (res.status) {
+			case 'SUCCESS':
+				setIsBookmarked((prev) => !prev);
+				break;
+			case 'Relogin':
+				router.push('/modal-login');
+				break;
+			default:
+				alert('서버 에러가 발생했습니다.');
+		}
+	};
 
 	return (
 		<article className="flex flex-col rounded-[12px] px-5 pt-5 pb-3 gap-2.5 bg-bg-white desktop:gap-3 desktop:pl-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ">
@@ -91,14 +110,8 @@ const IssueCard = ({
 						<IconWithCount key={icon.src} src={icon.src} alt={icon.alt} nums={icon.nums} />
 					))}
 				</div>
-				<button
-					className="py-0.5"
-					onClick={(e) => {
-						e.stopPropagation();
-						setIsChecked((prev) => !prev);
-					}}
-				>
-					<BookmarkIcon isChecked={isChecked} />
+				<button className="py-0.5" onClick={(e: MouseEvent) => toggleBookmark(e)}>
+					<BookmarkIcon isChecked={isBookmarked} />
 				</button>
 			</footer>
 		</article>

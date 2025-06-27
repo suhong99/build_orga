@@ -4,6 +4,7 @@ import { cookies } from 'next/headers';
 import { COOKIE_NAME } from '../const/cookie';
 import { refreshToken } from './auth';
 import { NeedLoginError, RefreshTokenError } from '../const/error';
+import { clearAuth } from '@/features/auth/utils/cookie';
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
@@ -59,12 +60,14 @@ export async function tokenFetcher<T>(path: string, options: FetcherOptions = {}
 
 		// 토큰이 있는데도 재발급 실패 → 이미 재시도 했으면 중단
 		if (isRetry) {
+			await clearAuth();
 			throw new RefreshTokenError();
 		}
 
 		// 첫 시도면 refresh 시도
 		const refreshed = await refreshToken();
 		if (!refreshed) {
+			await clearAuth();
 			throw new RefreshTokenError();
 		}
 

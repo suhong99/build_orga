@@ -2,11 +2,12 @@ interface BookmarkIconProps {
 	isChecked?: boolean;
 	color?: string;
 	size?: number;
+	className?: string;
 }
 
-const BookmarkIcon = ({ isChecked = false, color = '#6541F2', size = 18 }: BookmarkIconProps) => {
+const BookmarkIcon = ({ isChecked = false, color = '#6541F2', size = 18, className }: BookmarkIconProps) => {
 	return (
-		<svg width={size} height={size} viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width={size} height={size} viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
 			{isChecked ? (
 				<path
 					d="M6.45688 1.94971C6.05949 1.9497 5.72109 1.94969 5.44328 1.97239C5.15141 1.99623 4.86746 2.04846 4.59601 2.18677C4.18676 2.39529 3.85403 2.72803 3.64551 3.13728C3.5072 3.40873 3.45497 3.69267 3.43113 3.98454C3.40843 4.26236 3.40844 4.60074 3.40845 4.99813V16.1247C3.40845 16.3685 3.53993 16.5934 3.75241 16.713C3.9649 16.8325 4.22535 16.8282 4.43375 16.7017L9.33343 13.7269L14.2331 16.7017C14.4415 16.8282 14.702 16.8325 14.9144 16.713C15.1269 16.5934 15.2584 16.3685 15.2584 16.1247V4.99815C15.2584 4.60075 15.2584 4.26237 15.2357 3.98454C15.2119 3.69267 15.1597 3.40873 15.0213 3.13728C14.8128 2.72803 14.4801 2.39529 14.0708 2.18677C13.7994 2.04846 13.5154 1.99623 13.2236 1.97239C12.9458 1.94969 12.6074 1.9497 12.21 1.94971H6.45688Z"
