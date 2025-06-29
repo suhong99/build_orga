@@ -13,6 +13,7 @@ import { COOKIE_NAME } from '@/shared/const/cookie';
 
 const Header = async () => {
 	const cookieStore = await cookies();
+	const isLogin = cookieStore.get(COOKIE_NAME.auth.access)?.value;
 	const profileImg = cookieStore.get(COOKIE_NAME.auth.img)?.value;
 
 	return (
@@ -26,7 +27,7 @@ const Header = async () => {
 					<Link href={CLIENT_NAVI_PATH.search.path}>
 						<SearchIcon width={24} height={24} />
 					</Link>
-					{!!profileImg ? (
+					{isLogin && !!profileImg ? (
 						<Link href="/mypage">
 							<Image src={profileImg} alt="프로필 이미지" width={32} height={32} className="rounded-full" />
 						</Link>

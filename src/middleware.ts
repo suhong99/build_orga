@@ -10,11 +10,12 @@ export async function middleware(req: NextRequest) {
 
 	// 오타 방지용 상수값 관리
 	const { access, nickname } = COOKIE_NAME.auth;
-	const protectedPaths = ['/onboarding', '/mypage'];
+	const protectedPaths = ['/onboarding', '/mypage', '/mypage/profile'];
 
 	const hasToken = cookieStore.has(access);
 	const nickValue = cookieStore.get(nickname)?.value;
 
+	console.log(cookieStore.get(access)?.value);
 	if (hasToken && nickValue === '' && !(pathname === '/onboarding')) {
 		const referer = req.headers.get('referer') || '';
 		const isFromModalLogin = referer.includes('/modal-login');
