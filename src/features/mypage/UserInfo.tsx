@@ -1,15 +1,15 @@
 import Image from 'next/image';
-import { MyInfo } from './const/user';
+import { MyProfileInfo } from './const/user';
 import MyKeyword from './MyKeyword';
 import AccountMenu from './AccountMenu';
 
-const UserInfo = ({ nickname, profileImg, keywordList }: MyInfo) => {
+const UserInfo = ({ nickname, profileImageUrl, interests }: MyProfileInfo) => {
 	return (
 		<>
 			<article className="flex flex-col w-full gap-5 items-center">
 				<figure>
 					<Image
-						src={profileImg || '/images/profile.png'}
+						src={profileImageUrl}
 						alt="프로필 이미지"
 						width={100}
 						height={100}
@@ -21,11 +21,9 @@ const UserInfo = ({ nickname, profileImg, keywordList }: MyInfo) => {
 				</figure>
 				<h1 className="typo-heading1 font-bold">{nickname}</h1>
 
-				<ul className="flex w-full justify-center gap-2">
-					{keywordList.map((keyword) => (
-						<li key={keyword}>
-							<MyKeyword label={keyword} />
-						</li>
+				<ul className="flex w-full flex-wrap justify-center gap-2">
+					{interests.map((keyword, i) => (
+						<MyKeyword key={keyword + i} label={keyword} />
 					))}
 				</ul>
 			</article>

@@ -1,26 +1,38 @@
+'use client';
+
 import IssueCard from '@/shared/components/IssueCard';
-import React from 'react';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import React, { useEffect, useRef } from 'react';
+import { getMyBookmarks } from './api/server';
+import { useInView } from 'framer-motion';
 
 const MyBookmark = () => {
-	// TODO:
-	const arr = Array(10).fill(0);
+	//TODO: 에러처리?
+	const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
+		queryKey: ['bookmarks'],
+		queryFn: ({ pageParam }) => getMyBookmarks({ page: pageParam }),
+		initialPageParam: 0,
+		getNextPageParam: (lastPage) => {
+			if (!lastPage.result.last) {
+				return lastPage.result.pageNumber + 1;
+			}
+			return undefined;
+		},
+	});
+
+	const sensorRef = useRef(null);
+	const isInView = useInView(sensorRef);
+
+	useEffect(() => {
+		if (!isFetching && hasNextPage && isInView) {
+			fetchNextPage();
+		}
+	}, [fetchNextPage, hasNextPage, isFetching, isInView]);
+
 	return (
 		<div className="grid grid-cols-1 gap-6 @min-[768px]:grid-cols-2 ">
-			{arr.map((_, i) => (
-				<IssueCard
-					key={i}
-					billId={'1'}
-					aiTitle={'AI 시대의 개인정보 보호 방안'}
-					committeeName={'외교통일위원회'}
-					representativeName={'홍길동'}
-					proposeDate={'2025.04.27'}
-					billHistoryStatus={'발의/소관위원회 심사'}
-					viewCount={0}
-					reactionCount={0}
-					commentCount={0}
-					scraped={true}
-				/>
-			))}
+			{data?.pages.map(({ result }) => result.content.map((billInfo) => <IssueCard key={billInfo.billId} {...billInfo} />))}
+			<div ref={sensorRef} className="bg-accent-bg-red w-full h-10" />
 		</div>
 	);
 };

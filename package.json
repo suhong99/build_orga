@@ -12,6 +12,7 @@
 		"build-storybook": "storybook build"
 	},
 	"dependencies": {
+		"@tanstack/react-query": "^5.81.5",
 		"framer-motion": "^12.11.4",
 		"lint-staged": "^15.5.0",
 		"next": "15.2.4",

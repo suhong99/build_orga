@@ -9,7 +9,7 @@ import { CLIENT_NAVI_PATH } from '@/shared/const/url';
 const AccountMenu = () => {
 	return (
 		<div className="w-[110px] flex flex-col items-center gap-4 desktop:w-full">
-			<Link href={CLIENT_NAVI_PATH.myprofile.path}>
+			<Link href={CLIENT_NAVI_PATH.myprofile.path} className="w-full">
 				<SolidBtn primary={false} label="프로필 수정" className="w-full" />
 			</Link>
 			<button
