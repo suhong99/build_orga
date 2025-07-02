@@ -2,13 +2,14 @@
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getMyReactions } from './api/server';
-import { Fragment, useEffect, useRef } from 'react';
-import { useInView } from 'framer-motion';
+import { Fragment } from 'react';
 import { groupReactionByDate } from './util';
 import { BillReaction, REACTION_EMOJI } from '../bill-detail/const';
 import TagIcon from '@/shared/icon/Tag';
 import Link from 'next/link';
 import { CLIENT_NAVI_PATH } from '@/shared/const/url';
+import EmptyData from './EmptyData';
+import { useInfinityScrollSensor } from '@/shared/hooks/useInfinityScrollSensor';
 
 const MyOpinion = () => {
 	const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
@@ -23,6 +24,8 @@ const MyOpinion = () => {
 		},
 	});
 
+	const { sensorRef } = useInfinityScrollSensor({ isFetching, hasNextPage, fetchNextPage });
+
 	const COMMENT_BY_REACTION: Record<BillReaction, string> = {
 		좋아요: '좋아요를 눌렀어요! 이 법안에 힘을 보탰습니다.',
 		흥미진진: '흥미롭게 보셨군요! 이슈의 핵심을 짚으셨네요.',
@@ -30,14 +33,9 @@ const MyOpinion = () => {
 		아쉬워요: '아쉬우셨군요. 이런 목소리도 꼭 필요합니다.',
 	} as const;
 
-	const sensorRef = useRef(null);
-	const isInView = useInView(sensorRef);
-
-	useEffect(() => {
-		if (!isFetching && hasNextPage && isInView) {
-			fetchNextPage();
-		}
-	}, [fetchNextPage, hasNextPage, isFetching, isInView]);
+	if (data?.pages?.length === 1 && data.pages[0].result.content.length === 0) {
+		return <EmptyData category="의견" />;
+	}
 
 	const dataGroupedByDate = groupReactionByDate(data);
 

@@ -1,9 +1,10 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useInView } from 'framer-motion';
-import React, { Fragment, useEffect, useRef } from 'react';
+import { Fragment } from 'react';
 import { getMyComments } from './api/server';
 import HeartIcon from '@/shared/icon/Heart';
 import TagIcon from '@/shared/icon/Tag';
+import { useInfinityScrollSensor } from '@/shared/hooks/useInfinityScrollSensor';
+import EmptyData from './EmptyData';
 
 const MyComment = () => {
 	const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
@@ -18,16 +19,14 @@ const MyComment = () => {
 		},
 	});
 
-	const sensorRef = useRef(null);
-	const isInView = useInView(sensorRef);
+	const { sensorRef } = useInfinityScrollSensor({ isFetching, hasNextPage, fetchNextPage });
 
-	useEffect(() => {
-		if (!isFetching && hasNextPage && isInView) {
-			fetchNextPage();
-		}
-	}, [fetchNextPage, hasNextPage, isFetching, isInView]);
+	if (data?.pages?.length === 1 && data.pages[0].result.content.length === 0) {
+		return <EmptyData category="댓글" />;
+	}
 
 	const flatComments = data?.pages.flatMap((page) => page.result.content) ?? [];
+
 	return (
 		<div className="flex flex-col w-full gap-5 px-6 py-5 bg-white rounded-[12px]">
 			{flatComments.map((comment, index) => (
