@@ -2,16 +2,9 @@
 
 import { Fragment, useRef, useState } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
-import { BillReaction } from './const';
+import { BillReaction, REACTION_ICON_MAP } from './const';
 import ShareButton from '@/shared/components/ShareBtn';
 import BookmarkBtn from './BookmarkBtn';
-
-const IconMap: { label: BillReaction; emoji: string }[] = [
-	{ label: '좋아요', emoji: '👍' },
-	{ label: '흥미진진', emoji: '🤩' },
-	{ label: '개선필요', emoji: '😮‍💨' },
-	{ label: '아쉬워요', emoji: '☹️' },
-] as const;
 
 // TODO: { reactions, myReaction: initialMyReaction }: Pick<BillDetalProps, 'reactions' | 'myReaction'>
 // reactions: [number, number, number, number];
@@ -39,7 +32,7 @@ const DetailInteraction = ({ id, isScrapped }: { id: string; isScrapped: boolean
 	});
 
 	const handleClick = (index: number) => {
-		const selectedLabel = IconMap[index].label;
+		const selectedLabel = REACTION_ICON_MAP[index].label;
 		const updated = [...reactionCounts];
 
 		if (myReaction === selectedLabel) {
@@ -52,7 +45,7 @@ const DetailInteraction = ({ id, isScrapped }: { id: string; isScrapped: boolean
 		updated[index] += 1;
 
 		if (myReaction !== null) {
-			const prevIndex = IconMap.findIndex((item) => item.label === myReaction);
+			const prevIndex = REACTION_ICON_MAP.findIndex((item) => item.label === myReaction);
 			if (prevIndex !== -1) {
 				updated[prevIndex] = Math.max(0, updated[prevIndex] - 1);
 			}
@@ -75,7 +68,7 @@ const DetailInteraction = ({ id, isScrapped }: { id: string; isScrapped: boolean
 						<h3 className="typo-headline2 font-bold text-white z-10 desktop:typo-heading1">이 법안, 어떻게 평가하시나요?</h3>
 						<div className="flex items-center gap-3 z-10 bg-white px-4 py-[3px] rounded-[8px] desktop:px-5 desktop:py-2 desktop:rounded-[12px]">
 							{reactionCounts.map((count, i) => {
-								const { label, emoji } = IconMap[i];
+								const { label, emoji } = REACTION_ICON_MAP[i];
 								const isSelected = myReaction === label;
 								return (
 									<Fragment key={label}>
@@ -106,7 +99,7 @@ const DetailInteraction = ({ id, isScrapped }: { id: string; isScrapped: boolean
 						className="flex fixed bottom-10 z-50 px-5 py-3 gap-5 bg-bg-white border border-line-normal rounded-[20px] shadow-md  desktop:px-8 desktop:py-5 desktop:gap-6 desktop:h-17"
 					>
 						{reactionCounts.map((count, i) => {
-							const { label, emoji } = IconMap[i];
+							const { label, emoji } = REACTION_ICON_MAP[i];
 							const isSelected = myReaction === label;
 							return <EmojiBtn key={label} label={label} emoji={emoji} isSelected={isSelected} clickFn={() => handleClick(i)} count={count} />;
 						})}

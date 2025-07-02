@@ -69,7 +69,6 @@ const IssueCard = ({
 	const toggleBookmark = async (e: MouseEvent) => {
 		e.stopPropagation();
 		const res = await toggleScrapped(billId);
-		console.log(res, '뭐지');
 		switch (res.status) {
 			case 'SUCCESS':
 				setIsBookmarked((prev) => !prev);

@@ -30,10 +30,20 @@ const MyBookmark = () => {
 	}, [fetchNextPage, hasNextPage, isFetching, isInView]);
 
 	return (
-		<div className="grid grid-cols-1 gap-6 @min-[768px]:grid-cols-2 ">
-			{data?.pages.map(({ result }) => result.content.map((billInfo) => <IssueCard key={billInfo.billId} {...billInfo} />))}
-			<div ref={sensorRef} className="bg-accent-bg-red w-full h-10" />
-		</div>
+		<>
+			<div className="grid grid-cols-1 gap-6 @min-[768px]:grid-cols-2 ">
+				{data?.pages.map(({ result }) => result.content.map((billInfo) => <IssueCard key={billInfo.billId} {...billInfo} />))}
+			</div>
+			<div ref={sensorRef} className="flex items-center justify-center w-full col-span-2">
+				{hasNextPage && (
+					<div
+						className="w-6 h-6 border-2 border-t-transparent border-inverse-primary-main rounded-full animate-spin"
+						role="status"
+						aria-label="로딩 중"
+					/>
+				)}
+			</div>
+		</>
 	);
 };
 
