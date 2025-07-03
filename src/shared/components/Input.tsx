@@ -30,12 +30,12 @@ export interface InputExtensionProps {
 }
 
 // 모든 HTML input 속성을 포함하는 타입
-export type InputProps<T extends Record<string, unknown> = Record<string, never>> = BaseInputProps &
+export type InputProps<T extends Record<string, unknown> = Record<string, unknown>> = BaseInputProps &
 	InputExtensionProps &
 	Omit<React.InputHTMLAttributes<HTMLInputElement>, keyof (BaseInputProps & InputExtensionProps)> &
 	T;
 
-export default function Input<T extends Record<string, unknown> = Record<string, never>>({
+export default function Input<T extends Record<string, unknown> = Record<string, unknown>>({
 	id,
 	name,
 	value,

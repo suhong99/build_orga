@@ -10,3 +10,8 @@ export const normalizeTextStructure = (text: string): string => {
 	content = content.replace(/\r\n\s+/g, ' ');
 	return content.trim();
 };
+
+export const getCookieValue = (name: string): string | undefined => {
+	const cookie = document.cookie.split('; ').find((row) => row.startsWith(`${name}=`));
+	return cookie?.split('=')[1];
+};

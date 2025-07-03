@@ -5,11 +5,12 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { getMyBookmarks } from './api/server';
 import EmptyData from './EmptyData';
 import { useInfinityScrollSensor } from '@/shared/hooks/useInfinityScrollSensor';
+import { QUERY_KEYS } from '@/shared/const/reactQuery';
 
 const MyBookmark = () => {
 	//TODO: 에러처리?
 	const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
-		queryKey: ['bookmarks'],
+		queryKey: [QUERY_KEYS.myBookmarks],
 		queryFn: ({ pageParam }) => getMyBookmarks({ page: pageParam }),
 		initialPageParam: 0,
 		getNextPageParam: (lastPage) => {
@@ -18,6 +19,7 @@ const MyBookmark = () => {
 			}
 			return undefined;
 		},
+		gcTime: 60 * 1000,
 	});
 
 	const { sensorRef } = useInfinityScrollSensor({ isFetching, hasNextPage, fetchNextPage });

@@ -5,10 +5,11 @@ import HeartIcon from '@/shared/icon/Heart';
 import TagIcon from '@/shared/icon/Tag';
 import { useInfinityScrollSensor } from '@/shared/hooks/useInfinityScrollSensor';
 import EmptyData from './EmptyData';
+import { QUERY_KEYS } from '@/shared/const/reactQuery';
 
 const MyComment = () => {
 	const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
-		queryKey: ['comments'],
+		queryKey: [QUERY_KEYS.myComments],
 		queryFn: ({ pageParam }) => getMyComments({ page: pageParam }),
 		initialPageParam: 0,
 		getNextPageParam: (lastPage) => {
@@ -17,6 +18,7 @@ const MyComment = () => {
 			}
 			return undefined;
 		},
+		gcTime: 60 * 1000,
 	});
 
 	const { sensorRef } = useInfinityScrollSensor({ isFetching, hasNextPage, fetchNextPage });

@@ -3,6 +3,7 @@ import { CommitteeName } from '@/shared/const/committee';
 import { tokenFetcher } from '@/shared/api/fetcher';
 import { BillReaction } from '../const';
 import { NeedLoginError, RefreshTokenError } from '@/shared/const/error';
+import { CommentResponse } from '@/shared/components/Comment';
 
 export interface BillHistory {
 	id: number;
@@ -48,6 +49,11 @@ export interface BillDetalProps {
 	history: BillHistory[];
 }
 
+export interface BillComments {
+	totalcount: number;
+	comments: { content: CommentResponse[]; pageNumber: number; last: boolean };
+}
+
 export const getBillDetail = async (id: string): Promise<BillDetalProps> => {
 	try {
 		const response = await tokenFetcher<BillDetalProps>(`/api/bills/${id}`);
@@ -84,4 +90,18 @@ export const postMyReaction = async (id: string, reactionType: BillReaction) => 
 
 		return { status: 'SERVER_ERROR' };
 	}
+};
+
+export const getBillComments = async ({ id, page = 0, size = 16 }: { id: number | string; page: number; size?: number }) => {
+	const response = await tokenFetcher<BillComments>(`/api/bills/${id}/comments?page=0&page=${page}&size=${size}`);
+
+	return { result: response.result };
+};
+
+export const addBillComment = async (id: number | string, content: string) => {
+	await tokenFetcher(`/api/bills/${id}/comments`, { method: 'POST', body: JSON.stringify({ content }) });
+};
+
+export const deleteBillComment = async (id: number | string) => {
+	await tokenFetcher(`/api/comments/${id}`, { method: 'DELETE' });
 };

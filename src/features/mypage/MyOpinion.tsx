@@ -10,10 +10,11 @@ import Link from 'next/link';
 import { CLIENT_NAVI_PATH } from '@/shared/const/url';
 import EmptyData from './EmptyData';
 import { useInfinityScrollSensor } from '@/shared/hooks/useInfinityScrollSensor';
+import { QUERY_KEYS } from '@/shared/const/reactQuery';
 
 const MyOpinion = () => {
 	const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
-		queryKey: ['reactions'],
+		queryKey: [QUERY_KEYS.myOpinions],
 		queryFn: ({ pageParam }) => getMyReactions({ page: pageParam }),
 		initialPageParam: 0,
 		getNextPageParam: (lastPage) => {
@@ -22,6 +23,7 @@ const MyOpinion = () => {
 			}
 			return undefined;
 		},
+		gcTime: 60 * 1000,
 	});
 
 	const { sensorRef } = useInfinityScrollSensor({ isFetching, hasNextPage, fetchNextPage });
