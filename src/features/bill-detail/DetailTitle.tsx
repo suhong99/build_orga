@@ -1,6 +1,6 @@
 import { COMMITTEES } from '@/shared/const/committee';
 import Image from 'next/image';
-import { BillDetalProps } from './api';
+import { BillDetalProps } from './api/server';
 import BookmarkBtn from './BookmarkBtn';
 
 const DetailTitle = ({

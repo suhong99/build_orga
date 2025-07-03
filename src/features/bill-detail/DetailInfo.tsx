@@ -1,4 +1,4 @@
-import { BillDetalProps } from './api';
+import { BillDetalProps } from './api/server';
 
 type InfoSubject = '진행 단계' | '대표 발의자' | '소관 위원회' | 'AI 한줄 요약';
 

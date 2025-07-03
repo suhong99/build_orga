@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
-import { getBillDetail } from '@/features/bill-detail/api';
+import { getBillDetail } from '@/features/bill-detail/api/server';
 import DetailCommentList from '@/features/bill-detail/DetailCommentList';
 import DetailContent from '@/features/bill-detail/DetailContent';
 import DetailInfo from '@/features/bill-detail/DetailInfo';
-import DetailInteraction from '@/features/bill-detail/DetailInteraction';
+import DetailOpinion from '@/features/bill-detail/DetailOpinion';
 import DetailTitle from '@/features/bill-detail/DetailTitle';
 import ScrollUpBtn from '@/shared/components/ScrollUpBtn';
 
@@ -24,7 +24,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 				<DetailContent detail={data.billSummary || ''} />
 				{/* TODO: */}
 				{/* <DetailProcess status={data.billStatus} /> */}
-				<DetailInteraction id={id} isScrapped={data.scrapped} />
+				<DetailOpinion id={id} isScrapped={data.scrapped} />
 				<DetailCommentList />
 			</article>
 			<ScrollUpBtn />
