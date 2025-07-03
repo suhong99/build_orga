@@ -28,7 +28,7 @@ export const Default: Story = {
 		committeeName: '과학기술정보방송통신위원회',
 		representativeName: '홍길동',
 		proposeDate: '2025.04.27',
-		billHistoryStatus: '발의/소관위원회 심사',
+		billHistoryStatus: '발의',
 		viewCount: 1234,
 		reactionCount: 56,
 		commentCount: 12,

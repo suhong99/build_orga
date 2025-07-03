@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { CommitteeName, COMMITTEES } from '../const/committee';
 import TagLabel from './TagLabel';
-import { BillStatus } from '../const/bill';
 import Link from 'next/link';
 import { CLIENT_NAVI_PATH } from '../const/url';
 import { MouseEvent, useState } from 'react';
@@ -23,7 +22,7 @@ export interface IssueCardProps {
 	/** 발의 날짜 (YYYY.MM.DD 형태) */
 	proposeDate: string;
 	/** 현재 상태 */
-	billHistoryStatus: BillStatus;
+	billHistoryStatus: string;
 	/** 조회수 */
 	viewCount: number;
 	/** 반응 수 */

@@ -1,12 +1,11 @@
 import React from 'react';
-import { BillStatus } from '../const/bill';
 import { CommitteeName } from '../const/committee';
 
 /**
  * status 또는 committee 타입에 따라 태그를 렌더링하는 컴포넌트입니다.
  * status 타입은 BillStatus를 사용하고, committee 타입은 CommitteeName을 사용합니다.
  */
-export type TagLabelProps = { type: 'status'; text: BillStatus } | { type: 'committee'; text: CommitteeName };
+export type TagLabelProps = { type: 'status'; text: string } | { type: 'committee'; text: CommitteeName };
 
 type ColorGroup = 'blue' | 'deepBlue' | 'emerald' | 'green' | 'forest' | 'orange' | 'brown' | 'deepViolet' | 'violet';
 

@@ -1,4 +1,3 @@
-import { BillStatus } from '@/shared/const/bill';
 import { CommitteeName } from '@/shared/const/committee';
 import { tokenFetcher } from '@/shared/api/fetcher';
 import { BillReaction } from '../const';
@@ -33,7 +32,7 @@ export interface BillDetalProps {
 	/** 발의 날짜 (YYYY.MM.DD 형태) */
 	proposeDate: string;
 	/** 현재 상태 */
-	billStatus: BillStatus;
+	billStatus: string;
 	/** 조회수 */
 	viewCount: number;
 	/** 반응 수 */
