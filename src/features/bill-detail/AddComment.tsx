@@ -6,18 +6,21 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { addBillComment } from './api/server';
 import { QUERY_KEYS } from '@/shared/const/reactQuery';
+import { useHandleError } from '@/shared/hooks/useHandleError';
 
 const AddComment = ({ id }: { id: number | string }) => {
 	const queryClient = useQueryClient();
 	const [comment, setComment] = useState<string>('');
+	const { handleErrorByName } = useHandleError();
+
 	const addNewComment = useMutation({
 		mutationFn: ({ id, content }: { id: number | string; content: string }) => addBillComment(id, content),
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.billComments] });
+			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.billComments, id] });
 			setComment('');
 		},
-		onError: () => {
-			alert('댓글 작성에 실패했습니다. 다시 시도해주세요.');
+		onError: (err) => {
+			handleErrorByName(err, '댓글 작성');
 		},
 	});
 

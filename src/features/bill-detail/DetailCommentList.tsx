@@ -16,7 +16,7 @@ interface CommentListType {
 
 const DetailCommentList = ({ billId, nickname }: CommentListType) => {
 	const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
-		queryKey: [QUERY_KEYS.billComments],
+		queryKey: [QUERY_KEYS.billComments, billId],
 		queryFn: ({ pageParam }) => getBillComments({ id: billId, page: pageParam }),
 		initialPageParam: 0,
 		getNextPageParam: (lastPage) => {
@@ -30,7 +30,7 @@ const DetailCommentList = ({ billId, nickname }: CommentListType) => {
 	});
 
 	const { sensorRef } = useInfinityScrollSensor({ isFetching, hasNextPage, fetchNextPage });
-	const { deleteComment } = useBillComment();
+	const { deleteComment, editComment, likeComment } = useBillComment(billId);
 	const commentList = data?.pages.flatMap((page) => page.result.comments.content) ?? [];
 
 	return (
@@ -46,10 +46,15 @@ const DetailCommentList = ({ billId, nickname }: CommentListType) => {
 							key={comment.commentId}
 							{...comment}
 							isWriter={comment.nickname === nickname}
-							editFn={() => {}}
+							editFn={(newContent: string) => {
+								editComment.mutate({ id: comment.commentId, content: newContent });
+							}}
 							reportFn={() => {}}
 							deleteFn={() => {
 								deleteComment.mutate({ id: comment.commentId });
+							}}
+							likeFn={() => {
+								likeComment.mutate({ id: comment.commentId });
 							}}
 						/>
 					);

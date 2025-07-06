@@ -33,6 +33,9 @@ const defaultProps: CommentType = {
 	reportFn: () => {
 		console.log('댓글 신고');
 	},
+	likeFn: () => {
+		console.log('댓글 좋아요');
+	},
 };
 
 export const Default: Story = {
