@@ -8,6 +8,7 @@ import { redirect } from 'next/navigation';
 import { MyProfileInfo } from '../const/user';
 import { IssueCardProps } from '@/shared/components/IssueCard';
 import { BillReaction } from '@/features/bill-detail/const';
+import { logout } from '@/shared/api/auth';
 
 type MyProfileInfoResponse = { status: 'success'; result: MyProfileInfo } | { status: 'relogin' };
 
@@ -67,4 +68,35 @@ export async function getMyComments({ page = 0, size = 16 }: { page: number; siz
 	);
 
 	return { result: response.result };
+}
+
+export async function uploadProfileImg(formData: FormData) {
+	const cookieStore = await cookies();
+	const token = cookieStore.get(COOKIE_NAME.auth.access)?.value;
+	if (!token) {
+		return { status: 'relogin' };
+	}
+
+	try {
+		const response = await tokenFetcher<string>('/api/users/me/profile-image', {
+			method: 'PATCH',
+			body: formData,
+			cache: 'no-store',
+		});
+
+		// 성공시 반환받은 이미지 url 저장
+		cookieStore.set(COOKIE_NAME.auth.img, response.result ?? '', {
+			httpOnly: false,
+			path: '/',
+		});
+
+		return { status: 'success', img: response.result };
+	} catch (err) {
+		if (err instanceof RefreshTokenError) {
+			await logout(token);
+			return { status: 'relogin' };
+		} else {
+			return { status: 'retry' };
+		}
+	}
 }

@@ -22,15 +22,17 @@ interface ApiResponse<T> {
 export async function fetcher(path: string, options: FetcherOptions = {}): Promise<Response> {
 	const { headers, body, method = 'GET', ...rest } = options;
 
+	const isFormData = typeof FormData !== 'undefined' && body instanceof FormData;
+
 	const finalHeaders = {
-		'Content-Type': 'application/json;charset=UTF-8',
+		...(isFormData ? {} : { 'Content-Type': 'application/json;charset=UTF-8' }),
 		...headers,
 	};
 
 	const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}${path}`, {
 		method,
 		headers: finalHeaders,
-		body: body && typeof body !== 'string' ? JSON.stringify(body) : body,
+		body: !isFormData && body && typeof body !== 'string' ? JSON.stringify(body) : body,
 		...rest,
 	});
 

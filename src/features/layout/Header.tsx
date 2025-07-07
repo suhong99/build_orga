@@ -28,8 +28,16 @@ const Header = async () => {
 						<SearchIcon width={24} height={24} />
 					</Link>
 					{isLogin && !!profileImg ? (
-						<Link href="/mypage">
-							<Image src={profileImg} alt="프로필 이미지" width={32} height={32} className="rounded-full" />
+						<Link href="/mypage" className="w-8 h-8 overflow-hidden">
+							<Image
+								src={profileImg}
+								alt="프로필 이미지"
+								width={32}
+								height={32}
+								draggable={false}
+								sizes="100vw"
+								className="rounded-full w-8 h-8 object-cover object-center"
+							/>
 						</Link>
 					) : (
 						<Link href="/modal-login">

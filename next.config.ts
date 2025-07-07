@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
 				hostname: 'graydang-bucket.s3.ap-northeast-2.amazonaws.com',
 				pathname: '/default/images/**',
 			},
+			{
+				protocol: 'https',
+				hostname: 'graydang-bucket.s3.ap-northeast-2.amazonaws.com',
+				pathname: '/user-profile/images/**',
+			},
 		],
 	},
 };
