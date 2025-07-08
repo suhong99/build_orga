@@ -3,4 +3,5 @@ export const QUERY_KEYS = {
 	myBookmarks: 'myBookmarks',
 	myComments: 'myComments',
 	myOpinions: 'myOpinions',
+	bills: 'bill',
 };

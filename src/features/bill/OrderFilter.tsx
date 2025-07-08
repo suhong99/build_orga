@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import Dropdown from '@/shared/components/DropDown';
 import useUpdateQueryParam from '@/shared/hooks/useUpdateQueryParam';
 import CheckIcon from '@/shared/icon/Check';
@@ -10,7 +10,7 @@ const OrderFilter = () => {
 	const updateQueryParam = useUpdateQueryParam();
 
 	// URL에 쿼리가 없으면 '최신순'을 기본값으로 설정
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const urlSearchParams = new URLSearchParams(window.location.search);
 		const querySearch = urlSearchParams.get('order') || '최신순';
 		setSelected(querySearch);
