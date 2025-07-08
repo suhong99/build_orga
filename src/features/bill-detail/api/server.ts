@@ -97,7 +97,9 @@ export const getBillComments = async ({ id, page = 0, size = 16 }: { id: number 
 };
 
 export const addBillComment = async (id: number | string, content: string) => {
-	await tokenFetcher(`/api/bills/${id}/comments`, { method: 'POST', body: JSON.stringify({ content }) });
+	const response = await tokenFetcher<CommentResponse>(`/api/bills/${id}/comments`, { method: 'POST', body: JSON.stringify({ content }) });
+
+	return { result: response.result };
 };
 
 export const deleteBillComment = async (id: number | string) => {

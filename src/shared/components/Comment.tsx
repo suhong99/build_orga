@@ -64,8 +64,9 @@ const Comment = ({ profileImage, nickname, daysAgo, isEdited, content, likeCount
 				alt="프로필 이미지"
 				width={48}
 				height={48}
-				className="w-[32px] h-[32px] desktop:w-[48px] desktop:h-[48px] rounded-full"
+				className="w-[32px] h-[32px] desktop:w-[48px] desktop:h-[48px] rounded-full object-cover object-center border-1 border-line-normal"
 				draggable={false}
+				sizes="100vw"
 				priority
 			/>
 			<div className="flex flex-col flex-1 gap-2">
@@ -78,15 +79,20 @@ const Comment = ({ profileImage, nickname, daysAgo, isEdited, content, likeCount
 					)}
 				</div>
 				{isEditMode ? (
-					<input
-						type="text"
+					<textarea
 						value={editedContent}
 						onChange={(e) => setEditedContent(e.target.value)}
-						className="typo-body2-normal font-regular text-label-normal desktop:typo-body1-normal border-b-1 border-label-alternative focus:outline-none focus:border-label-strong"
 						placeholder="이 법안에 대한 의견을 공유해주세요."
+						className={`w-full h-35 px-4 py-3 rounded-[12px] typo-body1-reading font-regular text-label-normal placeholder:text-label-assistive border border-line-normal focus:outline-none focus:border-black disabled:bg-interaction-disable resize-none`}
+						style={{
+							scrollbarWidth: 'none',
+							msOverflowStyle: 'none',
+						}}
 					/>
 				) : (
-					<div className="break-words whitespace-pre-wrap typo-body2-normal font-regular text-label-normal desktop:typo-body1-normal">{content}</div>
+					<div className="custom-scrollbar max-h-[140px] overflow-y-scroll break-words whitespace-pre-wrap typo-body2-normal font-regular text-label-normal desktop:typo-body1-normal">
+						{content}
+					</div>
 				)}
 
 				<div className="flex w-full justify-between">
@@ -97,17 +103,25 @@ const Comment = ({ profileImage, nickname, daysAgo, isEdited, content, likeCount
 						{isWriter ? (
 							isEditMode ? (
 								<>
-									<button onClick={handleEdit}>수정완료</button>
-									<button onClick={() => setIsEditMode(false)}>수정취소</button>
+									<button onClick={() => setIsEditMode(false)} className="hover:opacity-80">
+										취소
+									</button>
+									<button onClick={handleEdit} className="text-primary-main-heavy hover:opacity-80">
+										수정완료
+									</button>
 								</>
 							) : (
 								<>
-									<button onClick={() => setIsEditMode(true)}>수정하기</button>
-									<button onClick={handleDelete}>삭제하기</button>
+									<button onClick={() => setIsEditMode(true)} className="hover:opacity-80">
+										수정하기
+									</button>
+									<button onClick={handleDelete} className="hover:opacity-80">
+										삭제하기
+									</button>
 								</>
 							)
 						) : (
-							<button>신고하기</button>
+							<button className="hover:opacity-80">신고하기</button>
 						)}
 					</div>
 				</div>

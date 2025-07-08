@@ -56,7 +56,7 @@ const ProfileImg = ({ img, nickname }: ProfileImgProps) => {
 				<img
 					src={preview}
 					alt="프로필 이미지"
-					className="w-[100px] h-[100px] rounded-full object-cover object-center"
+					className="w-[100px] h-[100px] rounded-full object-cover object-center border-1 border-line-normal"
 					draggable={false}
 					sizes="100vw"
 					loading="eager"
