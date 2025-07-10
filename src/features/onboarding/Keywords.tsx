@@ -4,14 +4,14 @@ import KeywordBtn from '@/shared/components/KeywordBtn';
 import { Keyword, KEYWORD_LIST } from '@/shared/const/committee';
 import React, { Dispatch, SetStateAction } from 'react';
 
-interface KeywordsProps<T> {
-	keywords: T[];
-	setKeywords: Dispatch<SetStateAction<T[]>>;
+interface KeywordsProps {
+	keywords: Keyword[];
+	setKeywords: Dispatch<SetStateAction<Keyword[]>>;
 }
 
 const MAX_KEYWORDS = 5;
 
-const Keywords = ({ keywords, setKeywords }: KeywordsProps<Keyword>) => {
+const Keywords = ({ keywords, setKeywords }: KeywordsProps) => {
 	const toggleKeyword = (keyword: Keyword) => {
 		const isSelected = keywords.includes(keyword);
 

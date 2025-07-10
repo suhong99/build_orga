@@ -15,29 +15,33 @@ type NicknameBtnExtension = {
 	className?: string;
 };
 
-type NicknameProps = {
+interface NicknameProps {
 	isValidate: boolean;
 	setIsValidate: React.Dispatch<React.SetStateAction<boolean>>;
-};
+	initialNick?: string;
+}
 
-const Nickname = ({ setIsValidate }: NicknameProps) => {
-	const { nickname, setNickname, error, isChecking, isValidLength, isDuplicateChecked, checkDuplicate, isValid } = useNickname();
+const Nickname = ({ setIsValidate, initialNick }: NicknameProps) => {
+	const { nickname, setNickname, error, isChecking, isValidLength, isDuplicateChecked, checkDuplicate, isValid, isSameAsInitial } =
+		useNickname(initialNick);
 
-	const isDuplicateButtonDisabled = !isValidLength || isChecking || isDuplicateChecked;
+	const isDuplicateButtonDisabled = !isValidLength || isSameAsInitial || isChecking || isDuplicateChecked;
 	const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
 	useEffect(() => {
 		if (isValid) {
 			setStatusMessage('사용 가능한 닉네임입니다');
 			setIsValidate(true);
+		} else if (isSameAsInitial) {
+			setIsValidate(true);
 		} else {
 			setStatusMessage(null);
 			setIsValidate(false);
 		}
-	}, [isValid, setIsValidate]);
+	}, [isValid, setIsValidate, isSameAsInitial]);
 
 	return (
-		<section className="min-w-[343px]">
+		<section className="flex flex-col gap-3 min-w-[343px]">
 			<label htmlFor="nickname" className="text-left typo-caption1 font-bold text-interaction-inactive">
 				닉네임
 			</label>
@@ -48,7 +52,7 @@ const Nickname = ({ setIsValidate }: NicknameProps) => {
 					value={nickname}
 					onChange={(val) => setNickname(val)}
 					placeholder="3~8글자 이내로 입력"
-					errMsg={error.msg}
+					errMsg={isSameAsInitial ? '' : error.msg}
 					successMsg={statusMessage}
 				/>
 				<SolidBtn<NicknameBtnExtension>

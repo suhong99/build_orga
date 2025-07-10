@@ -15,3 +15,10 @@ export const getCookieValue = (name: string): string | undefined => {
 	const cookie = document.cookie.split('; ').find((row) => row.startsWith(`${name}=`));
 	return cookie?.split('=')[1];
 };
+
+export const areArraysEqualUnordered = <T>(a: T[], b: T[]): boolean => {
+	if (a.length !== b.length) return false;
+	const aSorted = [...a].sort();
+	const bSorted = [...b].sort();
+	return aSorted.every((val, idx) => val === bSorted[idx]);
+};

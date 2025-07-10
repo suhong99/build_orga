@@ -70,7 +70,7 @@ export default function Input<T extends Record<string, unknown> = Record<string,
 				aria-invalid={!!errMsg}
 				aria-describedby={errMsg ? errorId : successMsg ? successId : undefined}
 				disabled={isDisabled}
-				className={`w-full h-12 px-4 py-3 rounded-[12px] typo-body1-normal font-regular text-label-normal placeholder:text-label-assistive border ${getBorderClass()} 
+				className={`w-full h-10 px-4 py-3 rounded-[12px] typo-body1-normal font-regular text-label-normal placeholder:text-label-assistive border ${getBorderClass()} 
                 focus:outline-none disabled:bg-interaction-disable ${className}`}
 				{...rest} // 커스텀 속성이 제거된 표준 HTML 속성만 전달
 			/>
