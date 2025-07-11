@@ -1,12 +1,11 @@
-import React from 'react';
-import { NonEmptyArray } from '@/shared/types/util';
-import RightIcon from '@/shared/icon/Right';
 import Link from 'next/link';
+import { Keyword } from '@/shared/const/committee';
+import RightIcon from '@/shared/icon/Right';
 
 interface ContentHeaderProps {
 	title: string;
 	link: string;
-	keywordList?: NonEmptyArray<string>;
+	keywordList?: Keyword[] | null;
 	isLoginRequired?: boolean;
 }
 
@@ -17,14 +16,12 @@ const ContentHeader = ({ title, link, keywordList, isLoginRequired }: ContentHea
 				{title}
 				{keywordList && (
 					<span className="flex gap-2 text-primary-main-normal">
-						{keywordList.map((keyword) => (
-							<span key={keyword}>#{keyword}</span>
-						))}
+						{keywordList && keywordList.map((keyword) => <span key={keyword}>#{keyword}</span>)}
 					</span>
 				)}
 				{isLoginRequired && (
 					<span className="typo-body1-normal font-regular desktop:typo-title2 desktop:font-bold text-label-alternative opacity-[61%]">
-						로그인하고 관심 키워드를 골라보세요
+						#로그인하고 관심 키워드를 골라보세요
 					</span>
 				)}
 			</h2>

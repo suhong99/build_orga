@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import Image from 'next/image';
 import { SolidBtn } from '@/shared/components/SolidBtn';
-import Header from '@/features/layout/Header';
 import Footer from '@/features/layout/Footer';
 
 export default function GlobalError({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
@@ -13,10 +12,9 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
 
 	return (
 		<html>
-			<body>
-				<Header />
-				<main className="flex flex-col flex-1 items-center w-full">
-					<div className="mx-auto flex flex-col items-center px-6 py-8 gap-6 desktop:py-12">
+			<body className="min-h-screen">
+				<main className="relaitve flex flex-col items-center w-full">
+					<div className="mx-auto flex flex-col items-center px-6 py-8 gap-6 desktop:py-12 h-[calc(100vh-120px)] desktop:h-[calc(100vh-96px)]">
 						<div className="w-[185px] desktop:w-[300px]">
 							<Image
 								src="/images/error.png"
