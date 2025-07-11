@@ -4,4 +4,5 @@ export const QUERY_KEYS = {
 	myComments: 'myComments',
 	myOpinions: 'myOpinions',
 	bills: 'bill',
+	search: 'search',
 };
