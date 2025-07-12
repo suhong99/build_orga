@@ -3,12 +3,13 @@ import { Fragment } from 'react';
 import { getMyComments } from './api/server';
 import HeartIcon from '@/shared/icon/Heart';
 import TagIcon from '@/shared/icon/Tag';
-import { useInfinityScrollSensor } from '@/shared/hooks/useInfinityScrollSensor';
 import EmptyData from './EmptyData';
 import { QUERY_KEYS } from '@/shared/const/reactQuery';
+import InfinityScrollSpinner from '@/shared/components/InfinityScrollSpinner';
+import ErrorIndicator from '@/shared/components/ErrorIndicator';
 
 const MyComment = () => {
-	const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
+	const { data, fetchNextPage, hasNextPage, isFetching, isError } = useInfiniteQuery({
 		queryKey: [QUERY_KEYS.myComments],
 		queryFn: ({ pageParam }) => getMyComments({ page: pageParam }),
 		initialPageParam: 0,
@@ -21,8 +22,6 @@ const MyComment = () => {
 		gcTime: 60 * 1000,
 	});
 
-	const { sensorRef } = useInfinityScrollSensor({ isFetching, hasNextPage, fetchNextPage });
-
 	if (data?.pages?.length === 1 && data.pages[0].result.content.length === 0) {
 		return <EmptyData category="댓글" />;
 	}
@@ -30,7 +29,7 @@ const MyComment = () => {
 	const flatComments = data?.pages.flatMap((page) => page.result.content) ?? [];
 
 	return (
-		<div className="flex flex-col w-full gap-5 px-6 py-5 bg-white rounded-[12px]">
+		<div className="flex flex-col w-full gap-5 px-6 py-5 bg-white desktop:rounded-[12px]">
 			{flatComments.map((comment, index) => (
 				<Fragment key={comment.commentId}>
 					<div className="w-full flex flex-col flex-wrap break-words gap-2">
@@ -49,14 +48,9 @@ const MyComment = () => {
 				</Fragment>
 			))}
 
-			<div ref={sensorRef} className="flex items-center justify-center w-full">
-				{hasNextPage && (
-					<div
-						className="w-6 h-6 border-2 border-t-transparent border-inverse-primary-main rounded-full animate-spin"
-						role="status"
-						aria-label="로딩 중"
-					/>
-				)}
+			<div className="flex items-center justify-center w-full">
+				{isError && <ErrorIndicator retiralFn={fetchNextPage} />}
+				{!isError && hasNextPage && <InfinityScrollSpinner isFetching={isFetching} hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />}
 			</div>
 		</div>
 	);

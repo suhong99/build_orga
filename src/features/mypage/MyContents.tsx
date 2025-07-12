@@ -30,7 +30,7 @@ const MyContents = ({ scrapeCount, commentCount, reactionCount }: MyContentsProp
 					<Tab key={tab} label={tab} count={TAB_COUNT[tab]} isSelected={curTab === tab} onSelect={() => setCurTab(tab)} />
 				))}
 			</div>
-			<div className="flex flex-col px-5 py-6 desktop:px-6 max-desktop:justify-center max-desktop:bg-bg-gray @container">{COMPONENT_MAP[curTab]}</div>
+			<div className="flex flex-col desktop:px-5 py-6 max-desktop:justify-center max-desktop:bg-bg-gray @container">{COMPONENT_MAP[curTab]}</div>
 		</div>
 	);
 };

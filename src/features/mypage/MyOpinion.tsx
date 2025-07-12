@@ -9,11 +9,12 @@ import TagIcon from '@/shared/icon/Tag';
 import Link from 'next/link';
 import { CLIENT_NAVI_PATH } from '@/shared/const/url';
 import EmptyData from './EmptyData';
-import { useInfinityScrollSensor } from '@/shared/hooks/useInfinityScrollSensor';
 import { QUERY_KEYS } from '@/shared/const/reactQuery';
+import InfinityScrollSpinner from '@/shared/components/InfinityScrollSpinner';
+import ErrorIndicator from '@/shared/components/ErrorIndicator';
 
 const MyOpinion = () => {
-	const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
+	const { data, fetchNextPage, hasNextPage, isFetching, isError } = useInfiniteQuery({
 		queryKey: [QUERY_KEYS.myOpinions],
 		queryFn: ({ pageParam }) => getMyReactions({ page: pageParam }),
 		initialPageParam: 0,
@@ -25,8 +26,6 @@ const MyOpinion = () => {
 		},
 		gcTime: 60 * 1000,
 	});
-
-	const { sensorRef } = useInfinityScrollSensor({ isFetching, hasNextPage, fetchNextPage });
 
 	const COMMENT_BY_REACTION: Record<BillReaction, string> = {
 		좋아요: '좋아요를 눌렀어요! 이 법안에 힘을 보탰습니다.',
@@ -42,7 +41,7 @@ const MyOpinion = () => {
 	const dataGroupedByDate = groupReactionByDate(data);
 
 	return (
-		<div className="flex flex-col w-full gap-5 px-6 py-5 bg-white rounded-[12px]">
+		<div className="flex flex-col w-full gap-5 px-6 py-5 bg-white desktop:rounded-[12px]">
 			{dataGroupedByDate.map(({ date, items }) => (
 				<div key={date} className="flex flex-col w-full gap-5 px-6 py-5 bg-white rounded-[12px]">
 					<span className="font-regular typo-label2 desktop:typo-body2-normal text-[#AEB0B6]">{date}</span>
@@ -68,14 +67,9 @@ const MyOpinion = () => {
 				</div>
 			))}
 
-			<div ref={sensorRef} className="flex items-center justify-center w-full">
-				{hasNextPage && (
-					<div
-						className="w-6 h-6 border-2 border-t-transparent border-inverse-primary-main rounded-full animate-spin"
-						role="status"
-						aria-label="로딩 중"
-					/>
-				)}
+			<div className="flex items-center justify-center w-full">
+				{isError && <ErrorIndicator retiralFn={fetchNextPage} />}
+				{!isError && hasNextPage && <InfinityScrollSpinner isFetching={isFetching} hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />}
 			</div>
 		</div>
 	);

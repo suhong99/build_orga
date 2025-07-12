@@ -4,13 +4,14 @@ import { QUERY_KEYS } from '@/shared/const/reactQuery';
 import { useBillQueryState } from './hooks/useBillQueryState';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getFilteredBills } from './api/server';
-import { useInfinityScrollSensor } from '@/shared/hooks/useInfinityScrollSensor';
 import IssueCard from '@/shared/components/IssueCard';
+import InfinityScrollSpinner from '@/shared/components/InfinityScrollSpinner';
+import ErrorIndicator from '@/shared/components/ErrorIndicator';
 
 const BillContents = () => {
 	const { order, keywords } = useBillQueryState();
 
-	const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
+	const { data, fetchNextPage, hasNextPage, isFetching, isError } = useInfiniteQuery({
 		queryKey: [QUERY_KEYS.bills, order, keywords],
 		queryFn: ({ pageParam }) => getFilteredBills({ page: pageParam, keywords, order }),
 		initialPageParam: 0,
@@ -24,8 +25,6 @@ const BillContents = () => {
 		staleTime: 30 * 1000,
 	});
 
-	const { sensorRef } = useInfinityScrollSensor({ isFetching, hasNextPage, fetchNextPage });
-
 	const BillData = data?.pages.flatMap((page) => page.result.content) ?? [];
 
 	return (
@@ -33,14 +32,9 @@ const BillContents = () => {
 			{BillData.map((bill) => (
 				<IssueCard key={bill.billId} {...bill} />
 			))}
-			<div ref={sensorRef} className="flex col-span-3 w-full items-center justify-center max-desktop:col-span-2 max-tablet:col-span-1">
-				{hasNextPage && (
-					<div
-						className="w-6 h-6 border-2 border-t-transparent border-inverse-primary-main rounded-full animate-spin"
-						role="status"
-						aria-label="로딩 중"
-					/>
-				)}
+			<div className="flex col-span-3 w-full items-center justify-center max-desktop:col-span-2 max-tablet:col-span-1">
+				{isError && <ErrorIndicator retiralFn={fetchNextPage} />}
+				{!isError && hasNextPage && <InfinityScrollSpinner isFetching={isFetching} hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />}
 			</div>
 		</section>
 	);

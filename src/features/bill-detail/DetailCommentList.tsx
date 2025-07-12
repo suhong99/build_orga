@@ -5,9 +5,10 @@ import React from 'react';
 import AddComment from './AddComment';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getBillComments } from './api/server';
-import { useInfinityScrollSensor } from '@/shared/hooks/useInfinityScrollSensor';
 import { QUERY_KEYS } from '@/shared/const/reactQuery';
 import { useBillComment } from './hooks/useBillComment';
+import InfinityScrollSpinner from '@/shared/components/InfinityScrollSpinner';
+import ErrorIndicator from '@/shared/components/ErrorIndicator';
 
 interface CommentListType {
 	billId: string | number;
@@ -15,7 +16,7 @@ interface CommentListType {
 }
 
 const DetailCommentList = ({ billId, nickname }: CommentListType) => {
-	const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
+	const { data, fetchNextPage, hasNextPage, isFetching, isError } = useInfiniteQuery({
 		queryKey: [QUERY_KEYS.billComments, billId],
 		queryFn: ({ pageParam }) => getBillComments({ id: billId, page: pageParam }),
 		initialPageParam: 0,
@@ -29,7 +30,6 @@ const DetailCommentList = ({ billId, nickname }: CommentListType) => {
 		staleTime: 50 * 1000,
 	});
 
-	const { sensorRef } = useInfinityScrollSensor({ isFetching, hasNextPage, fetchNextPage });
 	const { deleteComment, editComment, likeComment } = useBillComment(billId);
 	const commentList = data?.pages.flatMap((page) => page.result.comments.content) ?? [];
 
@@ -59,14 +59,9 @@ const DetailCommentList = ({ billId, nickname }: CommentListType) => {
 						/>
 					);
 				})}
-				<div ref={sensorRef} className="flex items-center justify-center w-full">
-					{hasNextPage && (
-						<div
-							className="w-6 h-6 border-2 border-t-transparent border-inverse-primary-main rounded-full animate-spin"
-							role="status"
-							aria-label="로딩 중"
-						/>
-					)}
+				<div className="flex items-center justify-center w-full">
+					{isError && <ErrorIndicator retiralFn={fetchNextPage} />}
+					{!isError && hasNextPage && <InfinityScrollSpinner isFetching={isFetching} hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />}{' '}
 				</div>
 			</ul>
 		</section>
