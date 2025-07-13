@@ -7,11 +7,12 @@ import { getFilteredBills } from './api/server';
 import IssueCard from '@/shared/components/IssueCard';
 import InfinityScrollSpinner from '@/shared/components/InfinityScrollSpinner';
 import ErrorIndicator from '@/shared/components/ErrorIndicator';
+import IssueCardSkeleton from '@/shared/skeletons/IssueCard.skeleton';
 
 const BillContents = () => {
 	const { order, keywords } = useBillQueryState();
 
-	const { data, fetchNextPage, hasNextPage, isFetching, isError } = useInfiniteQuery({
+	const { data, fetchNextPage, hasNextPage, isLoading, isFetching, isError } = useInfiniteQuery({
 		queryKey: [QUERY_KEYS.bills, order, keywords],
 		queryFn: ({ pageParam }) => getFilteredBills({ page: pageParam, keywords, order }),
 		initialPageParam: 0,
@@ -29,6 +30,8 @@ const BillContents = () => {
 
 	return (
 		<section className="w-full max-w-maxw grid grid-cols-3  gap-4 max-desktop:grid-cols-2 max-tablet:grid-cols-1">
+			{isLoading && Array.from({ length: 9 }).map((_, idx) => <IssueCardSkeleton key={idx} />)}
+
 			{BillData.map((bill) => (
 				<IssueCard key={bill.billId} {...bill} />
 			))}

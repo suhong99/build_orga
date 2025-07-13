@@ -7,9 +7,10 @@ import EmptyData from './EmptyData';
 import { QUERY_KEYS } from '@/shared/const/reactQuery';
 import InfinityScrollSpinner from '@/shared/components/InfinityScrollSpinner';
 import ErrorIndicator from '@/shared/components/ErrorIndicator';
+import IssueCardSkeleton from '@/shared/skeletons/IssueCard.skeleton';
 
 const MyBookmark = () => {
-	const { data, fetchNextPage, hasNextPage, isFetching, isError } = useInfiniteQuery({
+	const { data, fetchNextPage, hasNextPage, isLoading, isFetching, isError } = useInfiniteQuery({
 		queryKey: [QUERY_KEYS.myBookmarks],
 		queryFn: ({ pageParam }) => getMyBookmarks({ page: pageParam }),
 		initialPageParam: 0,
@@ -29,6 +30,8 @@ const MyBookmark = () => {
 	return (
 		<div className="flex flex-col px-5">
 			<div className="grid grid-cols-1 gap-3 @min-[768px]:grid-cols-2 ">
+				{isLoading && Array.from({ length: 6 }).map((_, idx) => <IssueCardSkeleton key={idx} />)}
+
 				{data?.pages.map(({ result }) => result.content.map((billInfo) => <IssueCard key={billInfo.billId} {...billInfo} />))}
 			</div>
 			<div className="flex items-center justify-center w-full col-span-2">

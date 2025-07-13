@@ -7,9 +7,10 @@ import { QUERY_KEYS } from '@/shared/const/reactQuery';
 import IssueCard from '@/shared/components/IssueCard';
 import ErrorIndicator from '@/shared/components/ErrorIndicator';
 import InfinityScrollSpinner from '@/shared/components/InfinityScrollSpinner';
+import IssueCardSkeleton from '@/shared/skeletons/IssueCard.skeleton';
 
 const SearchData = ({ keyword }: { keyword: string }) => {
-	const { data, fetchNextPage, hasNextPage, isFetching, isError } = useInfiniteQuery({
+	const { data, fetchNextPage, hasNextPage, isFetching, isLoading, isError } = useInfiniteQuery({
 		queryKey: [QUERY_KEYS.search, keyword],
 		queryFn: ({ pageParam }) => getSearchData({ page: pageParam, keyword }),
 		initialPageParam: 0,
@@ -29,7 +30,9 @@ const SearchData = ({ keyword }: { keyword: string }) => {
 	return (
 		<section className="flex flex-col w-full gap-5 items-baseline bg-bg-gray px-9 py-8 desktop:gap-4 desktop:items-center  min-h-[calc(100vh-300px)] desktop:min-h-[calc(100vh-260px)]">
 			<section className="w-full max-w-maxw grid grid-cols-3  gap-4 max-desktop:grid-cols-2 max-tablet:grid-cols-1">
-				{searchData.length === 0 ? (
+				{isLoading && Array.from({ length: 9 }).map((_, idx) => <IssueCardSkeleton key={idx} />)}
+
+				{!isLoading && searchData.length === 0 ? (
 					<EmptySearch keyword={keyword} />
 				) : (
 					<>

@@ -12,9 +12,10 @@ import EmptyData from './EmptyData';
 import { QUERY_KEYS } from '@/shared/const/reactQuery';
 import InfinityScrollSpinner from '@/shared/components/InfinityScrollSpinner';
 import ErrorIndicator from '@/shared/components/ErrorIndicator';
+import MyOpinionSkeleton from './skeleton/MyOpinion.Skeleton';
 
 const MyOpinion = () => {
-	const { data, fetchNextPage, hasNextPage, isFetching, isError } = useInfiniteQuery({
+	const { data, fetchNextPage, hasNextPage, isLoading, isFetching, isError } = useInfiniteQuery({
 		queryKey: [QUERY_KEYS.myOpinions],
 		queryFn: ({ pageParam }) => getMyReactions({ page: pageParam }),
 		initialPageParam: 0,
@@ -41,9 +42,11 @@ const MyOpinion = () => {
 	const dataGroupedByDate = groupReactionByDate(data);
 
 	return (
-		<div className="flex flex-col w-full gap-5 px-6 py-5 bg-white desktop:rounded-[12px]">
+		<div className="flex flex-col w-full gap-5 px-6 py-5 bg-white desktop:rounded-[12px] ">
+			{isLoading && <MyOpinionSkeleton />}
+
 			{dataGroupedByDate.map(({ date, items }) => (
-				<div key={date} className="flex flex-col w-full gap-5 px-6 py-5 bg-white rounded-[12px]">
+				<div key={date} className="flex flex-col w-full gap-5 ">
 					<span className="font-regular typo-label2 desktop:typo-body2-normal text-[#AEB0B6]">{date}</span>
 					{items.map((item, index) => (
 						<Fragment key={item.billId}>

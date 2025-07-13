@@ -7,9 +7,10 @@ import EmptyData from './EmptyData';
 import { QUERY_KEYS } from '@/shared/const/reactQuery';
 import InfinityScrollSpinner from '@/shared/components/InfinityScrollSpinner';
 import ErrorIndicator from '@/shared/components/ErrorIndicator';
+import MyCommentSkeleton from './skeleton/MyComment.Skeleton';
 
 const MyComment = () => {
-	const { data, fetchNextPage, hasNextPage, isFetching, isError } = useInfiniteQuery({
+	const { data, fetchNextPage, hasNextPage, isLoading, isFetching, isError } = useInfiniteQuery({
 		queryKey: [QUERY_KEYS.myComments],
 		queryFn: ({ pageParam }) => getMyComments({ page: pageParam }),
 		initialPageParam: 0,
@@ -30,9 +31,10 @@ const MyComment = () => {
 
 	return (
 		<div className="flex flex-col w-full gap-5 px-6 py-5 bg-white desktop:rounded-[12px]">
+			{isLoading && <MyCommentSkeleton />}
 			{flatComments.map((comment, index) => (
 				<Fragment key={comment.commentId}>
-					<div className="w-full flex flex-col flex-wrap break-words gap-2">
+					<div className="w-full flex flex-col flex-wrap break-words gap-2 ">
 						<span className="typo-label2 font-regular desktop:typo-body2-normal text-label-alternative">{comment.createdDate}</span>
 						<span className="typo-body2-normal desktop:typo-body1-normal">{comment.content}</span>
 						<div className="flex gap-1 items-center">

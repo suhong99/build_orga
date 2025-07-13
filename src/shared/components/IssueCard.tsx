@@ -112,7 +112,7 @@ const IssueCard = ({
 						<IconWithCount key={icon.src} src={icon.src} alt={icon.alt} nums={icon.nums} />
 					))}
 				</div>
-				<button className="py-0.5" onClick={(e: MouseEvent) => toggleBookmark(e)}>
+				<button className="py-0.5 my-1" onClick={(e: MouseEvent) => toggleBookmark(e)}>
 					<BookmarkIcon isChecked={isBookmarked} />
 				</button>
 			</footer>
