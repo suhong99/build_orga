@@ -1,6 +1,6 @@
 import { QUERY_KEYS } from '@/shared/const/reactQuery';
 import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query';
-import { BillComments, deleteBillComment, editBillComment, likeBillComment } from '../api/server';
+import { BillComments, deleteBillComment, editBillComment, likeBillComment, reportBillComment } from '../api/server';
 import { useHandleError } from '@/shared/hooks/useHandleError';
 
 export const useBillComment = (billId: string | number) => {
@@ -107,5 +107,15 @@ export const useBillComment = (billId: string | number) => {
 		},
 	});
 
-	return { deleteComment, editComment, likeComment };
+	const reportComent = useMutation({
+		mutationFn: ({ id }: { id: number | string }) => reportBillComment(id),
+		onSuccess: () => {
+			alert('댓글 신고에 성공하셨습니다.');
+		},
+		onError: (err) => {
+			handleErrorByName(err, '댓글 좋아요');
+		},
+	});
+
+	return { deleteComment, editComment, likeComment, reportComent };
 };

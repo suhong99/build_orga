@@ -41,7 +41,20 @@ export interface CommentType extends CommentResponse {
  * 개별 댓글 컴퍼넌트
  *  시맨틱한 태그 사용을 위해 li태그 사용. 배열 래퍼 하위에서 map 돌려야 합니다.
  */
-const Comment = ({ profileImage, nickname, daysAgo, isEdited, content, likeCount, isLiked, isWriter, deleteFn, editFn, likeFn }: CommentType) => {
+const Comment = ({
+	profileImage,
+	nickname,
+	daysAgo,
+	isEdited,
+	content,
+	likeCount,
+	isLiked,
+	isWriter,
+	deleteFn,
+	editFn,
+	likeFn,
+	reportFn,
+}: CommentType) => {
 	const [isEditMode, setIsEditMode] = useState(false);
 	const [editedContent, setEditedContent] = useState(content);
 
@@ -121,7 +134,9 @@ const Comment = ({ profileImage, nickname, daysAgo, isEdited, content, likeCount
 								</>
 							)
 						) : (
-							<button className="hover:opacity-80">신고하기</button>
+							<button onClick={reportFn} className="hover:opacity-80">
+								신고하기
+							</button>
 						)}
 					</div>
 				</div>

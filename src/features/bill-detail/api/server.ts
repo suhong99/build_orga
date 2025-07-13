@@ -113,3 +113,7 @@ export const editBillComment = async (id: number | string, content: string) => {
 export const likeBillComment = async (id: number | string) => {
 	await tokenFetcher(`/api/comments/${id}/likes/toggle`, { method: 'POST' });
 };
+
+export const reportBillComment = async (id: number | string) => {
+	await tokenFetcher(`/api/comments/${id}/reports`, { method: 'POST', body: JSON.stringify({ content: '부적절한 표현입니다.' }) });
+};
