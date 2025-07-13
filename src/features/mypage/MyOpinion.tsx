@@ -12,7 +12,7 @@ import EmptyData from './EmptyData';
 import { QUERY_KEYS } from '@/shared/const/reactQuery';
 import InfinityScrollSpinner from '@/shared/components/InfinityScrollSpinner';
 import ErrorIndicator from '@/shared/components/ErrorIndicator';
-import MyOpinionSkeleton from './skeleton/MyOpinion.Skeleton';
+import MyOpinionSkeleton from './skeletons/MyOpinion.Skeleton';
 
 const MyOpinion = () => {
 	const { data, fetchNextPage, hasNextPage, isLoading, isFetching, isError } = useInfiniteQuery({

@@ -7,7 +7,7 @@ import EmptyData from './EmptyData';
 import { QUERY_KEYS } from '@/shared/const/reactQuery';
 import InfinityScrollSpinner from '@/shared/components/InfinityScrollSpinner';
 import ErrorIndicator from '@/shared/components/ErrorIndicator';
-import MyCommentSkeleton from './skeleton/MyComment.Skeleton';
+import MyCommentSkeleton from './skeletons/MyComment.Skeleton';
 
 const MyComment = () => {
 	const { data, fetchNextPage, hasNextPage, isLoading, isFetching, isError } = useInfiniteQuery({

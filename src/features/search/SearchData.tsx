@@ -7,7 +7,7 @@ import { QUERY_KEYS } from '@/shared/const/reactQuery';
 import IssueCard from '@/shared/components/IssueCard';
 import ErrorIndicator from '@/shared/components/ErrorIndicator';
 import InfinityScrollSpinner from '@/shared/components/InfinityScrollSpinner';
-import IssueCardSkeleton from '@/shared/skeletons/IssueCard.skeleton';
+import SearchDataSkeleton from './skeletons/SearchData.skeleton';
 
 const SearchData = ({ keyword }: { keyword: string }) => {
 	const { data, fetchNextPage, hasNextPage, isFetching, isLoading, isError } = useInfiniteQuery({
@@ -15,8 +15,8 @@ const SearchData = ({ keyword }: { keyword: string }) => {
 		queryFn: ({ pageParam }) => getSearchData({ page: pageParam, keyword }),
 		initialPageParam: 0,
 		getNextPageParam: (lastPage) => {
-			if (!lastPage.result.last) {
-				return lastPage.result.pageNumber + 1;
+			if (!lastPage.result.bills.last) {
+				return lastPage.result.bills.pageNumber + 1;
 			}
 			return undefined;
 		},
@@ -25,12 +25,12 @@ const SearchData = ({ keyword }: { keyword: string }) => {
 	});
 
 	const { sensorRef } = useInfinityScrollSensor({ isFetching, hasNextPage, fetchNextPage });
-	const searchData = data?.pages.flatMap((page) => page.result.content) ?? [];
+	const searchData = data?.pages.flatMap((page) => page.result.bills.content) ?? [];
 
 	return (
 		<section className="flex flex-col w-full gap-5 items-baseline bg-bg-gray px-9 py-8 desktop:gap-4 desktop:items-center  min-h-[calc(100vh-300px)] desktop:min-h-[calc(100vh-260px)]">
 			<section className="w-full max-w-maxw grid grid-cols-3  gap-4 max-desktop:grid-cols-2 max-tablet:grid-cols-1">
-				{isLoading && Array.from({ length: 9 }).map((_, idx) => <IssueCardSkeleton key={idx} />)}
+				{isLoading && <SearchDataSkeleton />}
 
 				{!isLoading && searchData.length === 0 ? (
 					<EmptySearch keyword={keyword} />
@@ -38,7 +38,7 @@ const SearchData = ({ keyword }: { keyword: string }) => {
 					<>
 						<h2 className="flex flex-wrap typo-heading1 font-regular col-span-3 max-desktop:col-span-2 max-tablet:col-span-1">
 							<span className="desktop:font-bold">{`"${keyword}" 검색 결과`}&nbsp;</span>
-							<span className="text-label-alternative">{searchData.length}</span>
+							{data?.pages?.[0]?.result?.totalCount ?? 0}
 						</h2>
 
 						{searchData.map((bill) => (

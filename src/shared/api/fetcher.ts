@@ -78,6 +78,8 @@ export async function tokenFetcher<T>(path: string, options: FetcherOptions = {}
 	}
 
 	if (!response.ok) {
+		console.log(await response.json(), '에러');
+
 		throw new Error(`Request failed with status ${response.status}`);
 	}
 
