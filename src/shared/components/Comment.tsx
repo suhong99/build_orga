@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import HeartIcon from '../icon/Heart';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export interface CommentResponse {
 	/** 댓글 고유 ID (map의 key 등으로 사용) */
@@ -103,9 +103,7 @@ const Comment = ({
 						}}
 					/>
 				) : (
-					<div className="custom-scrollbar max-h-[140px] overflow-y-scroll break-words whitespace-pre-wrap typo-body2-normal font-regular text-label-normal desktop:typo-body1-normal">
-						{content}
-					</div>
+					<CommentContent content={content} />
 				)}
 
 				<div className="flex w-full justify-between">
@@ -146,3 +144,40 @@ const Comment = ({
 };
 
 export default Comment;
+
+const CommentContent = ({ content }: { content: string }) => {
+	const [showAll, setShowAll] = useState(false);
+	const [isOverflowing, setIsOverflowing] = useState(false);
+	const contentRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (contentRef.current) {
+			// scrollHeight > clientHeight → 줄 넘침
+			setIsOverflowing(contentRef.current.scrollHeight > contentRef.current.clientHeight);
+		}
+	}, [content]);
+
+	return (
+		<div className="typo-body2-normal desktop:typo-body1-normal font-regular">
+			<div
+				ref={contentRef}
+				className={`break-words whitespace-pre-wrap overflow-hidden   text-label-normal transition-all`}
+				style={{
+					display: '-webkit-box',
+					WebkitBoxOrient: 'vertical',
+					WebkitLineClamp: showAll ? 'unset' : 4,
+				}}
+			>
+				{content}
+			</div>
+			{isOverflowing && (
+				<button
+					onClick={() => setShowAll((prev) => !prev)}
+					className="text-label-assistive hover:text-label-alternative focus:outline-none focus:text-label-alternative"
+				>
+					{showAll ? '간단히 보기' : '더보기'}
+				</button>
+			)}
+		</div>
+	);
+};
