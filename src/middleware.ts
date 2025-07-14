@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { COOKIE_NAME } from './shared/const/cookie';
 import { clearAuth } from './features/auth/utils/cookie';
+import { MODAL_PATH } from './shared/const/url';
 
 export async function middleware(req: NextRequest) {
 	const { pathname } = req.nextUrl;
@@ -15,10 +16,9 @@ export async function middleware(req: NextRequest) {
 	const hasToken = cookieStore.has(access);
 	const nickValue = cookieStore.get(nickname)?.value;
 
-	console.log(cookieStore.get(access)?.value);
 	if (hasToken && nickValue === '' && !(pathname === '/onboarding')) {
 		const referer = req.headers.get('referer') || '';
-		const isFromModalLogin = referer.includes('/modal-login');
+		const isFromModalLogin = referer.includes(MODAL_PATH.login);
 
 		// modal-login에서 온 경우라면 생략 (slot 삭제에 의한 경유인 경우 무시)
 		if (!isFromModalLogin) {

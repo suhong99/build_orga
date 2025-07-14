@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { SolidBtn } from '@/shared/components/SolidBtn';
 import SearchIcon from '@/shared/icon/Search';
-import { CLIENT_NAVI_PATH } from '@/shared/const/url';
+import { CLIENT_NAVI_PATH, MODAL_PATH } from '@/shared/const/url';
 import Logo from '@/shared/icon/Logo';
 import { cookies } from 'next/headers';
 import { COOKIE_NAME } from '@/shared/const/cookie';
@@ -40,12 +40,12 @@ const Header = async () => {
 							/>
 						</Link>
 					) : (
-						<Link href="/modal-login">
+						<Link href={MODAL_PATH.login}>
 							<SolidBtn label="로그인" size="small" />
 						</Link>
 					)}
 
-					<Link href="/mobile-link" className="desktop:hidden cursor-pointer">
+					<Link href={MODAL_PATH.link} className="desktop:hidden cursor-pointer">
 						<Image src="/svgs/menu.svg" alt="네비바 열기" width={24} height={24} draggable={false} />
 					</Link>
 				</div>

@@ -12,6 +12,12 @@ export const CLIENT_NAVI_PATH = {
 	search: { name: '검색페이지', path: '/search' },
 } as const;
 
+export const MODAL_PATH = {
+	link: '/mobile-link',
+	login: '/modal-login',
+	reportComment: '/modal-report-comment',
+};
+
 const NAVIBAR_VALUES = ['home', 'bill'] as const;
 
 export const NAVIBAR_PATH = NAVIBAR_VALUES.map((key) => CLIENT_NAVI_PATH[key]);

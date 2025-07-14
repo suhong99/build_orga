@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BillReaction, REACTION_ICON_MAP } from '../const';
 import { postMyReaction, ReactionCounts } from '../api/server';
 import { useRouter } from 'next/navigation';
+import { MODAL_PATH } from '@/shared/const/url';
 
 interface ReactionInfoProps extends ReactionCounts {
 	id: string;
@@ -35,7 +36,7 @@ export const useReactionInfo = ({
 			case 'SUCCESS':
 				break;
 			case 'RELOGIN':
-				return router.push('/modal-login');
+				return router.push(MODAL_PATH.login);
 			case 'REFRESH':
 				return alert('로그인이 만료되었습니다. 로그인 후 다시 시도해주세요.');
 			default:

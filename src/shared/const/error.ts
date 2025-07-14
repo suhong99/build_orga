@@ -12,6 +12,13 @@ export class ServerError extends Error {
 	}
 }
 
+export class WrongRequestError extends Error {
+	constructor() {
+		super('Wrong request error');
+		this.name = 'WrongRequestError';
+	}
+}
+
 export class NeedLoginError extends Error {
 	constructor() {
 		super('Need Login');

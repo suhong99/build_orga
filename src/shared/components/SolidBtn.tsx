@@ -1,4 +1,5 @@
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 // 기본 SolidBtnProps 타입 정의
 export interface BaseSolidBtnProps {
@@ -43,10 +44,14 @@ export const SolidBtn = <T extends Record<string, unknown> = Record<string, neve
 	const variant = primary ? 'text-white bg-primary-main-normal' : 'text-label-neutral/88 bg-label-normal/8';
 	const sizeClass = sizeMap[size];
 
+	const mergedClassName = twMerge(
+		`${base} ${variant} ${sizeClass} disabled:bg-interaction-disable disabled:text-label-assistive disabled:opacity-50`,
+		className,
+	);
 	return (
 		<button
 			type="button"
-			className={`${base} ${variant} ${sizeClass}  disabled:opacity-50 ${className}`}
+			className={mergedClassName}
 			onClick={onClick}
 			disabled={disabled}
 			{...rest} // 이미 필터링된 표준 HTML 속성만 전달

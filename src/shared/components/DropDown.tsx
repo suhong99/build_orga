@@ -61,7 +61,7 @@ export const Dropdown = ({ label, about, children, className }: DropdownProps) =
 								<div className="w-6 h-6" />
 								<div className="typo-headline2 font-bold text-label-normal">{about}</div>
 								<button className="cursor-pointer desktop:hidden" onClick={close} aria-label="닫기">
-									<Image src="/svgs/close.svg" alt="" width={24} height={24} />
+									<Image src="/svgs/close.svg" alt="닫기" width={24} height={24} />
 								</button>
 							</div>
 							{children(close)}

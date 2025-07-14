@@ -126,4 +126,13 @@ button {
 		background-color: #dddddf;
 		border-radius: 1000px;
 	}
+
+	.scrollbar-hide {
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+	}
+
+	.scrollbar-hide::-webkit-scrollbar {
+		display: none;
+	}
 }

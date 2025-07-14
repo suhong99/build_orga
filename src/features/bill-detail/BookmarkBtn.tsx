@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { toggleScrapped } from '@/shared/api/bill';
 import BookmarkIcon from '@/shared/icon/Bookmark';
 import { useRouter } from 'next/navigation';
+import { MODAL_PATH } from '@/shared/const/url';
 
 const BookmarkBtn = ({ id, isScrapped }: { id: string; isScrapped: boolean }) => {
 	const [isBookmarked, setIsBookmarked] = useState<boolean>(isScrapped);
@@ -16,7 +17,7 @@ const BookmarkBtn = ({ id, isScrapped }: { id: string; isScrapped: boolean }) =>
 				setIsBookmarked((prev) => !prev);
 				break;
 			case 'Relogin':
-				router.push('/modal-login');
+				router.push(MODAL_PATH.login);
 				break;
 			default:
 				alert('서버 에러가 발생했습니다.');

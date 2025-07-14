@@ -3,7 +3,7 @@
 import { cookies } from 'next/headers';
 import { COOKIE_NAME } from '../const/cookie';
 import { refreshToken } from './auth';
-import { NeedLoginError, RefreshTokenError } from '../const/error';
+import { NeedLoginError, RefreshTokenError, WrongRequestError } from '../const/error';
 import { clearAuth } from '@/features/auth/utils/cookie';
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
@@ -54,6 +54,10 @@ export async function tokenFetcher<T>(path: string, options: FetcherOptions = {}
 		...options,
 		headers: buildHeaders(accessToken),
 	});
+
+	if (response.status === 400) {
+		throw new WrongRequestError();
+	}
 
 	if (response.status === 401) {
 		if (!accessToken) {

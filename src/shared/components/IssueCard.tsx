@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { CommitteeName, COMMITTEES } from '../const/committee';
 import TagLabel from './TagLabel';
 import Link from 'next/link';
-import { CLIENT_NAVI_PATH } from '../const/url';
+import { CLIENT_NAVI_PATH, MODAL_PATH } from '../const/url';
 import { MouseEvent, useState } from 'react';
 import BookmarkIcon from '../icon/Bookmark';
 import { toggleScrapped } from '../api/bill';
@@ -73,7 +73,7 @@ const IssueCard = ({
 				setIsBookmarked((prev) => !prev);
 				break;
 			case 'Relogin':
-				router.push('/modal-login');
+				router.push(MODAL_PATH.login);
 				break;
 			default:
 				alert('서버 에러가 발생했습니다.');

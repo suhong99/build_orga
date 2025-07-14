@@ -1,5 +1,6 @@
 import { myProfileInfo } from '@/features/mypage/api/server';
 import ProfileForm from '@/features/profile/ProfileForm';
+import { MODAL_PATH } from '@/shared/const/url';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
@@ -11,7 +12,7 @@ export default async function MyProfile() {
 	const response = await myProfileInfo();
 
 	if (response.status === 'relogin') {
-		redirect('/modal-login');
+		redirect(MODAL_PATH.login);
 	}
 
 	return (

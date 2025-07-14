@@ -1,6 +1,7 @@
 import { myProfileInfo } from '@/features/mypage/api/server';
 import MyContents from '@/features/mypage/MyContents';
 import UserInfo from '@/features/mypage/UserInfo';
+import { MODAL_PATH } from '@/shared/const/url';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
@@ -12,7 +13,7 @@ export default async function MyPage() {
 	const response = await myProfileInfo();
 
 	if (response.status === 'relogin') {
-		redirect('/modal-login');
+		redirect(MODAL_PATH.login);
 	}
 
 	return (
