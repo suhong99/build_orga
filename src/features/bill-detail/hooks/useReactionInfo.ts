@@ -1,23 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BillReaction, REACTION_ICON_MAP } from '../const';
-import { getBillReactions, postMyReaction } from '../api/server';
+import { postMyReaction, ReactionCounts } from '../api/server';
 import { useRouter } from 'next/navigation';
 
-export const useReactionInfo = (id: string) => {
+interface ReactionInfoProps extends ReactionCounts {
+	id: string;
+}
+
+export const useReactionInfo = ({
+	id,
+	likeReactionCount,
+	improvementReactionCount,
+	excitedReactionCount,
+	disappointedReactionCount,
+	userReactionType,
+}: ReactionInfoProps) => {
 	// 좋아요, 개선필요, 흥미진진, 아쉬워요
-	const [reactionCounts, setReactionCounts] = useState<[number, number, number, number]>([0, 0, 0, 0]);
-	const [myReaction, setMyReaction] = useState<BillReaction | null>(null);
+	const [reactionCounts, setReactionCounts] = useState<[number, number, number, number]>([
+		likeReactionCount,
+		improvementReactionCount,
+		excitedReactionCount,
+		disappointedReactionCount,
+	]);
+	const [myReaction, setMyReaction] = useState<BillReaction | null>(userReactionType);
 	const router = useRouter();
-
-	useEffect(() => {
-		const fetchReactionInfo = async () => {
-			const { result } = await getBillReactions(id);
-			setReactionCounts([result.likeReactionCount, result.improvementReactionCount, result.excitedReactionCount, result.disappointedReactionCount]);
-			setMyReaction(result.userReactionType);
-		};
-
-		fetchReactionInfo();
-	}, [id]);
 
 	const updateReaction = async (index: number) => {
 		const selectedLabel = REACTION_ICON_MAP[index].label;
@@ -31,8 +37,7 @@ export const useReactionInfo = (id: string) => {
 			case 'RELOGIN':
 				return router.push('/modal-login');
 			case 'REFRESH':
-				alert('로그인이 만료되었습니다. 로그인 후 다시 시도해주세요.');
-				return router.push('/modal-login');
+				return alert('로그인이 만료되었습니다. 로그인 후 다시 시도해주세요.');
 			default:
 				return alert('알 수 없는 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
 		}

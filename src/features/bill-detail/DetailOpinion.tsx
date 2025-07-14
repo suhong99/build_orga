@@ -7,9 +7,15 @@ import ShareButton from '@/shared/components/ShareBtn';
 import BookmarkBtn from './BookmarkBtn';
 import { useReactionInfo } from './hooks/useReactionInfo';
 import { useReactionVisble } from './hooks/useReactionVisible';
+import { ReactionCounts } from './api/server';
 
-const DetailOpinion = ({ id, isScrapped }: { id: string; isScrapped: boolean }) => {
-	const { reactionCounts, myReaction, updateReaction } = useReactionInfo(id);
+interface DetailOpinionProps extends ReactionCounts {
+	id: string;
+	isScrapped: boolean;
+}
+
+const DetailOpinion = ({ id, isScrapped, ...reactionProps }: DetailOpinionProps) => {
+	const { reactionCounts, myReaction, updateReaction } = useReactionInfo({ id, ...reactionProps });
 	const { targetRef, visible } = useReactionVisble();
 
 	return (

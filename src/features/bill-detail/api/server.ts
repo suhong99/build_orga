@@ -1,7 +1,6 @@
 import { CommitteeName } from '@/shared/const/committee';
 import { tokenFetcher } from '@/shared/api/fetcher';
 import { BillReaction } from '../const';
-import { NeedLoginError, RefreshTokenError } from '@/shared/const/error';
 import { CommentResponse } from '@/shared/components/Comment';
 
 export interface BillHistory {
@@ -79,11 +78,10 @@ export const postMyReaction = async (id: string, reactionType: BillReaction) => 
 		});
 		return { status: 'SUCCESS' };
 	} catch (err) {
-		if (err instanceof NeedLoginError) {
+		if (err instanceof Error && err.name === 'NeedLoginError') {
 			return { status: 'RELOGIN' };
 		}
-
-		if (err instanceof RefreshTokenError) {
+		if (err instanceof Error && err.name === 'RefreshTokenError') {
 			return { status: 'REFRESH' };
 		}
 
