@@ -10,6 +10,7 @@ import { useBillComment } from './hooks/useBillComment';
 import InfinityScrollSpinner from '@/shared/components/InfinityScrollSpinner';
 import ErrorIndicator from '@/shared/components/ErrorIndicator';
 import { useReportModal } from './hooks/useReportModal';
+import CommentSkeleton from './skeletons/Comment.skeleton';
 
 interface CommentListType {
 	billId: string | number;
@@ -17,7 +18,7 @@ interface CommentListType {
 }
 
 const DetailCommentList = ({ billId, nickname }: CommentListType) => {
-	const { data, fetchNextPage, hasNextPage, isFetching, isError } = useInfiniteQuery({
+	const { data, fetchNextPage, hasNextPage, isLoading, isFetching, isError } = useInfiniteQuery({
 		queryKey: [QUERY_KEYS.billComments, billId],
 		queryFn: ({ pageParam }) => getBillComments({ id: billId, page: pageParam }),
 		initialPageParam: 0,
@@ -42,6 +43,7 @@ const DetailCommentList = ({ billId, nickname }: CommentListType) => {
 			</header>
 			<AddComment id={billId} />
 			<ul className="flex flex-col gap-[15px] desktop:gap-5">
+				{isLoading && Array.from({ length: 3 }).map((_, idx) => <CommentSkeleton key={idx} />)}
 				{commentList.map((comment) => {
 					return (
 						<Comment
