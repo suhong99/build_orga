@@ -31,6 +31,7 @@ export const loginUser = async (code: string, type: SocialType): Promise<AuthRes
 			code,
 			redirectUri: URL_MAP[type],
 		}),
+		cache: 'no-store',
 	});
 
 	if (!response.ok) {

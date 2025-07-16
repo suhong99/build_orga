@@ -1,35 +1,15 @@
 'use client';
 
-import { loginUser } from '@/features/auth/api/oauth';
+import { useLoginWithOauthCode } from '@/features/auth/hooks/useLoginWithOauthCode';
 import useOAuthPopUp from '@/features/auth/hooks/useOauthPopup';
 import LoginFailText from '@/features/auth/LoginFailText';
 import Modal from '@/shared/components/Modal';
-import SocialBtn, { SocialType } from '@/shared/components/SocialBtn';
+import SocialBtn from '@/shared/components/SocialBtn';
 import Logo from '@/shared/icon/Logo';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
 export default function Page() {
-	const [isFail, setIsFail] = useState(false);
 	const { open, code, isOpen } = useOAuthPopUp();
-	const [socialType, setSocialType] = useState<SocialType | null>(null);
-	const router = useRouter();
-	useEffect(() => {
-		if (!code || !socialType) return;
-
-		loginUser(code, socialType)
-			.then((user) => {
-				if (!user.nickname) {
-					router.push('/onboarding');
-				} else {
-					router.back();
-				}
-			})
-			.catch((e) => {
-				console.error(e);
-				setIsFail(true);
-			});
-	}, [code, socialType, router]);
+	const { isFail, setSocialType } = useLoginWithOauthCode(code);
 
 	return (
 		<Modal>

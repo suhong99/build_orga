@@ -2,7 +2,7 @@ import { myProfileInfo } from '@/features/mypage/api/server';
 import ProfileForm from '@/features/profile/ProfileForm';
 import { MODAL_PATH } from '@/shared/const/url';
 import { Metadata } from 'next';
-import { redirect } from 'next/navigation';
+import { redirect, RedirectType } from 'next/navigation';
 
 export const metadata: Metadata = {
 	title: '프로필 수정',
@@ -12,7 +12,7 @@ export default async function MyProfile() {
 	const response = await myProfileInfo();
 
 	if (response.status === 'relogin') {
-		redirect(MODAL_PATH.login);
+		redirect(MODAL_PATH.login, RedirectType.push);
 	}
 
 	return (

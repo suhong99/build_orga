@@ -2,7 +2,7 @@ import { RefreshTokenError } from '@/shared/const/error';
 import { getRecommenedBills } from './api';
 import Content from './Content';
 import ContentHeader from './ContentHeader';
-import { redirect } from 'next/navigation';
+import { redirect, RedirectType } from 'next/navigation';
 import { MODAL_PATH } from '@/shared/const/url';
 
 const RecommendBills = async () => {
@@ -22,7 +22,7 @@ const RecommendBills = async () => {
 		);
 	} catch (err) {
 		if (err instanceof RefreshTokenError) {
-			redirect(MODAL_PATH.login);
+			redirect(MODAL_PATH.login, RedirectType.push);
 		}
 
 		throw err;

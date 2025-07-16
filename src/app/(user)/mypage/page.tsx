@@ -3,7 +3,7 @@ import MyContents from '@/features/mypage/MyContents';
 import UserInfo from '@/features/mypage/UserInfo';
 import { MODAL_PATH } from '@/shared/const/url';
 import { Metadata } from 'next';
-import { redirect } from 'next/navigation';
+import { redirect, RedirectType } from 'next/navigation';
 
 export const metadata: Metadata = {
 	title: '마이페이지',
@@ -13,7 +13,7 @@ export default async function MyPage() {
 	const response = await myProfileInfo();
 
 	if (response.status === 'relogin') {
-		redirect(MODAL_PATH.login);
+		redirect(MODAL_PATH.login, RedirectType.push);
 	}
 
 	return (

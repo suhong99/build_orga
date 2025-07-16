@@ -78,6 +78,7 @@ export const postMyReaction = async (id: string, reactionType: BillReaction) => 
 		});
 		return { status: 'SUCCESS' };
 	} catch (err) {
+		console.error('어떤 에러일까?', err);
 		if (err instanceof Error && err.name === 'NeedLoginError') {
 			return { status: 'RELOGIN' };
 		}

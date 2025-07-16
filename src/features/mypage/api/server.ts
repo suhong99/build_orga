@@ -4,7 +4,7 @@ import { tokenFetcher } from '@/shared/api/fetcher';
 import { COOKIE_NAME } from '@/shared/const/cookie';
 import { RefreshTokenError, ServerError } from '@/shared/const/error';
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
+import { redirect, RedirectType } from 'next/navigation';
 import { MyProfileInfo } from '../const/user';
 import { IssueCardProps } from '@/shared/components/IssueCard';
 import { BillReaction } from '@/features/bill-detail/const';
@@ -33,7 +33,7 @@ export async function myProfileInfo(): Promise<MyProfileInfoResponse> {
 	const token = cookieStore.get(COOKIE_NAME.auth.access)?.value;
 
 	if (!token) {
-		redirect('/');
+		redirect('/', RedirectType.push);
 	}
 
 	try {

@@ -9,6 +9,7 @@ interface OAuthPopUp {
 	isOpen: boolean;
 }
 
+// Oauth팝업을 열고 팝업창을 통해 code를 수신하는 훅
 const useOAuthPopUp = (): OAuthPopUp => {
 	const popUpRef = useRef<Window | null>(null);
 	const [code, setCode] = useState<string | null>(null);
