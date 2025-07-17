@@ -20,6 +20,8 @@ export const MODAL_PATH = {
 
 const NAVIBAR_VALUES = ['home', 'bill'] as const;
 
+export const DEPLOY_URL = 'https://graypick.co.kr';
+
 export const NAVIBAR_PATH = NAVIBAR_VALUES.map((key) => CLIENT_NAVI_PATH[key]);
 
 export const SERVER_URL = {

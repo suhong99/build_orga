@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 import GoogleAnalytics from '@/shared/script/GoogleAnalytics';
 import MicrosoftClarity from '@/shared/script/MicrosoftClarity';
 import Providers from './Providers';
+import JsonLD from '@/shared/script/JsonLD';
 
 export const metadata: Metadata = {
 	title: {
@@ -53,6 +54,7 @@ export default function RootLayout({
 			<head>
 				<GoogleAnalytics gaId="G-64MDTYBYT3" />
 				<MicrosoftClarity clId="rslbkldy5n" />
+				<JsonLD />
 			</head>
 			<body className={`${pretendard.className} antialiased flex flex-col items-center w-full  min-h-screen mx-auto`}>
 				<Providers>{children}</Providers>
