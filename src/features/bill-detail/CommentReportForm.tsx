@@ -3,6 +3,8 @@
 import { SolidBtn } from '@/shared/components/SolidBtn';
 import { useState } from 'react';
 import { reportBillComment } from './api/server';
+import { useRouter } from 'next/navigation';
+import { MODAL_PATH } from '@/shared/const/url';
 
 interface ReportFormProps {
 	id: string;
@@ -24,6 +26,7 @@ const CommentReportForm = ({ id, nextStep }: ReportFormProps) => {
 		'개인정보 침해',
 	];
 
+	const router = useRouter();
 	const [selectedReason, setSelectedReason] = useState<string>('');
 
 	const handleReport = async () => {
@@ -33,6 +36,10 @@ const CommentReportForm = ({ id, nextStep }: ReportFormProps) => {
 		} catch (err) {
 			if (err instanceof Error && err.name === 'WrongRequestError') {
 				return alert('이미 신고한 댓글입니다.');
+			}
+
+			if (err instanceof Error && err.name === 'NeedLoginError') {
+				return router.push(MODAL_PATH.login);
 			}
 			alert('알 수 없는 문제가 발생하였습니다. 다시 시도해주세요');
 		}

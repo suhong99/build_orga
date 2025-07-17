@@ -33,11 +33,11 @@ export const useReactionInfo = ({
 		const { status } = await postMyReaction(id, selectedLabel);
 
 		switch (status) {
-			case 'SUCCESS':
+			case 'success':
 				break;
-			case 'RELOGIN':
+			case 'relogin':
 				return router.push(MODAL_PATH.login);
-			case 'REFRESH':
+			case 'refresh':
 				return alert('로그인이 만료되었습니다. 로그인 후 다시 시도해주세요.');
 			default:
 				return alert('알 수 없는 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');

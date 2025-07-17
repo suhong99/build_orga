@@ -13,10 +13,10 @@ const BookmarkBtn = ({ id, isScrapped }: { id: string; isScrapped: boolean }) =>
 	const toggleBookmark = async (id: string) => {
 		const res = await toggleScrapped(id);
 		switch (res.status) {
-			case 'SUCCESS':
+			case 'success':
 				setIsBookmarked((prev) => !prev);
 				break;
-			case 'Relogin':
+			case 'relogin':
 				router.push(MODAL_PATH.login);
 				break;
 			default:

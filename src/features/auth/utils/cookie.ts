@@ -66,7 +66,7 @@ export const clearAuth = async () => {
 // 로그인인지
 export const isLoggedIn = async () => {
 	const cookieStore = await cookies();
-	const hasAccessToken = cookieStore.has('accesstoken');
+	const hasAccessToken = cookieStore.has(COOKIE_NAME.auth.access);
 
 	return hasAccessToken;
 };

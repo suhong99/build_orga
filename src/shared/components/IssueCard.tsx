@@ -69,10 +69,10 @@ const IssueCard = ({
 		e.stopPropagation();
 		const res = await toggleScrapped(billId);
 		switch (res.status) {
-			case 'SUCCESS':
+			case 'success':
 				setIsBookmarked((prev) => !prev);
 				break;
-			case 'Relogin':
+			case 'relogin':
 				router.push(MODAL_PATH.login);
 				break;
 			default:

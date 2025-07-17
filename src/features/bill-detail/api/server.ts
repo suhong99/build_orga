@@ -2,6 +2,8 @@ import { CommitteeName } from '@/shared/const/committee';
 import { tokenFetcher } from '@/shared/api/fetcher';
 import { BillReaction } from '../const';
 import { CommentResponse } from '@/shared/components/Comment';
+import { isLoggedIn } from '@/features/auth/utils/cookie';
+import { NeedLoginError } from '@/shared/const/error';
 
 export interface BillHistory {
 	id: number;
@@ -69,6 +71,11 @@ export const getBillReactions = async (id: string) => {
 
 export const postMyReaction = async (id: string, reactionType: BillReaction) => {
 	try {
+		const isLogin = await isLoggedIn();
+		if (!isLogin) {
+			return { status: 'relogin' };
+		}
+
 		await tokenFetcher<{
 			hasReacted: boolean;
 			reactionType: string;
@@ -76,14 +83,13 @@ export const postMyReaction = async (id: string, reactionType: BillReaction) => 
 			method: 'POST',
 			body: JSON.stringify({ reactionType }),
 		});
-		return { status: 'SUCCESS' };
+		return { status: 'success' };
 	} catch (err) {
-		console.error('어떤 에러일까?', err);
 		if (err instanceof Error && err.name === 'NeedLoginError') {
-			return { status: 'RELOGIN' };
+			return { status: 'relogin' };
 		}
 		if (err instanceof Error && err.name === 'RefreshTokenError') {
-			return { status: 'REFRESH' };
+			return { status: 'refresh' };
 		}
 
 		return { status: 'SERVER_ERROR' };
@@ -96,6 +102,12 @@ export const getBillComments = async ({ id, page = 0, size = 16 }: { id: number 
 };
 
 export const addBillComment = async (id: number | string, content: string) => {
+	const isLogin = await isLoggedIn();
+
+	if (!isLogin) {
+		throw new NeedLoginError();
+	}
+
 	const response = await tokenFetcher<CommentResponse>(`/api/bills/${id}/comments`, { method: 'POST', body: JSON.stringify({ content }) });
 
 	return { result: response.result };
@@ -110,9 +122,21 @@ export const editBillComment = async (id: number | string, content: string) => {
 };
 
 export const likeBillComment = async (id: number | string) => {
+	const isLogin = await isLoggedIn();
+
+	if (!isLogin) {
+		throw new NeedLoginError();
+	}
+
 	await tokenFetcher(`/api/comments/${id}/likes/toggle`, { method: 'POST' });
 };
 
 export const reportBillComment = async (id: number | string, content: string) => {
+	const isLogin = await isLoggedIn();
+
+	if (!isLogin) {
+		throw new NeedLoginError();
+	}
+
 	await tokenFetcher(`/api/comments/${id}/reports`, { method: 'POST', body: JSON.stringify({ content }) });
 };
