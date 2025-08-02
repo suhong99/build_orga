@@ -9,7 +9,7 @@ export const useReportModal = () => {
 		const isLogin = await isLoggedIn();
 
 		if (!isLogin) {
-			router.push(MODAL_PATH.login);
+			router.push(MODAL_PATH.login, { scroll: false });
 		} else {
 			router.push(`${MODAL_PATH.reportComment}/${commentId}`);
 		}

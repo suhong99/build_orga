@@ -41,7 +41,7 @@ const Nickname = ({ setIsValidate, initialNick }: NicknameProps) => {
 	}, [isValid, setIsValidate, isSameAsInitial]);
 
 	return (
-		<section className="flex flex-col gap-3 min-w-[343px]">
+		<section className="flex flex-col gap-3 w-full">
 			<label htmlFor="nickname" className="text-left typo-caption1 font-bold text-interaction-inactive">
 				닉네임
 			</label>

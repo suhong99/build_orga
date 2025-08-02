@@ -35,7 +35,7 @@ const OnboardingForm = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit} className="flex flex-col gap-[32px] desktop:gap-12 py-12 w-[375px] desktop:w-[480px] mx-auto">
+		<form onSubmit={handleSubmit} className="flex flex-col gap-[32px] desktop:gap-12 py-12 w-full max-w-[375px] desktop:max-w-[480px] mx-auto">
 			<div className="flex flex-col gap-2 items-center">
 				<h1 className="typo-title3 desktop:typo-title2 font-bold">어떤 분인지 알려주세요</h1>
 				<div className="typo-body2-normal desktop:typo-body1-normal text-label-alternative font-regular">최근 관심가는 주제는 무엇인가요?</div>

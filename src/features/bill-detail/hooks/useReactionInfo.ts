@@ -36,7 +36,7 @@ export const useReactionInfo = ({
 			case 'success':
 				break;
 			case 'relogin':
-				return router.push(MODAL_PATH.login);
+				return router.push(MODAL_PATH.login, { scroll: false });
 			case 'refresh':
 				return alert('로그인이 만료되었습니다. 로그인 후 다시 시도해주세요.');
 			default:

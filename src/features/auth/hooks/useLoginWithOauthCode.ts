@@ -2,12 +2,14 @@ import { SocialType } from '@/shared/components/SocialBtn';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { loginUser } from '../api/oauth';
+import { useQueryClient } from '@tanstack/react-query';
 
 // 인가받은 코드로 BE를 통해 로그인을 하는 훅
 export const useLoginWithOauthCode = (code: string | null) => {
 	const [isFail, setIsFail] = useState(false);
 	const [socialType, setSocialType] = useState<SocialType | null>(null);
 	const router = useRouter();
+	const queryClient = useQueryClient();
 
 	useEffect(() => {
 		if (!code || !socialType) return;
@@ -18,6 +20,7 @@ export const useLoginWithOauthCode = (code: string | null) => {
 				if (!user.nickname) {
 					router.push('/onboarding');
 				} else {
+					queryClient.clear();
 					router.back();
 				}
 			} catch (e) {
@@ -27,6 +30,6 @@ export const useLoginWithOauthCode = (code: string | null) => {
 		};
 
 		doLogin();
-	}, [code, socialType, router]);
+	}, [code, socialType, router, queryClient]);
 	return { isFail, setSocialType };
 };

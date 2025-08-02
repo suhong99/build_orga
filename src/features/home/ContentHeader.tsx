@@ -11,14 +11,15 @@ interface ContentHeaderProps {
 
 const ContentHeader = ({ title, link, keywordList, isLoginRequired }: ContentHeaderProps) => {
 	return (
-		<div className="flex justify-center  desktop:justify-between items-center w-full h-[56px] desktop:h-[38px] desktop:gap-[10px] p-0">
-			<h2 className="flex flex-col items-center desktop:flex-row typo-heading1 desktop:typo-title2 font-bold gap-2 flex-wrap text-center">
+		<div className="flex justify-center  desktop:justify-between items-center w-full desktop:gap-[10px] p-0">
+			<h2 className="flex flex-col items-center desktop:flex-row typo-heading1 desktop:typo-title2 font-bold gap-2 text-center desktop:flex-wrap desktop:flex-1">
 				{title}
 				{keywordList && (
-					<span className="flex gap-2 text-primary-main-normal">
+					<span className="flex gap-2 text-primary-main-normal flex-wrap max-desktop:justify-center">
 						{keywordList && keywordList.map((keyword) => <span key={keyword}>#{keyword}</span>)}
 					</span>
 				)}
+
 				{isLoginRequired && (
 					<span className="typo-body1-normal font-regular desktop:typo-title2 desktop:font-bold text-label-alternative opacity-[61%]">
 						#로그인하고 관심 키워드를 골라보세요

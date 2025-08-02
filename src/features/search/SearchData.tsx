@@ -4,7 +4,7 @@ import { useInfinityScrollSensor } from '@/shared/hooks/useInfinityScrollSensor'
 import { getSearchData } from './api/server';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/const/reactQuery';
-import IssueCard from '@/shared/components/IssueCard';
+import { MemoizedIssueCard } from '@/shared/components/IssueCard';
 import ErrorIndicator from '@/shared/components/ErrorIndicator';
 import InfinityScrollSpinner from '@/shared/components/InfinityScrollSpinner';
 import SearchDataSkeleton from './skeletons/SearchData.skeleton';
@@ -38,11 +38,11 @@ const SearchData = ({ keyword }: { keyword: string }) => {
 					<>
 						<h2 className="flex flex-wrap typo-heading1 font-regular col-span-3 max-desktop:col-span-2 max-tablet:col-span-1">
 							<span className="desktop:font-bold">{`"${keyword}" 검색 결과`}&nbsp;</span>
-							{data?.pages?.[0]?.result?.totalCount ?? 0}
+							<span className="text-label-alternative">{data?.pages?.[0]?.result?.totalCount ?? 0}</span>
 						</h2>
 
 						{searchData.map((bill) => (
-							<IssueCard key={bill.billId} {...bill} />
+							<MemoizedIssueCard key={bill.billId} {...bill} />
 						))}
 					</>
 				)}

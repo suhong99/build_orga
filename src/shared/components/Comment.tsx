@@ -117,7 +117,11 @@ const Comment = ({
 									<button onClick={() => setIsEditMode(false)} className="hover:opacity-80">
 										취소
 									</button>
-									<button onClick={handleEdit} className="text-primary-main-heavy hover:opacity-80">
+									<button
+										onClick={handleEdit}
+										disabled={editedContent === ''}
+										className="text-primary-main-heavy hover:opacity-80 disabled:text-label-disable"
+									>
 										수정완료
 									</button>
 								</>

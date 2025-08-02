@@ -2,13 +2,15 @@ import IssueCard, { IssueCardProps } from '@/shared/components/IssueCard';
 import React, { ReactElement } from 'react';
 import ContentHeader from './ContentHeader';
 import { SolidBtn } from '@/shared/components/SolidBtn';
+import Link from 'next/link';
 
 interface ContentProps {
 	children: ReactElement<typeof ContentHeader>;
 	data: IssueCardProps[];
+	link: string;
 }
 
-const Content = ({ children, data }: ContentProps) => {
+const Content = ({ children, data, link }: ContentProps) => {
 	return (
 		<section className="w-full flex flex-col gap-5 max-w-maxw">
 			{children}
@@ -18,7 +20,9 @@ const Content = ({ children, data }: ContentProps) => {
 				})}
 			</div>
 			<div className="flex justify-center desktop:hidden">
-				<SolidBtn primary={false} label={'더보기'} />
+				<Link href={link}>
+					<SolidBtn primary={false} label={'더보기'} />
+				</Link>
 			</div>
 		</section>
 	);

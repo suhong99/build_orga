@@ -10,11 +10,19 @@ import { useHandleError } from '@/shared/hooks/useHandleError';
 const AddComment = ({ id }: { id: number | string }) => {
 	const queryClient = useQueryClient();
 	const [comment, setComment] = useState<string>('');
-	const { handleErrorByName } = useHandleError();
+	const { handleErrorByCode } = useHandleError();
 
 	const addNewComment = useMutation({
 		mutationFn: ({ id, content }: { id: number | string; content: string }) => addBillComment(id, content),
-		onSuccess: ({ result }) => {
+		onSuccess: (res) => {
+			if (!res.success) {
+				handleErrorByCode(res.errorCode, '댓글 작성');
+				return;
+			}
+
+			const { result } = res;
+
+			// 댓글 리스트 갱신
 			queryClient.setQueryData<InfiniteData<{ result: BillComments }>>([QUERY_KEYS.billComments, id], (prev) => {
 				if (!prev) return prev;
 
@@ -33,14 +41,14 @@ const AddComment = ({ id }: { id: number | string }) => {
 						: page,
 				);
 
-				return { ...prev, pages: updatedPages };
+				return { ...prev, pages: updatedPages } as InfiniteData<{ result: BillComments }>;
 			});
 
 			setComment('');
 		},
-
 		onError: (err) => {
-			handleErrorByName(err, '댓글 작성');
+			console.error(err);
+			alert('댓글 작성 중 알 수 없는 에러가 발생하였습니다.');
 		},
 	});
 
@@ -63,6 +71,7 @@ const AddComment = ({ id }: { id: number | string }) => {
 				<SolidBtn
 					size="small"
 					label="의견 나누기"
+					disabled={comment === ''}
 					onClick={() => addNewComment.mutate({ id, content: comment })}
 					className="font-medium desktop:font-bold desktop:typo-body2-normal w-[90px] desktop:w-[110px] desktop:h-[40px]"
 				/>

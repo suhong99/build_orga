@@ -5,6 +5,7 @@ import { COOKIE_NAME } from '../const/cookie';
 import { refreshToken } from './auth';
 import { NeedLoginError, RefreshTokenError, WrongRequestError } from '../const/error';
 import { clearAuth } from '@/features/auth/utils/cookie';
+import { API_FAILURE_RESPONSE } from '../const/api';
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
@@ -17,6 +18,13 @@ interface ApiResponse<T> {
 	responseCode: number;
 	responseMessage: string;
 	result: T;
+}
+
+export interface SerializableActionResponse<T> {
+	success: boolean;
+	result: T | null;
+	message: string;
+	errorCode?: string;
 }
 
 export async function fetcher(path: string, options: FetcherOptions = {}): Promise<Response> {
@@ -86,4 +94,56 @@ export async function tokenFetcher<T>(path: string, options: FetcherOptions = {}
 	}
 
 	return (await response.json()) as ApiResponse<T>;
+}
+
+// 클라이언트 (리액트 쿼리)에서 사용할 때 직렬화 문제로 next server -> client로 에러 인스턴스가 제대로 전달되지 않음. 따라서 직렬화 가능한 fetcher를 사용
+export async function serializableFetcher<T>(path: string, options: FetcherOptions = {}, isRetry = false): Promise<SerializableActionResponse<T>> {
+	const cookieStore = await cookies();
+	const { access } = COOKIE_NAME.auth;
+	const accessToken = cookieStore.get(access)?.value;
+
+	const buildHeaders = (token?: string) => ({
+		...options.headers,
+		...(token ? { Authorization: `Bearer ${token}` } : {}),
+	});
+
+	const response = await fetcher(path, {
+		...options,
+		headers: buildHeaders(accessToken),
+	});
+
+	if (response.status === 400) {
+		return API_FAILURE_RESPONSE.badRequest;
+	}
+
+	if (response.status === 401) {
+		if (!accessToken) {
+			return API_FAILURE_RESPONSE.needLogin;
+		}
+
+		if (isRetry) {
+			await clearAuth();
+			return API_FAILURE_RESPONSE.refreshToken;
+		}
+
+		const refreshed = await refreshToken();
+		if (!refreshed) {
+			await clearAuth();
+			return API_FAILURE_RESPONSE.refreshToken;
+		}
+
+		// 토큰 갱신 성공 → 재요청
+		return serializableFetcher<T>(path, options, true);
+	}
+
+	if (!response.ok) {
+		return API_FAILURE_RESPONSE.unknown;
+	}
+
+	const json = (await response.json()) as ApiResponse<T>;
+	return {
+		success: true,
+		result: json.result,
+		message: json.responseMessage ?? 'api요청에 성공하였습니다.',
+	};
 }

@@ -4,10 +4,10 @@ import { QUERY_KEYS } from '@/shared/const/reactQuery';
 import { useBillQueryState } from './hooks/useBillQueryState';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getFilteredBills } from './api/server';
-import IssueCard from '@/shared/components/IssueCard';
 import InfinityScrollSpinner from '@/shared/components/InfinityScrollSpinner';
 import ErrorIndicator from '@/shared/components/ErrorIndicator';
 import IssueCardSkeleton from '@/shared/skeletons/IssueCard.skeleton';
+import { MemoizedIssueCard } from '@/shared/components/IssueCard';
 
 const BillContents = () => {
 	const { order, keywords } = useBillQueryState();
@@ -33,7 +33,7 @@ const BillContents = () => {
 			{isLoading && Array.from({ length: 9 }).map((_, idx) => <IssueCardSkeleton key={idx} />)}
 
 			{BillData.map((bill) => (
-				<IssueCard key={bill.billId} {...bill} />
+				<MemoizedIssueCard key={bill.billId} {...bill} />
 			))}
 			<div className="flex col-span-3 w-full items-center justify-center max-desktop:col-span-2 max-tablet:col-span-1">
 				{isError && <ErrorIndicator retiralFn={fetchNextPage} />}

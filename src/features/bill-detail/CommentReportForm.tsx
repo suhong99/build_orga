@@ -39,8 +39,9 @@ const CommentReportForm = ({ id, nextStep }: ReportFormProps) => {
 			}
 
 			if (err instanceof Error && err.name === 'NeedLoginError') {
-				return router.push(MODAL_PATH.login);
+				return router.push(MODAL_PATH.login, { scroll: false });
 			}
+
 			alert('알 수 없는 문제가 발생하였습니다. 다시 시도해주세요');
 		}
 	};

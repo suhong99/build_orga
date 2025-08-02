@@ -29,7 +29,8 @@ export const refreshToken = async (): Promise<boolean> => {
 
 	if (!response.ok) {
 		// 기타 예외 상황 → 서버 에러 등은 그대로 던짐
-		throw new Error(`Failed to refresh token: ${response.status}`);
+		console.error(`Failed to refresh token: ${response.status}`);
+		return false;
 	}
 
 	const data = await response.json();

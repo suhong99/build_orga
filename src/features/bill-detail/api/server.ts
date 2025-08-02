@@ -1,9 +1,12 @@
+'use server';
+
 import { CommitteeName } from '@/shared/const/committee';
-import { tokenFetcher } from '@/shared/api/fetcher';
+import { SerializableActionResponse, serializableFetcher, tokenFetcher } from '@/shared/api/fetcher';
 import { BillReaction } from '../const';
 import { CommentResponse } from '@/shared/components/Comment';
 import { isLoggedIn } from '@/features/auth/utils/cookie';
 import { NeedLoginError } from '@/shared/const/error';
+import { API_FAILURE_RESPONSE } from '@/shared/const/api';
 
 export interface BillHistory {
 	id: number;
@@ -101,34 +104,35 @@ export const getBillComments = async ({ id, page = 0, size = 16 }: { id: number 
 	return { result: response.result };
 };
 
-export const addBillComment = async (id: number | string, content: string) => {
+export const addBillComment = async (id: number | string, content: string): Promise<SerializableActionResponse<CommentResponse>> => {
 	const isLogin = await isLoggedIn();
 
 	if (!isLogin) {
-		throw new NeedLoginError();
+		return API_FAILURE_RESPONSE.needLogin;
 	}
 
-	const response = await tokenFetcher<CommentResponse>(`/api/bills/${id}/comments`, { method: 'POST', body: JSON.stringify({ content }) });
-
-	return { result: response.result };
+	return serializableFetcher<CommentResponse>(`/api/bills/${id}/comments`, {
+		method: 'POST',
+		body: JSON.stringify({ content }),
+	});
 };
 
 export const deleteBillComment = async (id: number | string) => {
-	await tokenFetcher(`/api/comments/${id}`, { method: 'DELETE' });
+	return await serializableFetcher(`/api/comments/${id}`, { method: 'DELETE' });
 };
 
 export const editBillComment = async (id: number | string, content: string) => {
-	await tokenFetcher(`/api/comments/${id}`, { method: 'PATCH', body: JSON.stringify({ content }) });
+	return await serializableFetcher(`/api/comments/${id}`, { method: 'PATCH', body: JSON.stringify({ content }) });
 };
 
 export const likeBillComment = async (id: number | string) => {
 	const isLogin = await isLoggedIn();
 
 	if (!isLogin) {
-		throw new NeedLoginError();
+		return API_FAILURE_RESPONSE.needLogin;
 	}
 
-	await tokenFetcher(`/api/comments/${id}/likes/toggle`, { method: 'POST' });
+	return await serializableFetcher(`/api/comments/${id}/likes/toggle`, { method: 'POST' });
 };
 
 export const reportBillComment = async (id: number | string, content: string) => {

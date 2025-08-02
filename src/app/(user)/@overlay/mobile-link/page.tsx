@@ -1,16 +1,13 @@
 import HamberMenu from '@/features/layout/HamberMenu';
 import Link from 'next/link';
-import { clearAuth, isLoggedIn } from '@/features/auth/utils/cookie';
+import { isLoggedIn } from '@/features/auth/utils/cookie';
 import { NAVIBAR_PATH } from '@/shared/const/url';
 import Logo from '@/shared/icon/Logo';
+import LogoutBtn from '@/features/layout/LogoutBtn';
 
 export default async function Page() {
-	const logout = async () => {
-		'use server';
-		await clearAuth();
-	};
-
 	const isLoggedInUser = await isLoggedIn();
+
 	return (
 		<HamberMenu>
 			<div className="flex flex-col mt-[68px] px-2.5 py-2 gap-3">
@@ -21,16 +18,7 @@ export default async function Page() {
 					))}
 				</nav>
 			</div>
-			{isLoggedInUser && (
-				<form action={logout}>
-					<button
-						type="submit"
-						className="absolute bottom-9 ml-10.5 my-3 typo-body1-normal font-regular text-label-alternative  active:text-label-normal"
-					>
-						로그아웃
-					</button>
-				</form>
-			)}
+			<LogoutBtn isLogin={isLoggedInUser} />
 		</HamberMenu>
 	);
 }

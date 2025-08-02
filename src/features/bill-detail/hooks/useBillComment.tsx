@@ -5,11 +5,16 @@ import { useHandleError } from '@/shared/hooks/useHandleError';
 
 export const useBillComment = (billId: string | number) => {
 	const queryClient = useQueryClient();
-	const { handleErrorByName } = useHandleError();
+	const { handleErrorByCode } = useHandleError();
 
 	const deleteComment = useMutation({
 		mutationFn: ({ id }: { id: number | string }) => deleteBillComment(id),
-		onSuccess: (_, variables) => {
+		onSuccess: (res, variables) => {
+			if (!res.success) {
+				handleErrorByCode(res.errorCode, '댓글 삭제');
+				return;
+			}
+
 			queryClient.setQueryData<InfiniteData<{ result: BillComments }>>([QUERY_KEYS.billComments, billId], (prev) => {
 				if (!prev) return prev;
 
@@ -34,14 +39,16 @@ export const useBillComment = (billId: string | number) => {
 				};
 			});
 		},
-		onError: (err) => {
-			handleErrorByName(err, '댓글 삭제');
-		},
 	});
 
 	const editComment = useMutation({
 		mutationFn: ({ id, content }: { id: number | string; content: string }) => editBillComment(id, content),
-		onSuccess: (_, { id, content }) => {
+		onSuccess: (res, { id, content }) => {
+			if (!res.success) {
+				handleErrorByCode(res.errorCode, '댓글 수정');
+				return;
+			}
+
 			queryClient.setQueryData<InfiniteData<{ result: BillComments }>>([QUERY_KEYS.billComments, billId], (prev) => {
 				if (!prev) return prev;
 
@@ -62,17 +69,22 @@ export const useBillComment = (billId: string | number) => {
 					};
 				});
 
-				return { ...prev, pages: updatedPages };
+				return {
+					...prev,
+					pages: updatedPages,
+				};
 			});
-		},
-		onError: (err) => {
-			handleErrorByName(err, '댓글 수정');
 		},
 	});
 
 	const likeComment = useMutation({
 		mutationFn: ({ id }: { id: number | string }) => likeBillComment(id),
-		onSuccess: (_, { id }) => {
+		onSuccess: (res, { id }) => {
+			if (!res.success) {
+				handleErrorByCode(res.errorCode, '댓글 좋아요');
+				return;
+			}
+
 			queryClient.setQueryData<InfiniteData<{ result: BillComments }>>([QUERY_KEYS.billComments, billId], (prev) => {
 				if (!prev) return prev;
 
@@ -99,11 +111,11 @@ export const useBillComment = (billId: string | number) => {
 					};
 				});
 
-				return { ...prev, pages: updatedPages };
+				return {
+					...prev,
+					pages: updatedPages,
+				};
 			});
-		},
-		onError: (err) => {
-			handleErrorByName(err, '댓글 좋아요');
 		},
 	});
 

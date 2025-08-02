@@ -5,6 +5,7 @@ import GoogleAnalytics from '@/shared/script/GoogleAnalytics';
 import MicrosoftClarity from '@/shared/script/MicrosoftClarity';
 import Providers from './Providers';
 import JsonLD from '@/shared/script/JsonLD';
+import { ReactScan } from '@/shared/script/ReactScan';
 
 export const metadata: Metadata = {
 	title: {
@@ -56,6 +57,8 @@ export default function RootLayout({
 				<MicrosoftClarity clId="rslbkldy5n" />
 				<JsonLD />
 			</head>
+			<ReactScan />
+
 			<body className={`${pretendard.className} antialiased flex flex-col items-center w-full  min-h-screen mx-auto`}>
 				<Providers>{children}</Providers>
 			</body>

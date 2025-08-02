@@ -17,7 +17,7 @@ const BookmarkBtn = ({ id, isScrapped }: { id: string; isScrapped: boolean }) =>
 				setIsBookmarked((prev) => !prev);
 				break;
 			case 'relogin':
-				router.push(MODAL_PATH.login);
+				router.push(MODAL_PATH.login, { scroll: false });
 				break;
 			default:
 				alert('서버 에러가 발생했습니다.');

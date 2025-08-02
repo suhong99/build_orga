@@ -23,7 +23,7 @@ const Keywords = ({ keywords, setKeywords }: KeywordsProps) => {
 	};
 
 	return (
-		<section className="flex flex-col w-full gap-[5px]">
+		<section className="flex flex-col w-full gap-3">
 			<p className="typo-caption1 text-interaction-inactive font-bold">
 				관심 키워드를 1개 이상 선택해주세요 <span className={keywords.length > 0 ? 'text-accent-bg-violet' : ''}>{keywords.length}/5</span>
 			</p>

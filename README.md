@@ -100,10 +100,10 @@ FSD를 간소화 시킨 폴더 구조 사용
 
 ## branch 전략
 
-- main : 실 서비스 중인 브랜치. 베타서비스 이전까지는 develop 브랜치 역할을 대신함
+- main : 실 서비스 중인 브랜치. 베타서비스 이전까지는 develop 브랜치 역할을 대신함, main에 대한 pullrequest의 경우 merge: prefix와 라벨을 적용.
 - develop : 신규 개발 내용을 병합중이 branch.
 - tt-\* : 지라 이슈 번호에 따른 기능 단위의 브랜치. 작업이 완료시 develop에 병합
-- hotfix : 급하게 수정해야할 내용을 작업 -> main에 병합
+- hotfix : 급하게 수정해야할 내용을 작업 -> main에 병합 , 단일 규모에 대한 hotfix는 tt에서 직접 작업후 병합
 
 ## 커밋 컨벤션
 

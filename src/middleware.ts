@@ -29,7 +29,7 @@ export async function middleware(req: NextRequest) {
 	// 토큰없을 경우 특정 페이지 진입 불가
 	if (!hasToken && protectedPaths.includes(pathname)) {
 		await clearAuth();
-		return NextResponse.redirect(new URL('/', req.url));
+		return NextResponse.redirect(new URL('/?logout=true', req.url));
 	}
 
 	return NextResponse.next();

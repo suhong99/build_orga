@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 
 const RecommendTerms = () => {
-	const data = ['정치가의 삶', '경제와 문화생활', '사회문화복지센터', '문화문화문화', '환경환경환경환경'];
+	const data = ['청년', '육아', '소상공인', '세액', '연금', '근로'];
 
 	return (
 		<section className="flex flex-col w-full px-5 gap-5 items-baseline desktop:items-center">
