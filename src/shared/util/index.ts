@@ -22,3 +22,7 @@ export const areArraysEqualUnordered = <T>(a: T[], b: T[]): boolean => {
 	const bSorted = [...b].sort();
 	return aSorted.every((val, idx) => val === bSorted[idx]);
 };
+export const formatDateToKorean = (dateStr: string) => {
+	const [year, month, day] = dateStr.split('.').map(Number);
+	return `${year}년 ${month}월 ${day}일`;
+};

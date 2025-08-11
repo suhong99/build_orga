@@ -10,6 +10,8 @@ export const CLIENT_NAVI_PATH = {
 	mypage: { name: '마이페이지', path: '/mypage' },
 	myprofile: { name: '프로필 수정', path: '/mypage/profile' },
 	search: { name: '검색페이지', path: '/search' },
+	policyService: { name: '서비스 이용약관', path: '/policy/service' },
+	policyPrivacy: { name: '개인정보 처리방침', path: '/policy/privacy' },
 } as const;
 
 export const MODAL_PATH = {
