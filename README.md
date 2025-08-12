@@ -1,8 +1,15 @@
-# 그래, 이 픽
+# [그래, 이 픽(gray pick)](https://graypick.co.kr/)
+
+법안 정보를 생활밀착형으로 쉽고 흥미롭게 추천해주는 AI 기반 큐레이션 서비스로, 복잡한 정치 정보를 일상과 연결하여 개인 맞춤형으로 제공하는 정치 참여 활성화 플랫폼
+
+<img width="939" height="819" alt="image" src="https://github.com/user-attachments/assets/3fc3ce88-4e33-4c27-b1ae-c5f5b0f1d681" />
+
+## 실행 방법
 
 로컬 실행
 
 ```bash
+npm i
 npm run dev
 ```
 
@@ -11,6 +18,14 @@ npm run dev
 ```bash
 npm run storybook
 ```
+
+## 주요 기능
+
+- 🔍 사용자 맞춤형 법안 추천 기능
+- 🔍 법안 검색 기능
+- 🎯 반응형 UI 지원 (데스크탑/모바일)
+- 🛠 무한스크롤
+- 🛠 AWS + Docker + Github action을 통한 CI/CD 파이프라인 연결
 
 ## 폴더구조
 
@@ -93,10 +108,15 @@ FSD를 간소화 시킨 폴더 구조 사용
 
 ## 기술 스텍
 
-<img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=black">    
-<img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" />
-<img src="https://img.shields.io/badge/framer--motion-0055FF?style=for-the-badge&logo=framer&logoColor=white" />
-<img src="https://img.shields.io/badge/storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white" />
+<div>
+  <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=black">    
+  <img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/framer--motion-0055FF?style=for-the-badge&logo=framer&logoColor=white" />
+  <img src="https://img.shields.io/badge/storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white" />
+  <img src="https://img.shields.io/badge/React%20Query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white" />
+  <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+</div>
 
 ## branch 전략
 
@@ -116,3 +136,8 @@ FSD를 간소화 시킨 폴더 구조 사용
 - ci/cd: cicd 파이프라인 추가 및 수정
 - dep: 의존성 추가
 - hotfix : 배포 파일 오류에 의한 핫픽스
+
+## DOCS
+
+[지라](https://twoteam.atlassian.net/jira/software/c/projects/TT/boards/2)  
+[노션](https://www.notion.so/2074deb2c29380628abcd29de2cedcf5?pvs=5)

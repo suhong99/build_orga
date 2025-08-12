@@ -13,7 +13,6 @@ const DetailTitle = ({
 	commentCount,
 	scrapped,
 }: Pick<BillDetalProps, 'id' | 'billAiTitle' | 'proposeDate' | 'committeeName' | 'viewCount' | 'reactionCount' | 'commentCount' | 'scrapped'>) => {
-	//TODO:
 	const IconList = [
 		{
 			src: '/svgs/eye.svg',
@@ -35,7 +34,7 @@ const DetailTitle = ({
 	return (
 		<header className="flex flex-col w-full  gap-5  px-1 desktop:pt-5 desktop:px-9">
 			<div className="flex items-center justify-center w-[40px] h-[40px] rounded-full bg-bg-gray text-[24px] desktop:w-[52px] desktop:h-[52px] desktop:text-[32px]">
-				{COMMITTEES[committeeName].emoji}
+				{COMMITTEES[committeeName]?.emoji ?? COMMITTEES['기타'].emoji}
 			</div>
 			<h1 className="typo-title2 font-bold text-label-normal desktop:typo-title1">{billAiTitle}</h1>
 			<div className="flex justify-between items-center">

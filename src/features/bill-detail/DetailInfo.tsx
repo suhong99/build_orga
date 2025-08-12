@@ -11,7 +11,7 @@ const DetailInfo = ({
 	const InfoList: { subject: InfoSubject; detail: string; isLong?: boolean }[] = [
 		{ subject: '진행 단계', detail: billStatus },
 		{ subject: '대표 발의자', detail: representativeName },
-		{ subject: '소관 위원회', detail: committeeName },
+		{ subject: '소관 위원회', detail: committeeName || '없음' },
 		{ subject: 'AI 한줄 요약', detail: billAiSummary, isLong: true },
 	];
 	return (
